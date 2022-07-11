@@ -11,33 +11,73 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <title>urlive</title>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <title>Streaming</title>
+
+    <link rel="stylesheet" href="../static/index.css">
+
+
     <script src="../static/index.js">
+
     </script>
-    <link rel="stylesheet" type="text/css" href="../static/index.css">
 </head>
 <body>
 <div class="backgraund">
-    <div class="mypic">
+    <div class="titlepost">
+        <div class="title">
+            <div class="waviy">
+                <span style="--i:1">M</span>
+                <span style="--i:2">e</span>
+                <span style="--i:3">a</span>
+                <span style="--i:4">n</span>
+                <span style="--i:5">i</span>
+                <span style="--i:6">n</span>
+                <span style="--i:7">g&nbsp;</span>
+                <span style="--i:8">O</span>
+                <span style="--i:9">f&nbsp;</span>
+                <span style="--i:10">L</span>
+                <span style="--i:11">i</span>
+                <span style="--i:12">v</span>
+                <span style="--i:13">e</span>
+
+            </div>
+            <h4>-소중한 나의 라이브-</h4>
+        </div>
         <div class="main">
             <h1 class="logo">login</h1>
             <div class="container">
                 <input type="text" placeholder="ID" id="id" class="account">
                 <input type="password" placeholder="Password" id="password" class="account">
                 <button onclick="login()" id="login" class="account">login</button>
-                <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up</button>
+                <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up
+                </button>
                 <p id="alert" class="account"></p>
             </div>
         </div>
     </div>
 </div>
-<div class="streaming">
-    <div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+<div class="baststreaming">
+    <div class="ratio ratio-4x3">
+        <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" title="YouTube video" allowfullscreen></iframe>
+    </div>
+    <div class="streamingtxt">
+        <h3>
+            < 내 손을 잡아 >
+        </h3>
+        <h4>-아이유-</h4>
+        <h6>음악도 음악이지만 그동안 그 수많은</h6>
+        <h6>억까들과 악플에도 꿋꿋하게 살아남아</h6>
+        <h6>음악을 계속해온 그 정신력이 새삼 대단한거 같다...</h6>
+        <h6>짧은 이 3분짜리 영상에서.</h6>
+        <h6>그동안 해온 노력들이 느껴지네요..</h6>
+
+    </div>
 </div>
-</div>
-<!--Modal-->
+<!-- Modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -61,6 +101,9 @@
             </div>
         </div>
     </div>
+</div>
+</div>
+</body>
 </div>
 </body>
 </html>
