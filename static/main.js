@@ -33,9 +33,10 @@ function show_list() {
                                              <div class="card-body">
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
-                                              <p>작성자: ${userId}</p>
-                                              <button id="detail-btn"type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                               동영상 보기
+
+                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal">
+                                               동영상 보기!
+
                                               </button>
                                              </div>
                                  </div>
@@ -120,6 +121,7 @@ function post_list() {
 
       //포스트 창 열기 (수정 필요)
     function post_page_open() {
+    comment_listing()
         $.ajax({
             type: 'GET',
             url: '/main/<urliveContents_id>',
