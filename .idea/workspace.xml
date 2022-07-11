@@ -7,10 +7,16 @@
     <list default="true" id="723081f3-c786-4575-9f02-9ae936da5790" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <change beforePath="$PROJECT_DIR$/static/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
 >>>>>>> 1cd1535e700d0b24d7b8b7145451c44c260069fe
+=======
+      <change beforePath="$PROJECT_DIR$/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
+>>>>>>> fd3c4b3f3f13f96bfbe13534c117dd4fba652465
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/khs13/OneDrive/Desktop/sparta/todayilearned",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -65,6 +72,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
 =======
     "last_opened_file_path": "C:/Users/khs13/OneDrive/Desktop/urliveclone",
+=======
+    "last_opened_file_path": "C:/Users/khs13/OneDrive/Desktop/urlive",
+>>>>>>> fd3c4b3f3f13f96bfbe13534c117dd4fba652465
     "list.type.of.created.stylesheet": "CSS",
 >>>>>>> 1cd1535e700d0b24d7b8b7145451c44c260069fe
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
@@ -114,8 +124,12 @@
       <workItem from="1657540868687" duration="1824000" />
 =======
       <workItem from="1657540868687" duration="124000" />
+<<<<<<< HEAD
       <workItem from="1657541786632" duration="1213000" />
 >>>>>>> 1cd1535e700d0b24d7b8b7145451c44c260069fe
+=======
+      <workItem from="1657541786632" duration="2364000" />
+>>>>>>> fd3c4b3f3f13f96bfbe13534c117dd4fba652465
     </task>
     <servers />
   </component>
@@ -124,6 +138,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/urlive$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657538771545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/urliveclone$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657541800559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/urliveclone$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657543418318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
