@@ -20,3 +20,27 @@
 #post-btn {
     margin-top: 35px;
 }
+
+
+.comment_box {
+    margin-top: 20px;
+    max-width: 750px;
+    width: 95%;
+}
+
+.post_box {
+    max-width: 766px;
+    width: 95%;
+
+    background-color: beige;
+
+    padding: 20px;
+    margin: 20px 0 auto 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+

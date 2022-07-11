@@ -24,7 +24,7 @@ def main():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.urliveUsers.find_one({"id": payload['id']})
+        user_info = db.users.find_one({"id": payload['id']})
         return render_template('main.html', id=user_info["id"])
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
@@ -69,6 +69,8 @@ def api_post():
     title_receive = request.form['title_give']
     artist_receive = request.form['artist_give']
     content_receive = request.form['content_give']
+    insertTime_receive = request.form['insertTime_give']
+    print(insertTime_receive)
     doc = {
         'userId': userId_receive,
         'url': url_receive,
@@ -84,6 +86,42 @@ def api_get():
     content_list = list(db.urliveContents.find({}))
     objectIdDecoder(content_list)
     return jsonify({'contents': content_list})
+
+
+
+# 댓글 포스팅 창 열기
+@app.route('/main/<urliveContents_id>', methods=['GET'])
+def read_articles(urliveContents_id):
+    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
+    return jsonify({urlivePost})
+
+@app.route("/main/comment", methods=["GET"])
+def post_get():
+    urlivePost = list(db.urliveContents.find({}, {'_id': False}))
+    return jsonify({'urlivePosts': urlivePost})
+
+
+@app.route('/main/comment', methods=['POST'])
+def comment_post():
+    userId_receive = request.form['userId_give']
+    comment_receive = request.form['comment_give']
+    num = db.urliveContents.select_one['objectId']
+    doc = {
+        'num': num,
+        'userId': userId_receive,
+        'comment': comment_receive,
+    }
+    db.urliveComment.insert_one(doc)
+    return redirect("/main/comment")
+
+
+# 숫자를 받아오면 바꿔주어야 함
+@app.route("/main/comment", methods=["GET"])
+def comment_get():
+    urliveComment = list(db.urliveComment.find({}, {'_id': False}))
+    return jsonify({'urliveComments': urliveComment})
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
