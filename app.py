@@ -70,11 +70,8 @@ def api_post():
     artist_receive = request.form['artist_give']
     content_receive = request.form['content_give']
     insertTime_receive = request.form['insertTime_give']
-    urlivecontents = list(db.uurliveContents.find({}, {'_id': False}))
-    count = len(urlivecontents) + 1
     print(insertTime_receive)
     doc = {
-        'num': count,
         'userId': userId_receive,
         'url': url_receive,
         'title': title_receive,
@@ -96,7 +93,7 @@ def api_get():
 @app.route('/main/<urliveContents_id>', methods=['GET'])
 def read_articles(urliveContents_id):
     urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return
+    return render_template
 
 @app.route("/main/comment", methods=["GET"])
 def post_get():
