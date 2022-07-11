@@ -1,6 +1,20 @@
 $(document).ready(function () {
     show_list();
 });
+<<<<<<< HEAD
+=======
+
+// youtube URL에서 id 추출 함수
+function youtube_parser(url) {
+    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[7].length == 11) ? match[7] : false;
+}
+
+function reload() {
+    window.location.reload()
+}
+>>>>>>> 70623879f69e18dff314623ccb5460073e8f3e67
 
 function show_list() {
     $.ajax({
@@ -38,6 +52,21 @@ function show_list() {
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                                 allowfullscreen></iframe>
                                                     </div>
+                                                    <div class="comment_box">
+                                                        <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                         <th scope="col" style="width: 100px">닉네임</th>
+                                                         <th scope="col">댓글</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="comment">
+                                        <tr>
+                                            <td>영희</td>
+                                            <td>노래 넘 좋아여</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
@@ -56,6 +85,7 @@ function post_list() {
     let artist = $('').val()
     let url = $('').val()
     $.ajax({
+<<<<<<< HEAD
             type: 'POST',
             url: '/api/post',
             data: {title_give: title, content_give: content, userId_give: userId, artist_give: artist, url_give: url},
@@ -122,3 +152,14 @@ function post_list() {
         });
     }
 
+=======
+        type: 'POST',
+        url: '/api/post',
+        data: {title_give: title, content_give: content, userId_give: userId, artist_give: artist, url_give: url},
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    })
+}
+>>>>>>> 70623879f69e18dff314623ccb5460073e8f3e67
