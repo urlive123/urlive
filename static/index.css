@@ -21,7 +21,6 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        float: right;
         margin: auto 300px 40px auto;
 
     }
@@ -52,25 +51,26 @@
     }
 
     .baststreaming {
-        max-width: 1000px;
-        width: 90%;
-        height: 500px;
+        width: 50%;
+        height: 70%;
         margin: 50px 20px auto 100px;
-        float: left;
     }
 
     .ratio {
         width: 50%;
         height: 400px;
-        margin: auto 20px auto 100px;
         float: left;
+        position: absolute;
     }
 
     .streamingtxt {
+        width: 30%;
+        height: 80%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        margin: 100px auto auto auto;
+
+        margin: 100px auto auto 700px;
     }
