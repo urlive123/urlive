@@ -93,7 +93,7 @@ def api_get():
 @app.route('/main/<urliveContents_id>', methods=['GET'])
 def read_articles(urliveContents_id):
     urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return render_template
+    return jsonify({urlivePost})
 
 @app.route("/main/comment", methods=["GET"])
 def post_get():
@@ -105,8 +105,9 @@ def post_get():
 def comment_post():
     userId_receive = request.form['userId_give']
     comment_receive = request.form['comment_give']
-    num =db.urliveContents.select_one
+    num = db.urliveContents.select_one['objectId']
     doc = {
+        'num': num,
         'userId': userId_receive,
         'comment': comment_receive,
     }

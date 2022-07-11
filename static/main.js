@@ -91,7 +91,7 @@ function post_list() {
     function post_page_open() {
         $.ajax({
             type: 'GET',
-            url: '/main',
+            url: '/main/<urliveContents_id>',
             data: {},
             success: function (response) {
                 let url = [response]['url']

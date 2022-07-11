@@ -100,8 +100,11 @@
                                         </tbody>
                                     </table>
                                     <div>
-                                        <textarea name="comments" id="comments"></textarea>
-                                        <input type="submit" value="댓글 남기기">
+                                       <div class="form-floating">
+                                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                          <label for="floatingTextarea">댓글창</label>
+                                           <button onclick="comment_posting()" type="button" class="btn btn-dark">Dark</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
