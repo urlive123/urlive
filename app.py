@@ -93,11 +93,10 @@ def api_get():
 
 
 # 댓글 포스팅 창 열기
-@app.route("/main/comment", methods=["POST"])
-def post_open():
-    num_receive = request.form['num_give']
-    db.urliveContents.select_one({'num': int(num_receive)})
-    return jsonify({'msg': '완료!'})
+@app.route('/main/<urliveContents_id>', methods=['GET'])
+def read_articles(urliveContents_id):
+    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
+    return
 
 @app.route("/main/comment", methods=["GET"])
 def post_get():
@@ -111,12 +110,11 @@ def comment_post():
     comment_receive = request.form['comment_give']
     num =db.urliveContents.select_one
     doc = {
-        'num': ,
         'userId': userId_receive,
         'comment': comment_receive,
     }
     db.urliveComment.insert_one(doc)
-    return jsonify({'msg': '등록되었습니다!'})
+    return redirect("/main/comment")
 
 
 # 숫자를 받아오면 바꿔주어야 함
