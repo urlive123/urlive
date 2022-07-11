@@ -11,56 +11,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <title>urlive</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <title>Streaming</title>
+
+    <link rel="stylesheet" href="../static/index.css">
+
+
     <script src="../static/index.js">
+
     </script>
-    <link rel="stylesheet" type="text/css" href="../static/index.css">
 </head>
 <body>
-<div class="backgraund">
-    <div class="mypic">
-        <div class="main">
-            <h1 class="logo">login</h1>
-            <div class="container">
-                <input type="text" placeholder="ID" id="id" class="account">
-                <input type="password" placeholder="Password" id="password" class="account">
-                <button onclick="login()" id="login" class="account">login</button>
-                <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up</button>
-                <p id="alert" class="account"></p>
+    <div class="backgraund">
+        <div class="titlepost">
+            <div class="main">
+                <h1 class="logo">login</h1>
+                <div class="container">
+                    <input type="text" placeholder="ID" id="id" class="account">
+                    <input type="password" placeholder="Password" id="password" class="account">
+                    <button id="login" class="account">login</button>
+                    <p id="alert" class="account"></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="streaming">
-    <div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-</div>
-</div>
-<!--Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="register-id" class="col-form-label">ID</label>
-                    <input type="text" class="form-control" id="register-id">
-                </div>
-                <div class="form-group">
-                    <label for="register-password" class="col-form-label">Password</label>
-                    <input type="password" class="form-control" id="register-password">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button onclick="register()" type="button" class="btn btn-primary">가입하기</button>
-            </div>
+    <div class="baststreaming">
+        <div class="ratio ratio-4x3">
+            <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" title="YouTube video" allowfullscreen></iframe>
+        </div>
+        <div class="streamingtxt">
+
+            <h3>내 손을 잡아</h3>
+            <h4>아이유</h4>
+            <h6>내 인생 최고 라이브 방송</h6>
+
         </div>
     </div>
+</div>
+</body>
 </div>
 </body>
 </html>
