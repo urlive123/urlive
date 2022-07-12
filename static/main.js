@@ -34,7 +34,7 @@ function show_list() {
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
 
-                                              <button onclick="comment_listing(${objectId})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                              <button onclick="comment_listing()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                동영상 보기!
 
                                               </button>
@@ -75,7 +75,7 @@ function show_list() {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting()" style="float: right" type="button" class="btn btn-outline-dark mt-3">등록</button>
+                                                            <button onclick="comment_posting(str(${objectId}))" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
@@ -132,12 +132,12 @@ function post_list() {
       //포스트 창 열기 (수정 필요)
 
     //댓글 하기
-    function comment_posting() {
+    function comment_posting(objectId) {
         let comment = $('#comment-post').val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {userId_give: userId, comment_give: comment},
+            data: {userId_give: userId, comment_give: comment, objectId_give: objectId},
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
