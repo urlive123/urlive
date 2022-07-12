@@ -116,7 +116,6 @@ def update_like():
         else:
             db.urliveLikes.delete_one(doc)
         count = db.urliveLikes.count_documents({"post_id": post_id_receive, "type": type_receive})
-        print(count)
         return jsonify({"result": "success", 'msg': 'updated', "count": count})
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
@@ -159,6 +158,7 @@ def comment_post():
 # 숫자를 받아오면 바꿔주어야 함
 @app.route("/main/comment", methods=["GET"])
 def comment_get():
+
     urliveComment = list(db.urliveComment.find({}, {'_id': False}))
     return jsonify({'urliveComments': urliveComment})
 

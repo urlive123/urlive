@@ -1,8 +1,5 @@
 $(document).ready(function () {
     show_list();
-    $('.modal fade').on('hidden.bs.modal', function () {
-        console.log('clicked!')
-    })
 });
 
 // youtube URL에서 id 추출 함수
@@ -14,7 +11,10 @@ function youtube_parser(url) {
 
 function show_list() {
     $.ajax({
-        type: "GET", url: "/api/get", data: {}, success: function (response) {
+        type: "GET",
+        url: "/api/get",
+        data: {},
+        success: function (response) {
             console.log(response['contents'])
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
@@ -116,7 +116,6 @@ function post_list() {
 
   //댓글 보이기
     function comment_listing(id) {
-        $(`#comment${id}`).empty()
         $.ajax({
             type: 'GET',
             url: '/main/comment',
@@ -136,11 +135,9 @@ function post_list() {
                     $(`#comment${id}`).append(temp_html)
                     }
                 }
-
             }
-        }
-    })
-}
+         })
+    }
 
 //포스트 창 열기 (수정 필요)
 
@@ -171,11 +168,9 @@ function toggle_like(post_id, type) {
             data: {
                 post_id_give: post_id,
                 type_give: type,
-                action_give: "like"
+                action_give: "like",
             },
             success: function (response) {
-                console.log("like")
-                console.log(response)
                 $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
                 $a_like.find("span.like-num").text(response["count"])
             }
