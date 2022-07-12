@@ -139,6 +139,7 @@ function post_list() {
       //포스트 창 열기 (수정 필요)
 
     //댓글 하기
+
     function comment_posting(id) {
         let commentpost = $(`#commentpost${id}`).val()
         $.ajax({
