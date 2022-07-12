@@ -178,6 +178,20 @@ def comment_delete():
         check = 0
     return jsonify({'msg': msg, 'check': check})
 
+# 댓글 순 정렬
+@app.route('/api/getByComment', methods=['GET'])
+def api_get_by_comment():
+    content_list = list(db.urliveContents.find({}))
+    print(content_list)
+    result = []
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        result.append(document)
+    result.sort(key=lambda content: content["comment_count"],reverse=True)
+    print(result)
+    return jsonify({'contents': result})
+
 
 
 
