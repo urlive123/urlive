@@ -60,10 +60,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    cursor: pointer;
 }
 
 a {
     color: black;
     text-decoration: none;
+    cursor: pointer;
 }
