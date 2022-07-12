@@ -1,9 +1,5 @@
 $(document).ready(function () {
     show_list();
-    sort_heart();
-    $('.modal fade').on('hidden.bs.modal', function () {
-        console.log('clicked!')
-    })
 });
 
 // 정렬 좋아요 지혜
@@ -104,7 +100,6 @@ function youtube_parser(url) {
 function show_list() {
     $.ajax({
         type: "GET", url: "/api/get", data: {}, success: function (response) {
-            console.log(response['contents'])
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -116,7 +111,7 @@ function show_list() {
                 let url = rows[i]['url']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log()
+
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
