@@ -1,94 +1,86 @@
 <!doctype html>
 <html lang="en">
-    <head>
+<head>
+    <title>URLIVE MY PAGE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script> const userId = '{{id}}'</script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-        <!-- Webpage Title -->
-        <title>URLIVE MY PAGE</title>
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="short icon" href="#">
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="../static/mypage.css">
+    <script src="../static/mypage.js"></script>
 
-        <!-- Bulma CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <!-- Font Awesome CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
-        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
-
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-        <script src="{{ url_for('static', filename='myjs.js') }}"></script>
-    </head>
-    <body class="has-navbar-fixed-top">
-        <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                </a>
-            </div>
-        </nav>
-        <section class="vh-100" style="background-color: #9de2ff;">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col col-md-9 col-lg-7 col-xl-5">
-                        <div class="card" style="border-radius: 15px;">
-                            <div class="card-body p-4">
-                                <div class="d-flex text-black" id="profile_mypage">
-                                    <div class="flex-shrink-0">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                             alt="Generic placeholder image" class="img-fluid"
-                                             style="width: 180px; border-radius: 10px;">
+</head>
+<body class="has-navbar-fixed-top">
+<section class="vh-100" style="background-color: #9de2ff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col col-md-9 col-lg-7 col-xl-5">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-4">
+                        <div class="d-flex text-black" id="profile_mypage">
+                            <div class="flex-shrink-0">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                     alt="Generic placeholder image" class="img-fluid"
+                                     style="width: 180px; border-radius: 10px;">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">이름</h5>
+                                <p class="mb-2 pb-1" style="color: #2b2a2a;">자기 설명글</p>
+                                <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                                     style="background-color: #efefef;">
+                                    <div>
+                                        <p class="small text-muted mb-1">올린 포스트</p>
+                                        <p class="mb-0">41</p>
                                     </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-1">이름</h5>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">자기 설명글</p>
-                                        <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
-                                             style="background-color: #efefef;">
-                                            <div>
-                                                <p class="small text-muted mb-1">올린 포스트</p>
-                                                <p class="mb-0">41</p>
-                                            </div>
-                                            <div class="px-3">
-                                                <p class="small text-muted mb-1">좋아요 누른 수</p>
-                                                <p class="mb-0">976</p>
-                                            </div>
-                                            <div>
-                                                <p class="small text-muted mb-1">팔로워</p>
-                                                <p class="mb-0">8.5</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex pt-1">
-                                            <button type="button"
-                                                    class="btn btn-outline-primary me-1 flex-grow-1">프로필 수정
-                                            </button>
-                                            <button type="button" class="btn btn-primary flex-grow-1"> 구독
-                                            </button>
-                                        </div>
+                                    <div class="px-3">
+                                        <p class="small text-muted mb-1">좋아요 누른 수</p>
+                                        <p class="mb-0">976</p>
                                     </div>
+                                    <div>
+                                        <p class="small text-muted mb-1">팔로워</p>
+                                        <p class="mb-0">8.5</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex pt-1">
+                                    <button type="button"
+                                            class="btn btn-outline-primary me-1 flex-grow-1">프로필 수정
+                                    </button>
+                                    <button type="button" class="btn btn-primary flex-grow-1"> 구독
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="imgcv">
-            <div >
-                <h3> 내가 올린 라이브</h3>
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="live_upload">
-            </div>
-                </div>
-            <div >
-                <h3> 내가 좋아요한 라이브</h3>
-             <div class="row row-cols-1 row-cols-md-4 g-4" id="live_like">
-            </div>
-                </div>
         </div>
+    </div>
+</section>
+<div class="imgcv">
+        <h3> 내가 좋아요한 라이브</h3>
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="live_upload">
+        </div>
+    </div>
+        <h3> 내가 올린 라이브</h3>
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="live_like">
+        </div>
+    </div>
+</div>
 
-    </body>
+</body>
 </html>

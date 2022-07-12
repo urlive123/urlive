@@ -21,7 +21,6 @@ function sort_heart() {
         type: "GET", url: '/api/sort_heart',
         data: {},
         success: function (response) {
-            console.log(response['contents'])
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -34,7 +33,6 @@ function sort_heart() {
                 let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
@@ -118,8 +116,6 @@ function show_list() {
         url: "/api/get",
         data: {},
         success: function (response) {
-            console.log(response['contents'])
-
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -353,7 +349,6 @@ function sortbycomment() {
         url: '/api/getByComment',
         data: {},
         success: function (response) {
-            console.log(response)
             $('#cards-box').empty()
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
@@ -367,7 +362,6 @@ function sortbycomment() {
                 let url = rows[i]['url']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
@@ -437,15 +431,6 @@ function sortbycomment() {
         }
     })
 }
-//메뉴 버튼
-const menuItems = document.querySelectorAll('.tab-menu__item');
-
-let previousSelectedItem = menuItems[0];
-
-    menuItems.forEach(item => {
-                            item.addEventListener('click', () => {
-                                previousSelectedItem?.classList.remove('tab-menu__active')
-                                previousSelectedItem = item;
-                                item.classList.add('tab-menu__active');
-                            })
-                        })
+function gotomypage() {
+    window.location.replace("/main/mypage")
+}
