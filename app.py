@@ -194,6 +194,17 @@ def api_get_by_comment():
 
 
 
+@app.route('/api/sort_heart', methods=['GET'])
+def card_sort_heart():
+    content_sort_heart = list(db.urliveContents.find())
+    print(content_sort_heart)
+    for document in content_sort_heart:
+        document['_id'] = str(document['_id'])
+        document['count_heart'] = db.urliveLikes.count_documents({"num": str(document['_id'])})
+    content_sort_heart.sort(key=lambda content: content["count_heart"],reverse=True)
+    print(content_sort_heart)
+    return jsonify({'contents': content_sort_heart})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
