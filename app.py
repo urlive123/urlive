@@ -123,13 +123,6 @@ def update_like():
         return redirect(url_for("home"))
 
 
-# 댓글 포스팅 창 열기
-@app.route('/main/<urliveContents_id>', methods=['GET'])
-def read_articles(urliveContents_id):
-    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return jsonify({urlivePost})
-
-
 @app.route('/main/comment', methods=['POST'])
 def comment_post():
     userId_receive = request.form['userId_give']
