@@ -22,7 +22,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/main')
-def main():
+def mypage():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -32,7 +32,18 @@ def main():
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("home"))
-
+@app.route('/main/mypage')
+def main():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.urliveUsers.find_one({'id': payload['id']})
+        return render_template('mypage.html', id=user_info["id"])
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("home"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home"))
+## 회원가입
 @app.route('/api/register', methods=['POST'])
 def api_register():
     id_receive = request.form['id_give']
@@ -64,6 +75,7 @@ def api_login():
     else:
         return jsonify(({'result' : 'fail', 'msg': '아이디, 비밀번호가 일치하지 않습니다.'}))
 
+
 @app.route('/api/post', methods=['POST'])
 def api_post():
     userId_receive = request.form['userId_give']
@@ -80,7 +92,7 @@ def api_post():
     }
     db.urliveContents.insert_one(doc)
     return jsonify({'msg': '등록되었습니다!'})
-
+# 리스트 조회 api
 @app.route('/api/get', methods=['GET'])
 def api_get():
     token_receive = request.cookies.get('mytoken')
@@ -89,6 +101,7 @@ def api_get():
         content_list = list(db.urliveContents.find({}))
         for document in content_list:
             document['_id'] = str(document['_id'])
+            document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
             document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
             document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
         return jsonify({'contents': content_list})
@@ -138,7 +151,7 @@ def api_delete():
         check = 0
     return jsonify({'msg': msg, 'check': check})
 
-
+## 댓글 등록 api
 @app.route('/main/comment', methods=['POST'])
 def comment_post():
     userId_receive = request.form['userId_give']
@@ -163,6 +176,7 @@ def comment_get():
         document['_id'] = str(document['_id'])
     return jsonify({'urliveComments': comment_list})
 
+# 댓글 삭제 api
 @app.route('/comment/delete', methods=['POST'])
 def comment_delete():
     objectId_receive = request.form['objectId_give']
@@ -181,19 +195,21 @@ def comment_delete():
 # 댓글 순 정렬
 @app.route('/api/getByComment', methods=['GET'])
 def api_get_by_comment():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     content_list = list(db.urliveContents.find({}))
-    print(content_list)
     result = []
     for document in content_list:
         document['_id'] = str(document['_id'])
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
+        document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
         result.append(document)
     result.sort(key=lambda content: content["comment_count"],reverse=True)
-    print(result)
     return jsonify({'contents': result})
 
 
-
+# 좋아요 순 정렬
 @app.route('/api/sort_heart', methods=['GET'])
 def card_sort_heart():
     token_receive = request.cookies.get('mytoken')
@@ -202,14 +218,43 @@ def card_sort_heart():
     print(content_sort_heart)
     for document in content_sort_heart:
         document['_id'] = str(document['_id'])
+
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
-        document["heart_by_me"] = bool(
-            db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-    content_sort_heart.sort(key=lambda content: content["count_heart"], reverse=True)
+        document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
+    content_sort_heart.sort(key=lambda content: content["count_heart"],reverse=True)
     print(content_sort_heart)
     return jsonify({'contents': content_sort_heart})
 
-
+## 마이페이지 좋아요 누른 영상
+@app.route('/api/mypageheart', methods=['GET'])
+def api_get_my_like():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    content_list = list(db.urliveContents.find())
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
+        document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
+    filtered_list = [c for c in content_list if c['heart_by_me'] is True]
+    print(filtered_list)
+    return jsonify({'contents': filtered_list})
+## 마이페이지 내가 올린 영상
+@app.route('/api/myupload', methods=['GET'])
+def api_get_my_upload():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    content_list = list(db.urliveContents.find())
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
+        document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
+    print(payload['id'])
+    filtered_list = [c for c in content_list if c['userId'] == payload['id']]
+    print(filtered_list)
+    return jsonify({'contents': filtered_list})
 
 if __name__ == '__main__':
 
