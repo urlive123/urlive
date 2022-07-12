@@ -30,18 +30,20 @@
     margin-top: 20px;
     max-width: 750px;
     width: 95%;
+    display: table;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .post_box {
-    max-width: 766px;
+    max-width: 760px;
     width: 95%;
 
-    background-color: beige;
+    margin: 20px auto 0 auto;
 
-    padding: 20px;
-    margin: 20px 0 auto 0;
-
-    display: flex;
+    display: table;
     flex-direction: column;
     align-items: center;
     justify-content: center;

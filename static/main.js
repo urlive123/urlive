@@ -34,9 +34,10 @@ function show_list() {
                                              <div class="card-body">
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
+
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <div class="card-wrap">
-                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}"
                                                동영상 보기!
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
@@ -53,11 +54,14 @@ function show_list() {
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
+                                                                <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                                 allowfullscreen
                                                                 id="player"></iframe>
+                                                        <div class="post_box">
+                                                                <h2>${title} - ${artist}</h2>
+                                                                <p>${content}</p>
                                                     </div>
                                                     <div class="comment_box">
                                                         <table class="table">
@@ -65,15 +69,21 @@ function show_list() {
                                                         <tr>
                                                          <th scope="col" style="width: 100px">닉네임</th>
                                                          <th scope="col">댓글</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="comment">
-                                        <tr>
-                                            <td>영희</td>
-                                            <td>노래 넘 좋아여</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="comment">
+                                                            <tr>
+                                                                <td>영희</td>
+                                                                <td>노래 넘 좋아여</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="form-floating">
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
+                                                            <label for="floatingTextarea">댓글 달기</label>
+                                                            <button onclick="comment_posting()" style="float: right" type="button" class="btn btn-outline-dark mt-3">등록</button>
+                                                        </div>
+                                                        </div>
                                                     <div class="modal-footer">
                                                         <button onclick="reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
@@ -105,6 +115,7 @@ function post_list() {
 
   //댓글 보이기
     function comment_listing() {
+        $('#comment').empty()
         $.ajax({
             type: 'GET',
             url: '/main/comment',
@@ -125,34 +136,14 @@ function post_list() {
     }
 
       //포스트 창 열기 (수정 필요)
-    function post_page_open() {
-    comment_listing()
-        $.ajax({
-            type: 'GET',
-            url: '/main/<urliveContents_id>',
-            data: {},
-            success: function (response) {
-                let url = [response]['url']
-                let song_name=[response]['songname']
-                let artist = [response]['artist']
-                let recommendation = [response]['recommendation']
-                let temp_html = ` <div class="embed-responsive embed-responsive-16by9">
-                                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${url}" allowfullscreen></iframe>
-                                    </div>
-                                    <h2>${song_name} - ${artist}</h2>
-                                    <div>${recommendation}</div>`
-                $('#post-box').append(temp_html)
-            }
-        })
-    }
 
     //댓글 하기
     function comment_posting() {
-        let comment = $('#comment').val()
+        let comment = $('#comment-post').val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {username_give: userId, comment_give: comment},
+            data: {userId_give: userId, comment_give: comment},
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
