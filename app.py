@@ -214,13 +214,21 @@ def card_sort_heart():
 
 #############################메인페이지 python 함수#################################################
 
-@app.route('/mypage/profile', methods=['GET'])
+##프로파일-댓글 수
+@app.route('/mypage/profile_comment', methods=['GET'])
 def profile_load():
     one = list(db.urliveComment.find({}))
-    print(one)
     return jsonify({'one':one})
 
+@app.route('/mypage/profile_like', methods=['GET'])
+def profile_load():
+    one = list(db.urliveLikes.find({}))
+    return jsonify({'one':one})
 
+@app.route('/mypage/profile_upload', methods=['GET'])
+def profile_load():
+    one = list(db.urliveContents.find({}))
+    return jsonify({'one':one})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
