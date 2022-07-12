@@ -251,9 +251,7 @@ def api_get_my_upload():
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
         document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-    print(payload['id'])
     filtered_list = [c for c in content_list if c['userId'] == payload['id']]
-    print(filtered_list)
     return jsonify({'contents': filtered_list})
 
 if __name__ == '__main__':
