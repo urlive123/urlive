@@ -1,7 +1,19 @@
+// 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
     show_list();
-});
+    const menuItems = document.querySelectorAll('.tab-menu__item');
 
+    let previousSelectedItem = menuItems[0];
+
+    menuItems.forEach(item => {
+                            item.addEventListener('click', () => {
+                                previousSelectedItem?.classList.remove('tab-menu__active')
+                                previousSelectedItem = item;
+                                item.classList.add('tab-menu__active');
+                            })
+                        })
+
+});
 // 정렬 좋아요 지혜
 function sort_heart() {
     $('#cards-box').empty()
@@ -9,7 +21,6 @@ function sort_heart() {
         type: "GET", url: '/api/sort_heart',
         data: {},
         success: function (response) {
-            console.log(response['contents'])
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -19,9 +30,9 @@ function sort_heart() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
+                let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
@@ -29,10 +40,10 @@ function sort_heart() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
-                                          
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -82,6 +93,7 @@ function sort_heart() {
                                             </div>
                                         </div>`
                 $('#cards-box').append(temp_html)
+                // 모달창 종료시 영상 멈춤
                 $(document).on('hidden.bs.modal', `#detailModal${objectId}`, function () {
                     $(`#detailModal${objectId} iframe`).attr("src", $(`#detailModal${objectId} iframe`).attr("src"))
                 })
@@ -97,14 +109,13 @@ function youtube_parser(url) {
     return (match && match[7].length == 11) ? match[7] : false;
 }
 
+// 초기 리스트 조회 함수
 function show_list() {
     $.ajax({
         type: "GET",
         url: "/api/get",
         data: {},
         success: function (response) {
-            console.log(response['contents'])
-
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -114,6 +125,7 @@ function show_list() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
+                let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
 
@@ -124,6 +136,7 @@ function show_list() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
 
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
@@ -186,7 +199,7 @@ function show_list() {
         }
     });
 }
-
+// 카드 포스팅
 function post_list() {
     let title = $('#title').val()
     let content = $('#content').val()
@@ -232,7 +245,7 @@ function post_list() {
     }
 
 
-    //댓글 하기
+    //댓글 쓰기
 
     function comment_posting(id) {
         let commentpost = $(`#commentpost${id}`).val()
@@ -336,7 +349,6 @@ function sortbycomment() {
         url: '/api/getByComment',
         data: {},
         success: function (response) {
-            console.log(response)
             $('#cards-box').empty()
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
@@ -346,10 +358,10 @@ function sortbycomment() {
                 let objectId = rows[i]['_id']
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
+                let count_comment = rows[i]['comment_count']
                 let url = rows[i]['url']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
@@ -357,6 +369,7 @@ function sortbycomment() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}</p>
                                               <div class="card-wrap">
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
@@ -418,4 +431,6 @@ function sortbycomment() {
         }
     })
 }
-
+function gotomypage() {
+    window.location.replace("/main/mypage")
+}

@@ -1,0 +1,239 @@
+    html, body {
+        font-family: 'Jua', sans-serif;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .vh-100 {
+        width: 100%;
+        max-height: 280px;
+        margin-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .nav-section {
+        width: 100%;
+        height: 280px;
+
+        background-image: url(https://www.chords.co.kr/wp-content/uploads/2021/04/%EC%95%A0%EC%89%AC-%EC%95%84%EC%9D%BC%EB%9E%9C%EB%93%9C-%EB%A9%9C%EB%A1%9C%EB%94%94_title.jpg);
+        background-position: center 35%;
+        background-size: cover;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #cards-box {
+        margin: auto;
+        width: 95%;
+        max-width: 1500px;
+    }
+
+    .card {
+        margin-right: 10px;
+    }
+
+    #post-btn {
+        margin-top: 35px;
+    }
+
+
+    .comment_box {
+        margin-top: 20px;
+        max-width: 750px;
+        width: 95%;
+    }
+
+    .post_box {
+        max-width: 766px;
+        width: 95%;
+
+        background-color: beige;
+
+        padding: 20px;
+        margin: 20px 0 auto 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-you-tube{
+        width: 80%;
+    }
+    .btn.btn-you-tube {
+        background-color: #cf3728;
+        border-color: #cf3728;
+        -webkit-box-shadow: 0 3px 0 #9a1e1a;
+        box-shadow: 0 3px 0 #9a1e1a;
+    }
+
+    .btn.btn-you-tube:active {
+        top: 3px;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728; -webkit-box-shadow: 0 3px 0 #9a1e1a; box-shadow: 0 3px 0 #9a1e1a;}
+    .btn.btn-you-tube:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
+
+    .bi-suit-heart-fill {
+        color: red;
+    }
+
+    .bi-suit-heart {
+        color: red;
+    }
+
+    .card-wrap {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .logoutbtn {
+        position: absolute;
+        right: 2%;
+        top: 2%;
+    }
+    /*Animation*/
+    .line {
+          position: relative;
+          top: 50%;
+          width: 16em;
+          margin: 0 auto 40px;
+          border-right: 2px solid rgba(255, 255, 255, 0.75);
+          font-size: 300%;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;transform: translateY(-50%);
+    }
+
+    .anim-typewriter {
+          animation: typewriter 4s steps(40) 1s 1 normal both,
+          blinkTextCursor 700ms steps(40) infinite normal;
+    }
+
+    @keyframes typewriter {
+          from {
+                width: 0;
+          }
+          to {
+                width: 100%;
+          }
+    }
+
+    @keyframes blinkTextCursor {
+          from {
+                border-right-color: rgba(183, 183, 77, 0.75);
+          }
+          to {
+                border-right-color: transparent;
+          }
+    }
+    .bi-x-lg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.5s linear;
+    float: right;
+    cursor: pointer;
+    margin-left: auto;
+    }
+    .card {
+        width: 100%;
+        height: 100%;
+        padding-top: 20px;
+    }
+    .card:hover .bi-x-lg {
+        opacity: 0.6;
+    }
+    /*메뉴*/
+    *,
+    *::after,
+    *::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .tab-menu{
+        width: 45%;
+        border-radius: 10rem;
+        padding-right: 15px;
+        background-color: var(--color-secondary);
+        box-shadow: 0 0 1rem rgba(0,0,0,.1);
+        margin : 20px auto;
+
+    }
+    :root{
+        --color-primary : #d7be19;
+        --color-primary-ligth : rgba(157, 155, 38, 0.2);
+        --color-secondary : #ffffff;
+    }
+    .tab-menu__list{
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+    }
+
+
+    .tab-menu__item{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        color: #222;
+        border-radius: 4rem;
+        font-size: 1.2rem;
+        padding: 1rem;
+        transition: all .4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: pointer;
+        }
+
+    .tab-menu__icon{
+        transform: translateY(2px);
+    }
+
+    .tab-menu__text{
+        display: none;
+    }
+
+    .tab-menu__active{
+        padding: 1rem 2rem;
+        color: var(--color-primary);
+        background-color: var(--color-primary-ligth)
+    }
+
+    .tab-menu__active .tab-menu__text{
+        display: block;
+    }
+
+    h3 {
+        padding: 20px;
+    }
+
+
+

@@ -62,22 +62,24 @@
         justify-content: center;
     }
 
-    .btnutu{
+    .btn-you-tube{
         width: 80%;
     }
-    .btnutu.btn-you-tube {
+    .btn.btn-you-tube {
         background-color: #cf3728;
         border-color: #cf3728;
         -webkit-box-shadow: 0 3px 0 #9a1e1a;
         box-shadow: 0 3px 0 #9a1e1a;
     }
 
-    .btnutu.btn-you-tube:active {
+    .btn.btn-you-tube:active {
         top: 3px;
         outline: none;
         -webkit-box-shadow: none;
         box-shadow: none;
     }
+    .btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728; -webkit-box-shadow: 0 3px 0 #9a1e1a; box-shadow: 0 3px 0 #9a1e1a;}
+    .btn.btn-you-tube:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
 
     .bi-suit-heart-fill {
         color: red;
@@ -129,7 +131,7 @@
                 width: 0;
           }
           to {
-                width: 8.2em;
+                width: 100%;
           }
     }
 
@@ -159,4 +161,64 @@
     .card:hover .bi-x-lg {
         opacity: 0.6;
     }
+    /*메뉴*/
+    *,
+    *::after,
+    *::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .tab-menu{
+        width: 45%;
+        border-radius: 10rem;
+        padding-right: 15px;
+        background-color: var(--color-secondary);
+        box-shadow: 0 0 1rem rgba(0,0,0,.1);
+        margin : 20px auto;
+
+    }
+    :root{
+        --color-primary : #d7be19;
+        --color-primary-ligth : rgba(157, 155, 38, 0.2);
+        --color-secondary : #ffffff;
+    }
+    .tab-menu__list{
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+    }
+
+
+    .tab-menu__item{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        color: #222;
+        border-radius: 4rem;
+        font-size: 1.2rem;
+        padding: 1rem;
+        transition: all .4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: pointer;
+        }
+
+    .tab-menu__icon{
+        transform: translateY(2px);
+    }
+
+    .tab-menu__text{
+        display: none;
+    }
+
+    .tab-menu__active{
+        padding: 1rem 2rem;
+        color: var(--color-primary);
+        background-color: var(--color-primary-ligth)
+    }
+
+    .tab-menu__active .tab-menu__text{
+        display: block;
+    }
+
 
