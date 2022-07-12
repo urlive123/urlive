@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="short icon" href="#">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
-	  <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
     <title>UrLive</title>
@@ -23,11 +23,21 @@
 </head>
 <body>
 <div class="nav-section">
-    <h1>{{id}}님! 내 인생 최고의 라이브를 들려주세요!</h1>
-    <!-- Button trigger modal -->
-    <button id="post-btn" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        등록하기
-    </button>
+
+    <div class="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">You Only Live Once</h2>
+
+        <div class="logoutbtn">
+                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">LogOut</button>
+        </div>
+    </div>
+        <div class='btn-holder'>
+             <!-- Button trigger modal -->
+        <button id="post-btn" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            등록하기
+        </button>
+    </div>
+
 </div>
 <!-- Modal Post -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,15 +66,16 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button onclick="post_list()" type="button" class="btn">등록하기</button>
-                <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+                <div class="dark-button button-wrapper">
+                    <button onclick="post_list()" type="button" class="btn btn-outline-dark">등록하기</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="imgcv">
 <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-
 </div>
 </div>
 </body>

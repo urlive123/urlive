@@ -1,14 +1,15 @@
-
     * {
         font-family: 'Jua', sans-serif;
-      }
+    }
+
+
 
     .nav-section {
         width: 100%;
-        height: 250px;
+        height: 280px;
 
-        background-image: url(http://ojsfile.ohmynews.com/STD_IMG_FILE/2018/0117/IE002272752_STD.jpg);
-        background-position: center 34%;
+        background-image: url(https://www.chords.co.kr/wp-content/uploads/2021/04/%EC%95%A0%EC%89%AC-%EC%95%84%EC%9D%BC%EB%9E%9C%EB%93%9C-%EB%A9%9C%EB%A1%9C%EB%94%94_title.jpg);
+        background-position: center 35%;
         background-size: cover;
 
         display: flex;
@@ -22,6 +23,7 @@
         width: 95%;
         max-width: 1500px;
     }
+
     .card {
         margin-right: 10px;
     }
@@ -51,68 +53,89 @@
         align-items: center;
         justify-content: center;
     }
-    .btn {
-        padding: 10px 50px;
-        margin:10px 4px;
-        color: rgba(0, 0, 0, 0.93);
-        font-family: sans-serif;
-        text-transform: uppercase;
-        text-align: center;
-        position: relative;
-        text-decoration: none;
-        display:inline-block;
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      bottom: 50%;
-      left: 0px;
-      width: 100%;
-      height: 1px;
-      background: rgba(33, 40, 100, 0.27);
-      display: block;
-      -webkit-transform-origin: left top;
-      -ms-transform-origin: left top;
-      transform-origin: left top;
-      -webkit-transform: scale(0, 1);
-      -ms-transform: scale(0, 1);
-      transform: scale(0, 1);
-      -webkit-transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
-      transition: transform 0.4s cubic-bezier(1, 0, 0, 1)
-    }
 
-    .btn:hover::before {
-      -webkit-transform-origin: right top;
-      -ms-transform-origin: right top;
-      transform-origin: right top;
-      -webkit-transform: scale(1, 1);
-      -ms-transform: scale(1, 1);
-      transform: scale(1, 1)
-    }
-    .modal-footer{
+
+
+    .modal-footer {
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
-    .btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728; -webkit-box-shadow: 0 3px 0 #9a1e1a; box-shadow: 0 3px 0 #9a1e1a;}
-    .btn.btn-you-tube:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
+    .btnutu{
+        width: 80%;
+    }
+    .btnutu.btn-you-tube {
+        background-color: #cf3728;
+        border-color: #cf3728;
+        -webkit-box-shadow: 0 3px 0 #9a1e1a;
+        box-shadow: 0 3px 0 #9a1e1a;
+    }
 
-.bi-suit-heart-fill {
-    color: red;
-}
-.bi-suit-heart {
-    color: red;
-}
+    .btnutu.btn-you-tube:active {
+        top: 3px;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 
-.card-wrap {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-}
+    .bi-suit-heart-fill {
+        color: red;
+    }
 
-a {
-    color: black;
-    text-decoration: none;
-}
+    .bi-suit-heart {
+        color: red;
+    }
+
+    .card-wrap {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .logoutbtn {
+        position: absolute;
+        right: 2%;
+        top: 2%;
+    }
+    /*Animation*/
+    .line {
+          position: relative;
+          top: 50%;
+          width: 16em;
+          margin: 0 auto 40px;
+          border-right: 2px solid rgba(255, 255, 255, 0.75);
+          font-size: 300%;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;transform: translateY(-50%);
+    }
+
+    .anim-typewriter {
+          animation: typewriter 4s steps(40) 1s 1 normal both,
+          blinkTextCursor 700ms steps(40) infinite normal;
+    }
+
+    @keyframes typewriter {
+          from {
+                width: 0;
+          }
+          to {
+                width: 8.2em;
+          }
+    }
+
+    @keyframes blinkTextCursor {
+          from {
+                border-right-color: rgba(183, 183, 77, 0.75);
+          }
+          to {
+                border-right-color: transparent;
+          }
+    }
