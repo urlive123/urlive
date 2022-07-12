@@ -1,7 +1,18 @@
 $(document).ready(function () {
     show_list();
-});
+    const menuItems = document.querySelectorAll('.tab-menu__item');
 
+    let previousSelectedItem = menuItems[0];
+
+    menuItems.forEach(item => {
+                            item.addEventListener('click', () => {
+                                previousSelectedItem?.classList.remove('tab-menu__active')
+                                previousSelectedItem = item;
+                                item.classList.add('tab-menu__active');
+                            })
+                        })
+
+});
 // 정렬 좋아요 지혜
 function sort_heart() {
     $('#cards-box').empty()
@@ -32,7 +43,6 @@ function sort_heart() {
                                               <div class="card-wrap">
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
-                                          
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -418,4 +428,15 @@ function sortbycomment() {
         }
     })
 }
+//메뉴 버튼
+const menuItems = document.querySelectorAll('.tab-menu__item');
 
+let previousSelectedItem = menuItems[0];
+
+    menuItems.forEach(item => {
+                            item.addEventListener('click', () => {
+                                previousSelectedItem?.classList.remove('tab-menu__active')
+                                previousSelectedItem = item;
+                                item.classList.add('tab-menu__active');
+                            })
+                        })
