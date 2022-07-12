@@ -37,7 +37,7 @@ function show_list() {
 
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <div class="card-wrap">
-                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}"
+                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                동영상 보기!
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
