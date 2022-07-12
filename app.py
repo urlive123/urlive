@@ -193,7 +193,7 @@ def api_get_by_comment():
     return jsonify({'contents': result})
 
 
-
+# 좋아요 순 정렬
 @app.route('/api/sort_heart', methods=['GET'])
 def card_sort_heart():
     token_receive = request.cookies.get('mytoken')
@@ -208,6 +208,19 @@ def card_sort_heart():
     content_sort_heart.sort(key=lambda content: content["count_heart"], reverse=True)
     print(content_sort_heart)
     return jsonify({'contents': content_sort_heart})
+
+
+
+
+#############################메인페이지 python 함수#################################################
+
+@app.route('/mypage/profile', methods=['GET'])
+def profile_load():
+    one = list(db.urliveComment.find_one())
+    two = list(db.urliveContents.find_one())
+    three = list(db.urliveLikes.find_one())
+    four = list(db.urliveUsers.find_one())
+    return jsonify({'one':one,'two':two,'three':three,'four':four})
 
 
 
