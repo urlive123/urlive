@@ -159,8 +159,10 @@ def comment_post():
 # 숫자를 받아오면 바꿔주어야 함
 @app.route("/main/comment", methods=["GET"])
 def comment_get():
-    urliveComment = list(db.urliveComment.find({}, {'_id': False}))
-    return jsonify({'urliveComments': urliveComment})
+    comment_list = list(db.urliveComment.find({}))
+    for document in comment_list:
+        document['_id'] = str(document['_id'])
+    return jsonify({'urliveComments': comment_list})
 
 @app.route('/comment/delete', methods=['POST'])
 def comment_delete():

@@ -132,7 +132,7 @@ function post_list() {
                         let objectId = rows[i]['_id']
                         let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment} <button onclick="delete_comment( '${objectId}',${num})" type="button" class="btn-close" aria-label="Close"></button></td>
+                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                     }
@@ -224,8 +224,7 @@ function delete_card(id) {
 }
 
 function delete_comment(objectId,id) {
-
-    if(confirm('삭제하시겠습니까?')) {
+    if (confirm('삭제하시겠습니까?')) {
         $.ajax({
         type: 'POST',
         url: '/comment/delete',
