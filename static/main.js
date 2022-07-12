@@ -129,20 +129,19 @@ function post_list() {
                     if(id == num){
                         let comment = rows[i]['comment']
                         let userId = rows[i]['userId']
+                        let objectId = rows[i]['_id']
                         let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment}</td>
+                                        <td>${comment} <button onclick="delete_comment( '${objectId}',${num})" type="button" class="btn-close" aria-label="Close"></button></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                     }
                 }
-
             }
-        }
     })
 }
 
-//포스트 창 열기 (수정 필요)
+
 
     //댓글 하기
 
@@ -217,6 +216,24 @@ function delete_card(id) {
             alert(response['msg'])
             if (response['check'] == 1) {
                 window.location.reload()
+            }
+        }
+    })
+    }
+
+}
+
+function delete_comment(objectId,id) {
+
+    if(confirm('삭제하시겠습니까?')) {
+        $.ajax({
+        type: 'POST',
+        url: '/comment/delete',
+        data: {objectId_give: objectId, userId_give: userId},
+        success: function (response) {
+            alert(response['msg'])
+            if (response['check'] == 1) {
+                comment_listing(id)
             }
         }
     })

@@ -162,6 +162,21 @@ def comment_get():
     urliveComment = list(db.urliveComment.find({}, {'_id': False}))
     return jsonify({'urliveComments': urliveComment})
 
+@app.route('/comment/delete', methods=['POST'])
+def comment_delete():
+    objectId_receive = request.form['objectId_give']
+    user_id_receive = request.form['userId_give']
+    comment_info = db.urliveComment.find_one({'_id': ObjectId(objectId_receive)})
+    print(user_id_receive)
+    if comment_info['userId'] == user_id_receive:
+        db.urliveComment.delete_one({'_id': ObjectId(objectId_receive)})
+        msg = "삭제 완료"
+        check = 1
+    else:
+        msg = "본인이 작성한 글이 아닙니다."
+        check = 0
+    return jsonify({'msg': msg, 'check': check})
+
 
 
 if __name__ == '__main__':
