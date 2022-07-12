@@ -34,7 +34,7 @@ function show_list() {
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
 
-                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                              <button onclick="comment_listing(${objectId})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                동영상 보기!
 
                                               </button>
@@ -53,6 +53,8 @@ function show_list() {
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                                 allowfullscreen
                                                                 id="player"></iframe>
+                                                                <h2>${title} - ${artist}</h2>
+                                                                <p>${content}</p>
                                                     </div>
                                                     <div class="comment_box">
                                                         <table class="table">
@@ -60,15 +62,15 @@ function show_list() {
                                                         <tr>
                                                          <th scope="col" style="width: 100px">닉네임</th>
                                                          <th scope="col">댓글</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="comment">
-                                        <tr>
-                                            <td>영희</td>
-                                            <td>노래 넘 좋아여</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="comment">
+                                                            <tr>
+                                                                <td>영희</td>
+                                                                <td>노래 넘 좋아여</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
                                                     <div class="modal-footer">
                                                         <button onclick="reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
@@ -100,6 +102,7 @@ function post_list() {
 
   //댓글 보이기
     function comment_listing() {
+        $('#comment').empty()
         $.ajax({
             type: 'GET',
             url: '/main/comment',
@@ -120,26 +123,6 @@ function post_list() {
     }
 
       //포스트 창 열기 (수정 필요)
-    function post_page_open() {
-    comment_listing()
-        $.ajax({
-            type: 'GET',
-            url: '/main/<urliveContents_id>',
-            data: {},
-            success: function (response) {
-                let url = [response]['url']
-                let song_name=[response]['songname']
-                let artist = [response]['artist']
-                let recommendation = [response]['recommendation']
-                let temp_html = ` <div class="embed-responsive embed-responsive-16by9">
-                                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${url}" allowfullscreen></iframe>
-                                    </div>
-                                    <h2>${song_name} - ${artist}</h2>
-                                    <div>${recommendation}</div>`
-                $('#post-box').append(temp_html)
-            }
-        })
-    }
 
     //댓글 하기
     function comment_posting() {
