@@ -69,8 +69,6 @@ def api_post():
     title_receive = request.form['title_give']
     artist_receive = request.form['artist_give']
     content_receive = request.form['content_give']
-    insertTime_receive = request.form['insertTime_give']
-    print(insertTime_receive)
     doc = {
         'userId': userId_receive,
         'url': url_receive,
