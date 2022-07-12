@@ -48,11 +48,12 @@ function show_list() {
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
+                                                                <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                                 allowfullscreen
                                                                 id="player"></iframe>
+                                                        <div class="post_box">
                                                                 <h2>${title} - ${artist}</h2>
                                                                 <p>${content}</p>
                                                     </div>
@@ -71,6 +72,12 @@ function show_list() {
                                                             </tr>
                                                             </tbody>
                                                         </table>
+                                                        <div class="form-floating">
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
+                                                            <label for="floatingTextarea">댓글 달기</label>
+                                                            <button onclick="comment_posting()" style="float: right" type="button" class="btn btn-outline-dark mt-3">등록</button>
+                                                        </div>
+                                                        </div>
                                                     <div class="modal-footer">
                                                         <button onclick="reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
@@ -126,11 +133,11 @@ function post_list() {
 
     //댓글 하기
     function comment_posting() {
-        let comment = $('#comment').val()
+        let comment = $('#comment-post').val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {username_give: userId, comment_give: comment},
+            data: {userId_give: userId, comment_give: comment},
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
