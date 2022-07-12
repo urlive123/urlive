@@ -13,6 +13,7 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.test
 
+
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
 def objectIdDecoder(list):
@@ -28,7 +29,7 @@ def main():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"id": payload['id']})
+        user_info = db.urliveUsers.find_one({'id': payload['id']})
         return render_template('main.html', id=user_info["id"])
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
@@ -90,14 +91,6 @@ def api_get():
     content_list = list(db.urliveContents.find({}))
     objectIdDecoder(content_list)
     return jsonify({'contents': content_list})
-
-
-
-# 댓글 포스팅 창 열기
-@app.route('/main/<urliveContents_id>', methods=['GET'])
-def read_articles(urliveContents_id):
-    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return jsonify({urlivePost})
 
 @app.route("/main/comment", methods=["GET"])
 def post_get():
