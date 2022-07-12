@@ -47,9 +47,11 @@
                                                  alt="Generic placeholder image" class="img-fluid"
                                                  style="width: 180px; border-radius: 10px;">
                                         </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h5 class="mb-1">이름</h5>
-                                            <p class="mb-2 pb-1" style="color: #2b2a2a;">자기 설명글</p>
+                                        <div class="flex-grow-1 ms-3" >
+                                            <div id="profile_info">
+                                                <h5 class="mb-1">이름</h5>
+                                                <p class="mb-2 pb-1" style="color: #2b2a2a;">자기 설명글</p>
+                                            </div>
                                             <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
                                                  style="background-color: #efefef;">
                                                 <div id="profile_upload_number">
@@ -66,9 +68,20 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex pt-1">
-                                                <button type="button"
-                                                        class="btn btn-outline-primary me-1 flex-grow-1">프로필 수정
+                                                <button data-toggle="modal" data-target=".bd-example-modal-lg"onclick="profile_edit(userId)" type="button"
+                                                        class="btn btn-outline-primary me-1 flex-grow-1">
+                                                프로필 수정
                                                 </button>
+
+                                                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            ...
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <button type="button" class="btn btn-primary flex-grow-1"> 구독
                                                 </button>
                                             </div>

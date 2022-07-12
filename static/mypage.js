@@ -9,7 +9,25 @@ $(document).ready(function () {
 //프로파일-댓글 수
 
 function profile_get(){
-
+ $('#profile_info').empty()
+    $.ajax({
+        type: 'GET',
+        url: '/mypage/profile',
+        data: {},
+        success: function (response) {
+            console.log(response)
+            let rows = response['one']
+            for (let i=0; i<rows.length; i++){
+                if ( rows[i]['userId']==userId ){
+                    let userId = rows[i]['userId']
+                    let introduction = rows[i]['intro']
+                let temp_html =`<h5 class="mb-1">${userId}</h5>
+                                <p class="mb-2 pb-1" style="color: #2b2a2a;">${introduction}</p>`
+                $('#profile_info').append(temp_html)
+                }
+            }
+        }
+    })
 }
 
 function profile_num_get() {
@@ -84,7 +102,19 @@ function profile_num_get() {
     })
 }
 
-function profile_edit(){}
+function profile_edit() {
+    let intro = $('#intro').val()
+    $.ajax({
+        type: 'POST',
+        url: '/mypage/profile/edit',
+        data: {intro_give: intro, userId_give: userId},
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    });
+}
+
 
 
 
