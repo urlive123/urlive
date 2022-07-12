@@ -81,7 +81,7 @@ function show_list() {
                                                         </table>
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost"></textarea>
-                                                            <label for="floatingTextarea">댓글 달기</label>
+                                                            <label for="commentpost">댓글 달기</label>
                                                             <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
@@ -144,11 +144,11 @@ function post_list() {
     //댓글 하기
     function comment_posting(Id) {
     console.log(Id)
-        let commentpost = $('#commentpost').val()
+        let comment = $('#commentpost').val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {userId_give: userId, comment_give: commentpost, objectId_give: Id},
+            data: {userId_give: userId, comment_give: comment, objectId_give: Id},
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
