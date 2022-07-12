@@ -9,13 +9,12 @@ function youtube_parser(url) {
     return (match && match[7].length == 11) ? match[7] : false;
 }
 
-function reload() {
-    window.location.reload()
-}
-
 function show_list() {
     $.ajax({
-        type: "GET", url: "/api/get", data: {}, success: function (response) {
+        type: "GET",
+        url: "/api/get",
+        data: {},
+        success: function (response) {
             console.log(response['contents'])
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
@@ -26,7 +25,7 @@ function show_list() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
-                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill": "bi-suit-heart"
+                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
                 console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
@@ -37,7 +36,9 @@ function show_list() {
 
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <div class="card-wrap">
-                                              <button onclick="comment_listing()" href="#" type="button" class="btnutu btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+
+                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+
                                                <i class="fa fa-youtube"></i>
                                           
                                               </button>
@@ -46,7 +47,8 @@ function show_list() {
                                               </a>
                                               </div>
                                              </div>
-                                 </div>
+                                             <i onclick="delete_card('${objectId}')" class="bi bi-x-lg"></i>
+                                            </div>
                                         <!-- Modal Detail -->
                                         <div class="modal fade" id="detailModal${objectId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -72,26 +74,25 @@ function show_list() {
                                                          <th scope="col">댓글</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody id="comment">
-                                                            <tr>
-                                                                <td>영희</td>
-                                                                <td>노래 넘 좋아여</td>
-                                                            </tr>
+                                                            <tbody id="comment${objectId}">                                                         
                                                             </tbody>
                                                         </table>
                                                         <div class="form-floating">
-                                                            <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting((${objectId}))" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
-                                                        <button onclick="reload()" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>`
                 $('#cards-box').append(temp_html)
+                $(document).on('hidden.bs.modal', `#detailModal${objectId}`, function () {
+                    $(`#detailModal${objectId} iframe`).attr("src", $(`#detailModal${objectId} iframe`).attr("src"))
+                })
             }
         }
     });
@@ -114,43 +115,49 @@ function post_list() {
     })
 }
 
+
   //댓글 보이기
-    function comment_listing(objectId) {
-        $('#comment').empty()
+    function comment_listing(id) {
+        $(`#comment${id}`).empty();
         $.ajax({
             type: 'GET',
             url: '/main/comment',
             data: {},
             success: function (response) {
+                console.log(response)
                 let rows = response['urliveComments']
                 for (let i = 0; i < rows.length; i++) {
                     let num = rows[i]['num']
-                    if(objectId == num){
+                    if(id == num){
                         let comment = rows[i]['comment']
                         let userId = rows[i]['userId']
+                        let objectId = rows[i]['_id']
                         let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment}</td>
+                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
                                     </tr>`
-                    $('#comment').append(temp_html)
-                    }else None;
+                    $(`#comment${id}`).append(temp_html)
+                    }
                 }
             }
-        })
+         })
     }
 
-      //포스트 창 열기 (수정 필요)
+
+
 
     //댓글 하기
-    function comment_posting(objectId) {
-        let comment = $('#comment-post').val()
+
+    function comment_posting(id) {
+        let commentpost = $(`#commentpost${id}`).val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {userId_give: userId, comment_give: comment, objectId_give: objectId},
+            data: {userId_give: userId, comment_give: commentpost, objectId_give: id},
             success: function (response) {
                 alert(response['msg'])
-                window.location.reload()
+                comment_listing(id)
+                $(`#commentpost${id}`).val("")
             }
         });
     }
@@ -166,11 +173,9 @@ function toggle_like(post_id, type) {
             data: {
                 post_id_give: post_id,
                 type_give: type,
-                action_give: "like"
+                action_give: "like",
             },
             success: function (response) {
-                console.log("like")
-                console.log(response)
                 $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -192,4 +197,136 @@ function toggle_like(post_id, type) {
         })
 
     }
+
+}
+//by현서 로그아웃 기능
+function logout() {
+    $.removeCookie('mytoken')
+    window.location.reload()
+    console.log("clicked!")
+}
+
+//by현서 딜리트 기능
+function delete_card(id) {
+    if(confirm('삭제하시겠습니까?')) {
+        $.ajax({
+        type: 'POST',
+        url: '/api/delete',
+        data: {id_give: id, userId_give: userId},
+        success: function (response) {
+            alert(response['msg'])
+            if (response['check'] == 1) {
+                window.location.reload()
+            }
+        }
+    })
+    }
+
+}
+
+function delete_comment(objectId,id) {
+    if (confirm('삭제하시겠습니까?')) {
+        $.ajax({
+        type: 'POST',
+        url: '/comment/delete',
+        data: {objectId_give: objectId, userId_give: userId},
+        success: function (response) {
+            alert(response['msg'])
+            if (response['check'] == 1) {
+                comment_listing(id)
+            }
+        }
+    })
+    }
+
+}
+
+// 댓글 순 정렬
+function sortbycomment() {
+    $.ajax({
+        type: 'get',
+        url: '/api/getByComment',
+        data: {},
+        success: function (response) {
+            console.log(response)
+            $('#cards-box').empty()
+            let rows = response['contents']
+            for (let i = 0; i < rows.length; i++) {
+                let title = rows[i]['title']
+                let content = rows[i]['content']
+                let userId = rows[i]['userId']
+                let objectId = rows[i]['_id']
+                let artist = rows[i]['artist']
+                let count_heart = rows[i]['count_heart']
+                let url = rows[i]['url']
+                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
+                let url_result = youtube_parser(url)
+                console.log()
+                let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
+                                          <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
+                                             <div class="card-body">
+                                              <h5 class="card-title">${title} - ${artist}</h5>
+                                              <p class="card-text">${content}</p>
+
+                                              <p class="card-writer">작성자: ${userId}</p>
+                                              <div class="card-wrap">
+                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                               <i class="fa fa-youtube"></i>
+                                          
+                                              </button>
+                                              <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
+                                              <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
+                                              </a>
+                                              </div>
+                                             </div>
+                                             <i onclick="delete_card('${objectId}')" class="bi bi-x-lg"></i>
+                                            </div>
+                                        <!-- Modal Detail -->
+                                        <div class="modal fade" id="detailModal${objectId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                                <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
+                                                                title="YouTube video player" frameborder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen
+                                                                id="player"></iframe>
+                                                        <div class="post_box">
+                                                                <h2>${title} - ${artist}</h2>
+                                                                <p>${content}</p>
+                                                    </div>
+                                                    <div class="comment_box">
+                                                        <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                         <th scope="col" style="width: 100px">닉네임</th>
+                                                         <th scope="col">댓글</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="comment${objectId}">                                                         
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="form-floating">
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
+                                                            <label for="floatingTextarea">댓글 달기</label>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                        </div>
+                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                $('#cards-box').append(temp_html)
+                $(document).on('hidden.bs.modal', `#detailModal${objectId}`, function () {
+                    $(`#detailModal${objectId} iframe`).attr("src", $(`#detailModal${objectId} iframe`).attr("src"))
+                })
+            }
+
+        }
+    })
 }

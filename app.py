@@ -5,6 +5,7 @@ import jwt
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 app = Flask(__name__)
 
+from bson import ObjectId
 from pymongo import MongoClient
 import certifi
 
@@ -115,19 +116,27 @@ def update_like():
         else:
             db.urliveLikes.delete_one(doc)
         count = db.urliveLikes.count_documents({"post_id": post_id_receive, "type": type_receive})
-        print(count)
         return jsonify({"result": "success", 'msg': 'updated', "count": count})
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("home"))
 
-
-# 댓글 포스팅 창 열기
-@app.route('/main/<urliveContents_id>', methods=['GET'])
-def read_articles(urliveContents_id):
-    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return jsonify({urlivePost})
+# 카드 삭제 기능
+@app.route('/api/delete', methods=['POST'])
+def api_delete():
+    id_receive = request.form['id_give']
+    userId_receive = request.form['userId_give']
+    content = db.urliveContents.find_one({'_id': ObjectId(id_receive)})
+    print(userId_receive)
+    if content['userId'] == userId_receive:
+        db.urliveContents.delete_one({'_id': ObjectId(id_receive)})
+        msg = "삭제되었습니다!"
+        check = 1
+    else:
+        msg = "본인이 작성한 글이 아닙니다."
+        check = 0
+    return jsonify({'msg': msg, 'check': check})
 
 
 @app.route('/main/comment', methods=['POST'])
@@ -141,15 +150,48 @@ def comment_post():
         'userId': userId_receive,
         'comment': comment_receive,
     }
+
     db.urliveComment.insert_one(doc)
-    return jsonify({'msg':'댓글 등록 완료'})
+    return jsonify({'msg':'등록 완료'})
 
 
 # 숫자를 받아오면 바꿔주어야 함
 @app.route("/main/comment", methods=["GET"])
 def comment_get():
-    urliveComment = list(db.urliveComment.find({}, {'_id': False}))
-    return jsonify({'urliveComments': urliveComment})
+    comment_list = list(db.urliveComment.find({}))
+    for document in comment_list:
+        document['_id'] = str(document['_id'])
+    return jsonify({'urliveComments': comment_list})
+
+@app.route('/comment/delete', methods=['POST'])
+def comment_delete():
+    objectId_receive = request.form['objectId_give']
+    user_id_receive = request.form['userId_give']
+    comment_info = db.urliveComment.find_one({'_id': ObjectId(objectId_receive)})
+    print(user_id_receive)
+    if comment_info['userId'] == user_id_receive:
+        db.urliveComment.delete_one({'_id': ObjectId(objectId_receive)})
+        msg = "삭제 완료"
+        check = 1
+    else:
+        msg = "본인이 작성한 글이 아닙니다."
+        check = 0
+    return jsonify({'msg': msg, 'check': check})
+
+# 댓글 순 정렬
+@app.route('/api/getByComment', methods=['GET'])
+def api_get_by_comment():
+    content_list = list(db.urliveContents.find({}))
+    print(content_list)
+    result = []
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        result.append(document)
+    result.sort(key=lambda content: content["comment_count"],reverse=True)
+    print(result)
+    return jsonify({'contents': result})
+
 
 
 

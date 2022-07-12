@@ -9,7 +9,6 @@ $(document).ready(function () {
 function login() {
     id = $('#id').val();
     pw = $('#password').val();
-    let errStack = 0;
     $.ajax({
         type: "POST",
         url: "/api/login",
@@ -17,7 +16,6 @@ function login() {
         success: function (response) {
             if (response['result'] == 'fail') {
                 alert(response['msg'])
-                errStack++;
             }
             if (response['result'] == 'success') {
                 let access_token = response['token']
