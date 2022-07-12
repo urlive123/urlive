@@ -1,3 +1,4 @@
+// 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
     show_list();
 });
@@ -19,6 +20,7 @@ function sort_heart() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
+                let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
                 console.log()
@@ -29,6 +31,7 @@ function sort_heart() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
@@ -82,6 +85,7 @@ function sort_heart() {
                                             </div>
                                         </div>`
                 $('#cards-box').append(temp_html)
+                // 모달창 종료시 영상 멈춤
                 $(document).on('hidden.bs.modal', `#detailModal${objectId}`, function () {
                     $(`#detailModal${objectId} iframe`).attr("src", $(`#detailModal${objectId} iframe`).attr("src"))
                 })
@@ -97,6 +101,7 @@ function youtube_parser(url) {
     return (match && match[7].length == 11) ? match[7] : false;
 }
 
+// 초기 리스트 조회 함수
 function show_list() {
     $.ajax({
         type: "GET",
@@ -114,6 +119,7 @@ function show_list() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
+                let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
 
@@ -124,6 +130,7 @@ function show_list() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
 
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
@@ -186,7 +193,7 @@ function show_list() {
         }
     });
 }
-
+// 카드 포스팅
 function post_list() {
     let title = $('#title').val()
     let content = $('#content').val()
@@ -232,7 +239,7 @@ function post_list() {
     }
 
 
-    //댓글 하기
+    //댓글 쓰기
 
     function comment_posting(id) {
         let commentpost = $(`#commentpost${id}`).val()
@@ -346,6 +353,7 @@ function sortbycomment() {
                 let objectId = rows[i]['_id']
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
+                let count_comment = rows[i]['comment_count']
                 let url = rows[i]['url']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
@@ -357,6 +365,7 @@ function sortbycomment() {
                                               <p class="card-text">${content}</p>
 
                                               <p class="card-writer">작성자: ${userId}</p>
+                                              <p class="card-comment-count">댓글 수: ${count_comment}</p>
                                               <div class="card-wrap">
                                               <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
