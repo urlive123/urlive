@@ -218,6 +218,7 @@ def card_sort_heart():
     print(content_sort_heart)
     for document in content_sort_heart:
         document['_id'] = str(document['_id'])
+
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
         document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
@@ -236,7 +237,6 @@ def api_get_my_like():
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
         document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-
     filtered_list = [c for c in content_list if c['heart_by_me'] is True]
     print(filtered_list)
     return jsonify({'contents': filtered_list})
@@ -255,5 +255,6 @@ def api_get_my_upload():
     filtered_list = [c for c in content_list if c['userId'] == payload['id']]
     print(filtered_list)
     return jsonify({'contents': filtered_list})
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
