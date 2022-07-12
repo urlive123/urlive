@@ -16,10 +16,6 @@ db = client.test
 
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
-def objectIdDecoder(list):
-    for document in list:
-        document['_id'] = str(document['_id'])
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -86,9 +82,52 @@ def api_post():
 
 @app.route('/api/get', methods=['GET'])
 def api_get():
-    content_list = list(db.urliveContents.find({}))
-    objectIdDecoder(content_list)
-    return jsonify({'contents': content_list})
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        content_list = list(db.urliveContents.find({}))
+        for document in content_list:
+            document['_id'] = str(document['_id'])
+            document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
+            document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
+        return jsonify({'contents': content_list})
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("home"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home"))
+# 좋아요 기능
+@app.route('/api/likes', methods=['POST'])
+def update_like():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.urliveUsers.find_one({"id": payload["id"]})
+        post_id_receive = request.form["post_id_give"]
+        type_receive = request.form["type_give"]
+        action_receive = request.form["action_give"]
+        doc = {
+            "post_id": post_id_receive,
+            "id": user_info["id"],
+            "type": type_receive
+        }
+        if action_receive == "like":
+            db.urliveLikes.insert_one(doc)
+        else:
+            db.urliveLikes.delete_one(doc)
+        count = db.urliveLikes.count_documents({"post_id": post_id_receive, "type": type_receive})
+        print(count)
+        return jsonify({"result": "success", 'msg': 'updated', "count": count})
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("home"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("home"))
+
+
+# 댓글 포스팅 창 열기
+@app.route('/main/<urliveContents_id>', methods=['GET'])
+def read_articles(urliveContents_id):
+    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
+    return jsonify({urlivePost})
 
 
 @app.route('/main/comment', methods=['POST'])

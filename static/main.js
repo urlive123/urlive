@@ -24,20 +24,27 @@ function show_list() {
                 let userId = rows[i]['userId']
                 let objectId = rows[i]['_id']
                 let artist = rows[i]['artist']
+                let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
-                console.log(url)
+                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill": "bi-suit-heart"
                 let url_result = youtube_parser(url)
-                console.log((url_result))
-                let temp_html = `<div class="card" style="width: 18rem;">
+                console.log()
+                let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
 
-                                              <button onclick="comment_listing(${objectId})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                               동영상 보기!
-
+                                              <p class="card-writer">작성자: ${userId}</p>
+                                              <div class="card-wrap">
+                                              <button onclick="post_page_open()" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                               <i class="fa fa-youtube"></i>
+                                          
                                               </button>
+                                              <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
+                                              <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
+                                              </a>
+                                              </div>
                                              </div>
                                  </div>
                                         <!-- Modal Detail -->
@@ -79,7 +86,7 @@ function show_list() {
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
-                                                        <button onclick="reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button onclick="reload()" type="button" class="btn" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,3 +154,42 @@ function post_list() {
             }
         });
     }
+    //좋아요 기능
+function toggle_like(post_id, type) {
+    let $a_like = $(`#${post_id} a[aria-label='heart']`)
+    let $i_like = $a_like.find("i")
+    console.log($i_like)
+    if ($i_like.hasClass("bi-suit-heart")) {
+        $.ajax({
+            type: "POST",
+            url: "/api/likes",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "like"
+            },
+            success: function (response) {
+                console.log("like")
+                console.log(response)
+                $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
+                $a_like.find("span.like-num").text(response["count"])
+            }
+        })
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/api/likes",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "unlike"
+            },
+            success: function (response) {
+                console.log("unlike")
+                $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
+                $a_like.find("span.like-num").text(response["count"])
+            }
+        })
+
+    }
+}
