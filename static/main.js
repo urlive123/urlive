@@ -75,7 +75,7 @@ function show_list() {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting(str(${objectId}))" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button onclick="comment_posting((${objectId}))" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
@@ -118,9 +118,9 @@ function post_list() {
                 let rows = response['urliveComments']
                 for (let i = 0; i < rows.length; i++) {
                     let comment = rows[i]['comment']
-                    let username = rows[i]['username']
+                    let userId = rows[i]['userId']
                     let temp_html = ` <tr>
-                                        <td>${username}</td>
+                                        <td>${userId}</td>
                                         <td>${comment}</td>
                                     </tr>`
                     $('#comment').append(temp_html)
