@@ -48,3 +48,22 @@
 
 }
 
+.bi-suit-heart-fill {
+    color: red;
+}
+.bi-suit-heart {
+    color: red;
+}
+
+.card-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
