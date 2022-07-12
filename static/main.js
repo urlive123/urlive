@@ -72,7 +72,7 @@ function show_list() {
                                                          <th scope="col">댓글</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody id="comment">
+                                                            <tbody id="comment{$objectId}">
                                                             <tr>
                                                                 <td>영희</td>
                                                                 <td>노래 넘 좋아여</td>
@@ -81,7 +81,7 @@ function show_list() {
                                                         </table>
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost"></textarea>
-                                                            <label for="commentpost">댓글 달기</label>
+                                                            <label for="commentpost{}">댓글 달기</label>
                                                             <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
