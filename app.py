@@ -5,6 +5,7 @@ import jwt
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 app = Flask(__name__)
 
+from bson import ObjectId
 from pymongo import MongoClient
 import certifi
 
@@ -121,6 +122,22 @@ def update_like():
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("home"))
+
+# 카드 삭제 기능
+@app.route('/api/delete', methods=['POST'])
+def api_delete():
+    id_receive = request.form['id_give']
+    userId_receive = request.form['userId_give']
+    content = db.urliveContents.find_one({'_id': ObjectId(id_receive)})
+    print(userId_receive)
+    if content['userId'] == userId_receive:
+        db.urliveContents.delete_one({'_id': ObjectId(id_receive)})
+        msg = "삭제되었습니다!"
+        check = 1
+    else:
+        msg = "본인이 작성한 글이 아닙니다."
+        check = 0
+    return jsonify({'msg': msg, 'check': check})
 
 
 @app.route('/main/comment', methods=['POST'])
