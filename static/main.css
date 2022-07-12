@@ -62,22 +62,24 @@
         justify-content: center;
     }
 
-    .btnutu{
+    .btn{
         width: 80%;
     }
-    .btnutu.btn-you-tube {
+    .btn.btn-you-tube {
         background-color: #cf3728;
         border-color: #cf3728;
         -webkit-box-shadow: 0 3px 0 #9a1e1a;
         box-shadow: 0 3px 0 #9a1e1a;
     }
 
-    .btnutu.btn-you-tube:active {
+    .btn.btn-you-tube:active {
         top: 3px;
         outline: none;
         -webkit-box-shadow: none;
         box-shadow: none;
     }
+    .btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728; -webkit-box-shadow: 0 3px 0 #9a1e1a; box-shadow: 0 3px 0 #9a1e1a;}
+    .btn.btn-you-tube:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
 
     .bi-suit-heart-fill {
         color: red;
