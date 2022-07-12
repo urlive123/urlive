@@ -116,3 +116,22 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+.bi-x-lg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.5s linear;
+    float: right;
+    cursor: pointer;
+    margin-left: auto;
+}
+.card {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+}
+.card:hover .bi-x-lg {
+    opacity: 0.6;
+}

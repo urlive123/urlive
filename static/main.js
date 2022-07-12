@@ -1,5 +1,8 @@
 $(document).ready(function () {
     show_list();
+    $('.modal fade').on('hidden.bs.modal', function () {
+        console.log('clicked!')
+    })
 });
 
 // youtube URL에서 id 추출 함수
@@ -7,10 +10,6 @@ function youtube_parser(url) {
     let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     let match = url.match(regExp);
     return (match && match[7].length == 11) ? match[7] : false;
-}
-
-function reload() {
-    window.location.reload()
 }
 
 function show_list() {
@@ -26,7 +25,7 @@ function show_list() {
                 let artist = rows[i]['artist']
                 let count_heart = rows[i]['count_heart']
                 let url = rows[i]['url']
-                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill": "bi-suit-heart"
+                let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
                 console.log()
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
@@ -46,7 +45,8 @@ function show_list() {
                                               </a>
                                               </div>
                                              </div>
-                                 </div>
+                                             <i onclick="delete_card('${objectId}')" class="bi bi-x-lg"></i>
+                                            </div>
                                         <!-- Modal Detail -->
                                         <div class="modal fade" id="detailModal${objectId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -86,12 +86,15 @@ function show_list() {
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
-                                                        <button onclick="reload()" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>`
                 $('#cards-box').append(temp_html)
+                $(document).on('hidden.bs.modal', `#detailModal${objectId}`, function () {
+                    $(`#detailModal${objectId} iframe`).attr("src", $(`#detailModal${objectId} iframe`).attr("src"))
+                })
             }
         }
     });
@@ -114,44 +117,45 @@ function post_list() {
     })
 }
 
-  //댓글 보이기
-    function comment_listing() {
-        $('#comment').empty()
-        $.ajax({
-            type: 'GET',
-            url: '/main/comment',
-            data: {},
-            success: function (response) {
-                let rows = response['urliveComments']
-                for (let i = 0; i < rows.length; i++) {
-                    let comment = rows[i]['comment']
-                    let username = rows[i]['username']
-                    let temp_html = ` <tr>
+//댓글 보이기
+function comment_listing() {
+    $('#comment').empty()
+    $.ajax({
+        type: 'GET',
+        url: '/main/comment',
+        data: {},
+        success: function (response) {
+            let rows = response['urliveComments']
+            for (let i = 0; i < rows.length; i++) {
+                let comment = rows[i]['comment']
+                let username = rows[i]['username']
+                let temp_html = ` <tr>
                                         <td>${username}</td>
                                         <td>${comment}</td>
                                     </tr>`
-                    $('#comment').append(temp_html)
-                }
+                $('#comment').append(temp_html)
             }
-        })
-    }
+        }
+    })
+}
 
-      //포스트 창 열기 (수정 필요)
+//포스트 창 열기 (수정 필요)
 
-    //댓글 하기
-    function comment_posting() {
-        let comment = $('#comment-post').val()
-        $.ajax({
-            type: 'POST',
-            url: '/main/comment',
-            data: {userId_give: userId, comment_give: comment},
-            success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
-            }
-        });
-    }
-    //좋아요 기능
+//댓글 하기
+function comment_posting() {
+    let comment = $('#comment-post').val()
+    $.ajax({
+        type: 'POST',
+        url: '/main/comment',
+        data: {userId_give: userId, comment_give: comment},
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    });
+}
+
+//좋아요 기능
 function toggle_like(post_id, type) {
     let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
@@ -188,5 +192,28 @@ function toggle_like(post_id, type) {
             }
         })
 
+    }
+}
+//by현서 로그아웃 기능
+function logout() {
+    $.removeCookie('mytoken')
+    window.location.reload()
+    console.log("clicked!")
+}
+
+//by현서 딜리트 기능
+function delete_card(id) {
+    if(confirm('삭제하시겠습니까?')) {
+        $.ajax({
+        type: 'POST',
+        url: '/api/delete',
+        data: {id_give: id, userId_give: userId},
+        success: function (response) {
+            alert(response['msg'])
+            if (response['check'] == 1) {
+                window.location.reload()
+            }
+        }
+    })
     }
 }
