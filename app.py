@@ -140,30 +140,20 @@ def api_delete():
     return jsonify({'msg': msg, 'check': check})
 
 
-# 댓글 포스팅 창 열기
-@app.route('/main/<urliveContents_id>', methods=['GET'])
-def read_articles(urliveContents_id):
-    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return jsonify({urlivePost})
-
-@app.route("/main/comment", methods=["GET"])
-def post_get():
-    urlivePost = list(db.urliveContents.find({}, {'_id': False}))
-    return jsonify({'urlivePosts': urlivePost})
-
-
 @app.route('/main/comment', methods=['POST'])
 def comment_post():
     userId_receive = request.form['userId_give']
     comment_receive = request.form['comment_give']
-    num = db.urliveContents.select_one['objectId']
+    num= request.form['objectId_give']
+
     doc = {
         'num': num,
         'userId': userId_receive,
         'comment': comment_receive,
     }
+
     db.urliveComment.insert_one(doc)
-    return redirect("/main/comment")
+    return jsonify({'msg':'등록 완료'})
 
 
 # 숫자를 받아오면 바꿔주어야 함
