@@ -36,7 +36,7 @@ function show_list() {
 
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <div class="card-wrap">
-                                              <button onclick="post_page_open()" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                <i class="fa fa-youtube"></i>
                                           
                                               </button>
@@ -72,17 +72,13 @@ function show_list() {
                                                          <th scope="col">댓글</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody id="comment">
-                                                            <tr>
-                                                                <td>영희</td>
-                                                                <td>노래 넘 좋아여</td>
-                                                            </tr>
+                                                            <tbody id="comment${objectId}">                                                         
                                                             </tbody>
                                                         </table>
                                                         <div class="form-floating">
-                                                            <textarea class="form-control" placeholder="Leave a comment" id="comment-post"></textarea>
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting()" style="float: right" type="button" class="btn btn-outline-dark mt-3">등록</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
                                                     <div class="modal-footer">
@@ -117,23 +113,30 @@ function post_list() {
     })
 }
 
-//댓글 보이기
-function comment_listing() {
-    $('#comment').empty()
-    $.ajax({
-        type: 'GET',
-        url: '/main/comment',
-        data: {},
-        success: function (response) {
-            let rows = response['urliveComments']
-            for (let i = 0; i < rows.length; i++) {
-                let comment = rows[i]['comment']
-                let username = rows[i]['username']
-                let temp_html = ` <tr>
-                                        <td>${username}</td>
+
+  //댓글 보이기
+    function comment_listing(id) {
+        $(`#comment${id}`).empty()
+        $.ajax({
+            type: 'GET',
+            url: '/main/comment',
+            data: {},
+            success: function (response) {
+                console.log(response)
+                let rows = response['urliveComments']
+                for (let i = 0; i < rows.length; i++) {
+                    let num = rows[i]['num']
+                    if(id == num){
+                        let comment = rows[i]['comment']
+                        let userId = rows[i]['userId']
+                        let temp_html = ` <tr>
+                                        <td>${userId}</td>
                                         <td>${comment}</td>
                                     </tr>`
-                $('#comment').append(temp_html)
+                    $(`#comment${id}`).append(temp_html)
+                    }
+                }
+
             }
         }
     })
@@ -141,21 +144,22 @@ function comment_listing() {
 
 //포스트 창 열기 (수정 필요)
 
-//댓글 하기
-function comment_posting() {
-    let comment = $('#comment-post').val()
-    $.ajax({
-        type: 'POST',
-        url: '/main/comment',
-        data: {userId_give: userId, comment_give: comment},
-        success: function (response) {
-            alert(response['msg'])
-            window.location.reload()
-        }
-    });
-}
+    //댓글 하기
 
-//좋아요 기능
+    function comment_posting(id) {
+        let commentpost = $(`#commentpost${id}`).val()
+        $.ajax({
+            type: 'POST',
+            url: '/main/comment',
+            data: {userId_give: userId, comment_give: commentpost, objectId_give: id},
+            success: function (response) {
+                alert(response['msg'])
+                comment_listing(id)
+                $(`#commentpost${id}`).val("")
+            }
+        });
+    }
+    //좋아요 기능
 function toggle_like(post_id, type) {
     let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
@@ -193,6 +197,7 @@ function toggle_like(post_id, type) {
         })
 
     }
+
 }
 //by현서 로그아웃 기능
 function logout() {
@@ -216,4 +221,5 @@ function delete_card(id) {
         }
     })
     }
+
 }
