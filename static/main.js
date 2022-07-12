@@ -132,7 +132,7 @@ function post_list() {
                                         <td>${userId}</td>
                                         <td>${comment}</td>
                                     </tr>`
-                    $('#comment').append(temp_html)
+                        $('#comment').append(temp_html)
                     }else{}
                 }
             }

@@ -136,7 +136,7 @@ def comment_post():
     }
 
     db.urliveComment.insert_one(doc)
-    return jsonify({'msg':doc})
+    return jsonify({'msg':'등록 완료'})
 
 
 # 숫자를 받아오면 바꿔주어야 함
