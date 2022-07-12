@@ -34,9 +34,9 @@ function show_list() {
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
 
-                                              <button onclick="post_page_open()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                               동영상 보기!
-
+                                              <button onclick="post_page_open()" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                               <i class="fa fa-youtube"></i>
+                                                
                                               </button>
                                              </div>
                                  </div>
@@ -70,7 +70,7 @@ function show_list() {
                                         </tbody>
                                     </table>
                                                     <div class="modal-footer">
-                                                        <button onclick="reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button onclick="reload()" type="button" class="btn" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
