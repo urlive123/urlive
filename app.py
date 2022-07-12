@@ -6,8 +6,13 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for
 app = Flask(__name__)
 
 from pymongo import MongoClient
-client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority')
+import certifi
+
+ca = certifi.where()
+
+client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.test
+
 
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
@@ -84,14 +89,6 @@ def api_get():
     content_list = list(db.urliveContents.find({}))
     objectIdDecoder(content_list)
     return jsonify({'contents': content_list})
-
-
-
-# 댓글 포스팅 창 열기
-@app.route('/main/<urliveContents_id>', methods=['GET'])
-def read_articles(urliveContents_id):
-    urlivePost = db.urliveContents.find_one({'_id' : urliveContents_id})
-    return jsonify({urlivePost})
 
 @app.route("/main/comment", methods=["GET"])
 def post_get():
