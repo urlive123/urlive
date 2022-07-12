@@ -72,15 +72,11 @@ function show_list() {
                                                          <th scope="col">댓글</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody id="comment">
-                                                            <tr>
-                                                                <td>영희</td>
-                                                                <td>노래 넘 좋아여</td>
-                                                            </tr>
+                                                            <tbody id="comment${objectId}">                                                         
                                                             </tbody>
                                                         </table>
                                                         <div class="form-floating">
-                                                            <textarea class="form-control" placeholder="Leave a comment" id="commentpost"></textarea>
+                                                            <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
                                                             <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
@@ -115,25 +111,26 @@ function post_list() {
 }
 
   //댓글 보이기
-    function comment_listing(Id) {
-        $('#comment').empty()
+    function comment_listing(id) {
+        $(`#comment${id}`).empty()
         $.ajax({
             type: 'GET',
             url: '/main/comment',
             data: {},
             success: function (response) {
+                console.log(response)
                 let rows = response['urliveComments']
                 for (let i = 0; i < rows.length; i++) {
                     let num = rows[i]['num']
-                    if(Id == num){
+                    if(id == num){
                         let comment = rows[i]['comment']
                         let userId = rows[i]['userId']
                         let temp_html = ` <tr>
                                         <td>${userId}</td>
                                         <td>${comment}</td>
                                     </tr>`
-                    $('#comment').append(temp_html)
-                    }else{}
+                    $(`#comment${id}`).append(temp_html)
+                    }
                 }
             }
         })
@@ -142,16 +139,16 @@ function post_list() {
       //포스트 창 열기 (수정 필요)
 
     //댓글 하기
-    function comment_posting(Id) {
-    console.log(Id)
-        let commentpost = $('#commentpost').val()
+    function comment_posting(id) {
+        let commentpost = $(`#commentpost${id}`).val()
         $.ajax({
             type: 'POST',
             url: '/main/comment',
-            data: {userId_give: userId, comment_give: commentpost, objectId_give: Id},
+            data: {userId_give: userId, comment_give: commentpost, objectId_give: id},
             success: function (response) {
                 alert(response['msg'])
-                window.location.reload()
+                comment_listing(id)
+                $(`#commentpost${id}`).val("")
             }
         });
     }
