@@ -38,6 +38,7 @@
 
     .card {
         margin-right: 10px;
+        margin-left: 20px;
     }
 
     #post-btn {
@@ -234,6 +235,11 @@
     h3 {
         padding: 20px;
     }
+    .align-items-center {
+
+    }
+
+
 
 
 
