@@ -34,7 +34,7 @@ function show_list() {
                                               <h5 class="card-title">${title} - ${artist}</h5>
                                               <p class="card-text">${content}</p>
 
-                                              <button onclick="comment_listing()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                              <button onclick="comment_listing(${objectId})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
                                                동영상 보기!
 
                                               </button>
@@ -108,7 +108,7 @@ function post_list() {
 }
 
   //댓글 보이기
-    function comment_listing() {
+    function comment_listing(objectId) {
         $('#comment').empty()
         $.ajax({
             type: 'GET',
@@ -117,13 +117,16 @@ function post_list() {
             success: function (response) {
                 let rows = response['urliveComments']
                 for (let i = 0; i < rows.length; i++) {
-                    let comment = rows[i]['comment']
-                    let userId = rows[i]['userId']
-                    let temp_html = ` <tr>
+                    let num = rows[i]['num']
+                    if(objectId == num){
+                        let comment = rows[i]['comment']
+                        let userId = rows[i]['userId']
+                        let temp_html = ` <tr>
                                         <td>${userId}</td>
                                         <td>${comment}</td>
                                     </tr>`
                     $('#comment').append(temp_html)
+                    }else None;
                 }
             }
         })
