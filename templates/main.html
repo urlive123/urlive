@@ -27,11 +27,21 @@
 </head>
 <body>
 <div class="nav-section">
-    <h1>{{id}}님! 내 인생 최고의 라이브를 들려주세요!</h1>
-    <!-- Button trigger modal -->
-    <button id="post-btn" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        등록하기
-    </button>
+
+    <div class="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">You Only Live Once</h2>
+
+        <div class="logoutbtn">
+                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">LogOut</button>
+        </div>
+    </div>
+        <div class='btn-holder'>
+             <!-- Button trigger modal -->
+        <button id="post-btn" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            등록하기
+        </button>
+    </div>
+
 </div>
 <!-- Modal Post -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,8 +70,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button onclick="post_list()" type="button" class="btn">등록하기</button>
-                <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+                <div class="dark-button button-wrapper">
+                    <button onclick="post_list()" type="button" class="btn btn-outline-dark">등록하기</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+                </div>
             </div>
         </div>
     </div>
