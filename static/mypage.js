@@ -9,7 +9,7 @@ $(document).ready(function () {
 function profile_get() {
     $('#profile_mypage').empty()
     $.ajax({
-        type: 'get',
+        type: 'GET',
         url: '/mypage/profile',
         data: {},
         success: function (response) {

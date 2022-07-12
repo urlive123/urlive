@@ -216,11 +216,9 @@ def card_sort_heart():
 
 @app.route('/mypage/profile', methods=['GET'])
 def profile_load():
-    one = list(db.urliveComment.find_one())
-    two = list(db.urliveContents.find_one())
-    three = list(db.urliveLikes.find_one())
-    four = list(db.urliveUsers.find_one())
-    return jsonify({'one':one,'two':two,'three':three,'four':four})
+    one = list(db.urliveComment.find({}))
+    print(one)
+    return jsonify({'one':one})
 
 
 
