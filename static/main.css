@@ -66,12 +66,14 @@
 
     .btn-you-tube{
         width: 80%;
+
     }
+
     .btn.btn-you-tube {
-        background-color: #cf3728;
-        border-color: #cf3728;
-        -webkit-box-shadow: 0 3px 0 #9a1e1a;
-        box-shadow: 0 3px 0 #9a1e1a;
+        background-color: rgba(213, 187, 64, 0.75);
+        border-color: rgba(222, 196, 71, 0.84);
+        -webkit-box-shadow: 0 3px 0 rgba(190, 160, 36, 0.75);
+        box-shadow: 0 3px 0 rgba(145, 124, 20, 0.75);
     }
 
     .btn.btn-you-tube:active {
@@ -80,15 +82,18 @@
         -webkit-box-shadow: none;
         box-shadow: none;
     }
-    .btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728; -webkit-box-shadow: 0 3px 0 #9a1e1a; box-shadow: 0 3px 0 #9a1e1a;}
+    .btn.btn-you-tube{background-color: rgba(213, 187, 64, 0.75);
+        border-color: rgba(222, 196, 71, 0.84);
+        -webkit-box-shadow: 0 3px 0 rgba(190, 160, 36, 0.75);
+        box-shadow: 0 3px 0 rgba(145, 124, 20, 0.75);}
     .btn.btn-you-tube:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
 
     .bi-suit-heart-fill {
-        color: red;
+        color: rgba(232, 63, 11, 0.82);
     }
 
     .bi-suit-heart {
-        color: red;
+        color: rgba(232, 63, 11, 0.82);
     }
 
     .card-wrap {

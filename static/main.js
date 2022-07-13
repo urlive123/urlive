@@ -48,11 +48,8 @@ function show_list() {
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
-
-                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-
-                                               <i class="fa fa-youtube"></i>
-                                          
+                                              <button style="color: rgb(253,246,246)" onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                             동영상 재생
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -228,8 +225,8 @@ function sort_heart() {
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
-                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                               <i class="fa fa-youtube"></i>
+                                              <button style="color: rgb(253,246,246)" onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                             동영상 재생
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -430,7 +427,6 @@ function delete_comment(objectId, id) {
     }
 
 }
-
 
 function gotomypage() {
     window.location.replace("/main/mypage")

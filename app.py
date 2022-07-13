@@ -264,6 +264,7 @@ def api_get_my_upload():
 
 #############################메인페이지 python 함수#################################################
 ##프로파일 기본 설정
+
 @app.route('/api/profile', methods=['GET'])
 def profile_users_load():
     one = list(db.urliveUsers.find({}))
@@ -275,15 +276,18 @@ def profile_comment_load():
     one = list(db.urliveComment.find({}))
     return jsonify({'one':one})
 ##프로파일-좋아요 수
+
 @app.route('/api/profile-like', methods=['GET'])
 def profile_like_load():
     one = list(db.urliveLikes.find({}))
     return jsonify({'one':one})
 ##프로파일-업로드 수
+
 @app.route('/api/profile-upload', methods=['GET'])
 def profile_load():
     one = list(db.urliveContents.find({}))
     return jsonify({'one':one})
+
 
 
 @app.route('/api/profile', methods=['POST'])
