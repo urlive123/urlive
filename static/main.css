@@ -5,7 +5,6 @@
         justify-content: center;
     }
 
-    .m_menu{}
 
     .ul {
         list-style-type: none;
@@ -65,6 +64,22 @@
 
     * {
         font-family: 'Jua', sans-serif;
+    }
+    .m_menu{
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+    .m_menu > button{
+        border-color: transparent;
+        background-color: transparent;
+        color: #F3C238FF;
+    }
+    .m_menu>button:hover{
+        background-color: #f3c238;
+        color: black;
     }
 
     html, body {

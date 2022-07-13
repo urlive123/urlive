@@ -20,17 +20,7 @@ function media_check(id) {
                             <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
                             <div class="logoutbtn">
                             <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
-        $('#titletxt').append(temp_html)
-        let temp_html1 ='<div class="m_menu">\n' +
-            '                <ul>\n' +
-            '                    <button>메뉴 1</button>\n' +
-            '                    <button>메뉴 2</button>\n' +
-            '                    <button>메뉴 3</button>\n' +
-            '                    <button>메뉴 4</button>\n' +
-            '                </ul>\n' +
-            '            </div>'
-        $('#menu').append(temp_html1)
-    }
+        $('#titletxt').append(temp_html)}
 }
 
 
