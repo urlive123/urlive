@@ -1,6 +1,6 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
-    show_list(1);
+    show_list();
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -20,9 +20,9 @@ function youtube_parser(url) {
 }
 
 // 리스트 조회
-function show_list(page) {
+function show_list() {
     $.ajax({
-        type: "GET", url: `/api/contents?page=${page}`, data: {}, success: function (response) {
+        type: "GET", url: '/api/contents', data: {}, success: function (response) {
             console.log(response)
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
