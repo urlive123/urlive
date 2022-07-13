@@ -1,6 +1,7 @@
 $(document).ready(function () {
     showMyActivity()
     get_img()
+    media_check()
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -11,6 +12,17 @@ $(document).ready(function () {
         })
     })
 })
+
+
+function media_check() {
+    if (matchMedia("screen and (max-width:750px)").matches) {
+        $('#mobile_index').show()
+        $('#wide-screen').empty()
+    } else if (matchMedia("screen and (min-width:751px)").matches) {
+        $('#mobile_index').empty()
+    }
+}
+
 function youtube_parser(url) {
     let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     let match = url.match(regExp);
