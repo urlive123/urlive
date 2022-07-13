@@ -2,7 +2,9 @@
         font-family: 'Jua', sans-serif;
     }
 
-
+    html {
+        height: 100vh;
+    }
 
     .nav-section {
         width: 100%;
