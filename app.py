@@ -254,6 +254,41 @@ def api_get_my_upload():
     filtered_list = [c for c in content_list if c['userId'] == payload['id']]
     return jsonify({'contents': filtered_list})
 
+
+#############################메인페이지 python 함수#################################################
+##프로파일 기본 설정
+@app.route('/mypage/profile', methods=['GET'])
+def profile_users_load():
+    one = list(db.urliveUsers.find({}))
+    return jsonify({'one': one})
+
+##프로파일-댓글 수
+@app.route('/mypage/profile_comment', methods=['GET'])
+def profile_comment_load():
+    one = list(db.urliveComment.find({}))
+    return jsonify({'one':one})
+##프로파일-좋아요 수
+@app.route('/mypage/profile_like', methods=['GET'])
+def profile_like_load():
+    one = list(db.urliveLikes.find({}))
+    return jsonify({'one':one})
+##프로파일-업로드 수
+@app.route('/mypage/profile_upload', methods=['GET'])
+def profile_load():
+    one = list(db.urliveContents.find({}))
+    return jsonify({'one':one})
+
+
+@app.route('/mypage/profile/edit', methods=['POST'])
+def profile_edit():
+    userId_receive = request.form['userId_give']
+    intro_receive = request.form['intro_give']
+    if db.urliveUsers.include('intro')==True:
+        db.urliveUsers.insert_one({'intro': intro_receive})
+    else: db.urliveUsers.update_one({"$set": {'intro': intro_receive}})
+    return jsonify({'msg': '수정되었습니다'})
+
+
 if __name__ == '__main__':
 
     app.run('0.0.0.0', port=5000, debug=True)
