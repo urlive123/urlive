@@ -26,41 +26,6 @@
 
     }
 
-    .main {
-        width: 250px;
-        height: 300px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin: auto 300px 40px auto;
-
-    }
-
-    .logo {
-        margin-top: 0px;
-        margin-bottom: 40px;
-    }
-
-    #login {
-        width: 100%;
-        background-color: skyblue;
-        border-color: transparent;
-        color: black;
-    }
-
-    .account {
-        width: 227px;
-        display: block;
-        margin-bottom: 3px;
-        padding: 3px;
-        border: 1px solid lightgray;
-        border-radius: 3px;
-    }
-
-    #alert {
-        border-color: transparent;
-    }
 
     .baststreaming {
         width: 100%;
@@ -76,14 +41,14 @@
     .ratio {
         width: 700px;
         height: 500px;
-        margin: 0px auto;
+        margin: 0px auto auto 30px;
     }
 
     .streamingtxt {
         width: 50%;
         text-align: center;
-        padding: 20px;
         color: #987cad;
+        margin-right: 4%;
 
     }
     .titlepost {
@@ -98,7 +63,7 @@
     }
 
     .title {
-        margin: 0px auto;
+        margin: 60px auto 60px auto;
         color: #684f7e;
 
         display: flex;
@@ -121,3 +86,41 @@
                   animation-delay: calc(.1s * var(--i));
 
                 }
+
+    button{
+              background: rgba(141, 89, 171, 0.82);
+              color:#fff;
+              border:none;
+              position:relative;
+              height:40px;
+              font-size:1.6em;
+              padding:0 2em;
+              cursor:pointer;
+              transition:800ms ease all;
+              outline:none;
+              margin-bottom: 4%;
+        }
+        button:hover{
+          background: #ffffff;
+          color: #6326a6;
+        }
+        button:before,button:after{
+          content:'';
+          position:absolute;
+          top:0;
+          right:0;
+          height:2px;
+          width:0;
+          background: rgba(93, 28, 154, 0.86);
+          transition:400ms ease all;
+        }
+        button:after{
+          right:inherit;
+          top:inherit;
+          left:0;
+          bottom:0;
+        }
+        button:hover:before,button:hover:after{
+          width:100%;
+          transition:800ms ease all;
+        }
