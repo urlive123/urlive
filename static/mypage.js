@@ -18,7 +18,6 @@ function youtube_parser(url) {
 }
 
 
-
 // 내가 업로드한 영상 조회
         function showMyUpload() {
             $.ajax({
