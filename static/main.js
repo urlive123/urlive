@@ -35,10 +35,9 @@ function youtube_parser(url) {
 // 리스트 조회
 function show_list() {
     $.ajax({
-        type: "GET",
-        url: "/api/contents",
-        data: {},
-        success: function (response) {
+        type: "GET", url: '/api/contents', data: {}, success: function (response) {
+            console.log(response)
+
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -331,7 +330,7 @@ function comment_listing(id) {
                     let objectId = rows[i]['_id']
                     let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
+                                        <td>${comment} <i style="cursor:pointer;" onclick="delete_comment('${objectId}', '${num}')" class="bi bi-x"></i></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                 }

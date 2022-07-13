@@ -183,7 +183,11 @@ def api_get_comment():
     comment_list = list(db.urliveComment.find({}))
     for document in comment_list:
         document['_id'] = str(document['_id'])
-    return jsonify({'urliveComments': comment_list})
+    content_list = list(db.urliveContents.find({}))
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+    return jsonify({'urliveComments': comment_list, 'urliveContents': content_list})
 
 # 댓글 삭제 api
 @app.route('/api/comment', methods=['POST'])

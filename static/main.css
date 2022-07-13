@@ -273,3 +273,17 @@
         width: 100px;
         font-size: 20px;
     }
+
+
+    .form_floating {
+        display: flex;
+    }
+
+    #modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
