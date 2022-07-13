@@ -1,121 +1,233 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: 'Jua', sans-serif;
-}
-@keyframes waviy {
-  0%,40%,100% {
-    transform: translateY(0)
-  }
-  20% {
-    transform: translateY(-20px)
-  }
-}
-    body {
-        width: 100%;
-        height: 80%;
 
-        background-image: url(http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/223/125/81223125_1560161529492_1_600x600.JPG);
-        background-position: center 34%;
-        background-size: cover;
+    @media screen and (max-width: 750px) {
+        body {
+            width: 100%;
+            height: 80%;
+            background-image: url(http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/223/125/81223125_1560161529492_1_600x600.JPG);
+            background-position: center 34%;
+            background-size: cover;
+            color: black
+        }
+        .background {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .title {
+            margin-top: 30px;
+            color: #684f7e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .logo {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .main {
+            width: 250px;
+            height: 300px;
 
-        color: black;
-
-    }
-
-    .main {
-        width: 250px;
-        height: 300px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin: auto 300px 40px auto;
-
-    }
-
-    .logo {
-        margin-top: 0px;
-        margin-bottom: 40px;
-    }
-
-    #login {
-        width: 100%;
-        background-color: skyblue;
-        border-color: transparent;
-        color: black;
-    }
-
-    .account {
-        width: 227px;
-        display: block;
-        margin-bottom: 3px;
-        padding: 3px;
-        border: 1px solid lightgray;
-        border-radius: 3px;
-    }
-
-    #alert {
-        border-color: transparent;
-    }
-
-    .baststreaming {
-        width: 100%;
-        height: 70%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-
-        margin-left: 20px;
-    }
-
-    .ratio {
-        width: 700px;
-        height: 500px;
-        margin: 0px auto;
-    }
-
-    .streamingtxt {
-        width: 50%;
-        text-align: center;
-        padding: 20px;
-        color: #987cad;
-
-    }
-    .titlepost {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-    }
-    .main {
-        margin: 0px auto;
-    }
-
-    .title {
-        margin: 0px auto;
-        color: #684f7e;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-    }
-    .waviy {
-              position: relative;
-              font-size: 30px;
+        }
+        @keyframes waviy {
+            0%, 40%, 100% {
+                transform: translateY(0)
             }
-    .waviy span {
-                  font-family: 'Alfa Slab One', cursive;
-                  position: relative;
-                  display: inline-block;
-                  color: rgba(106, 72, 138, 0.37);
-                  text-transform: uppercase;
-                  animation: waviy 1.8s infinite;
-                  animation-delay: calc(.1s * var(--i));
+            20% {
+                transform: translateY(-20px)
+            }
+        }
 
-                }
+        .streamingtxt {
+            width: 90%;
+            text-align: center;
+            padding: 20px;
+            color: #987cad;
+            background-color: aliceblue; rgba( 255, 255, 255, 0.5 );
+
+        }
+
+        #login {
+            width: 100%;
+            background-color: skyblue;
+            border-color: transparent;
+            color: black;
+        }
+        .account {
+            width: 227px;
+            display: block;
+            margin-bottom: 3px;
+            padding: 3px;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+        }
+        #alert {
+            border-color: transparent;
+        }
+
+        .baststreaming {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+
+            margin-left: 20px;
+        }
+
+        .titlepost {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .waviy {
+            position: relative;
+            font-size: 30px;
+        }
+        .waviy span {
+            font-family: 'Alfa Slab One', cursive;
+            position: relative;
+            display: inline-block;
+            color: rgba(106, 72, 138, 0.37);
+            text-transform: uppercase;
+            animation: waviy 1.8s infinite;
+            animation-delay: calc(.1s * var(--i));
+
+        }
+    }
+ * {
+        font-family: 'Jua', sans-serif;
+    }
+
+    @media screen and (min-width: 751px) {
+        @keyframes waviy {
+            0%, 40%, 100% {
+                transform: translateY(0)
+            }
+            20% {
+                transform: translateY(-20px)
+            }
+        }
+
+        body {
+            width: 100%;
+            height: 80%;
+
+            background-image: url(http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/223/125/81223125_1560161529492_1_600x600.JPG);
+            background-position: center 34%;
+            background-size: cover;
+
+            color: black;
+
+        }
+        .mobile{
+            display: none;
+        }
+
+        .main {
+            width: 250px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: auto 300px 40px auto;
+
+        }
+
+        .logo {
+            margin-top: 0px;
+            margin-bottom: 40px;
+        }
+
+        #login {
+            width: 100%;
+            background-color: skyblue;
+            border-color: transparent;
+            color: black;
+        }
+
+        .account {
+            width: 227px;
+            display: block;
+            margin-bottom: 3px;
+            padding: 3px;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+        }
+
+        #alert {
+            border-color: transparent;
+        }
+
+        .baststreaming {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+
+            margin-left: 20px;
+        }
+
+        .ratio {
+            width: 700px;
+            height: 500px;
+            margin: 0px auto;
+        }
+
+        .streamingtxt {
+            width: 50%;
+            text-align: center;
+            padding: 20px;
+            color: #987cad;
+
+        }
+
+        .titlepost {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .main {
+            margin: 0 auto;
+        }
+
+        .title {
+            margin: 0px auto;
+            color: #684f7e;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        .waviy {
+            position: relative;
+            font-size: 30px;
+        }
+
+        .waviy span {
+            font-family: 'Alfa Slab One', cursive;
+            position: relative;
+            display: inline-block;
+            color: rgba(106, 72, 138, 0.37);
+            text-transform: uppercase;
+            animation: waviy 1.8s infinite;
+            animation-delay: calc(.1s * var(--i));
+
+        }
+    }

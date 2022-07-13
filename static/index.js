@@ -1,10 +1,22 @@
 $(document).ready(function () {
+    media_check()
     $("#password").keydown(function(e){
         if(e.which == 13){
             $('#login').click();
         }
     })
 });
+
+
+function media_check() {
+    if (matchMedia("screen and (max-width:750px)").matches) {
+        $('#mobile_index').show()
+        $('#wide-screen').empty()
+    } else if (matchMedia("screen and (min-width:751px)").matches) {
+        $('#mobile_index').empty()
+    }
+}
+
 // 로그인
 function login() {
     id = $('#id').val();

@@ -1,0 +1,11 @@
+diff a/static/main.js b/static/main.js	(rejected hunks)
+@@ -289,6 +289,9 @@
+     let artist = $('#artist').val()
+     let url = `${$('#url').val()}`
+     console.log(url)
++    if(title == "" || content == "" || artist == "" || url == ""){
++        alert('내용을 모두 입력해주세요')
++    } else {
+     $.ajax({
+         type: 'POST',
+         url: '/api/contents',
