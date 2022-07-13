@@ -319,7 +319,7 @@ function comment_listing(id) {
                     let objectId = rows[i]['_id']
                     let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
+                                        <td>${comment} <i style="cursor:pointer;" onclick="delete_comment('${objectId}', '${num}')" class="bi bi-x"></i></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                 }
