@@ -431,3 +431,7 @@ function delete_comment(objectId, id) {
 function gotomypage() {
     window.location.replace("/main/mypage")
 }
+
+function gotomain() {
+    window.location.replace("/main")
+}
