@@ -274,26 +274,43 @@ function youtube_parser(url) {
         }
 
 //좋아요 기능
-        function toggle_like(post_id, type) {
-            let $a_like = $(`#${post_id} a[aria-label='heart']`)
-            let $i_like = $a_like.find("i")
-            console.log($i_like)
-            if ($i_like.hasClass("bi-suit-heart")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/api/likes",
-                    data: {
-                        post_id_give: post_id,
-                        type_give: type,
-                        action_give: "like",
-                    },
-                    success: function (response) {
-                        $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
-                        $a_like.find("span.like-num").text(response["count"])
-                    }
-                })
+function toggle_like(post_id, type) {
+    let $a_like = $(`#${post_id} a[aria-label='heart']`)
+    let $i_like = $a_like.find("i")
+    console.log($i_like)
+    if ($i_like.hasClass("bi-suit-heart")) {
+        $.ajax({
+            type: "POST",
+            url: "/api/likes",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "like",
+            },
+            success: function (response) {
+                $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
+                $a_like.find("span.like-num").text(response["count"])
             }
-        }
+        })
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/api/likes",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "unlike"
+            },
+            success: function (response) {
+                console.log("unlike")
+                $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
+                $a_like.find("span.like-num").text(response["count"])
+            }
+        })
+
+    }
+
+}
 
 //by현서 로그아웃 기능
                 function gotomain() {
@@ -338,7 +355,7 @@ function youtube_parser(url) {
 function showMyActivity() {
     $('.wrapper').show()
     if ($('#profile_id').children().length == 0){
-    $('#profile_id').append(userId)
+    $('#profile_id').append(`<h3>${userId}</h3>`)
     }
     $('#live_section').empty()
     $.ajax({
@@ -353,7 +370,6 @@ function showMyActivity() {
                     count++
                 }
             }
-            console.log('len',$('#profile_upload').children().length)
             if ($('#profile_upload').children().length == 1) {
                 $('#profile_upload').prepend(`<h3>${count}</h3>`)
             }
@@ -399,6 +415,7 @@ function showMyActivity() {
         }
     })
 }
+// 프로필 이미지 등록
 
 function update_profile() {
     let file = $('#input-pic')[0].files[0]
@@ -427,10 +444,14 @@ function get_img() {
         type: "GET",
         url: "/get_profile",
         data: {},
-        success: function (response) {
+    })
+        .done(function (response) {
             console.log(response['userinfo']['profile_pic_real'])
             pic_path = response['userinfo']['profile_pic_real']
+            if (response['userinfo']['profile_pic_real'] != undefined)
+            {
+            $('.photo-container').empty()
             $('.photo-container').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
-        }
-    });
+            }
+        })
 }

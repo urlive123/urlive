@@ -67,9 +67,10 @@
     <div class="wrapper">
         <div class="container">
             <div class="photo-container">
-
+                <img style="max-width: 100%; max-height: 100%;" src="../static/profile_pics/profileex.png" alt="">
             </div>
-            <h3 class="profile_title" id="profile_id"></h3>
+                <div class="profile_title" id="profile_id">
+                </div>
             <div class="content">
                 <div class="social-description" id="profile_like">
                     <p>좋아요 한 영상</p>
@@ -82,9 +83,14 @@
                 </div>
             </div>
         </div>
+
             <p>프로필 사진 등록/수정</p>
-            <input id="input-pic" type="file" name="file"/>
-            <input onclick="update_profile()" type="submit"/>
+            <p>정방형으로 올려주세요!(1:1 비율)</p>
+        <div class="post-wrap">
+            <label class="btn btn-outline-warning" for="input-pic" id="post-pic">업로드</label>
+            <input id="input-pic" type="file" name="file" style="display:none;"/>
+            <input class="btn btn-warning" onclick="update_profile()" type="submit"/>
+        </div>
     </div>
 </div>
 </div>
