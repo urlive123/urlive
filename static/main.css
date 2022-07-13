@@ -1,11 +1,32 @@
-   @media screen and (max-width: 580px) {
-       .center > div {
-           display: flex;
-           align-items: center;
-           justify-content: center;
-       }
+@media screen and (max-width: 580px) {
+    .center > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        @keyframes typewriter {
+    .m_menu{}
+
+    .ul {
+        list-style-type: none;
+        padding-left: 0;
+        float: right;
+    }
+
+    .ul li {
+        display: inline;
+
+        /* li요소의 좌측 1px의 테두리 만들기 */
+        border-left: 1px solid #c0c0c0;
+        padding: 0px 10px 0px 10px;
+        margin: 5px 0px 5px 0px;
+    }
+
+    .ul li:first-child {
+        border-left: none;
+    }
+
+    @keyframes typewriter {
             from {
                 width: 0;
             }
