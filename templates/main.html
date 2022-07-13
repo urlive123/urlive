@@ -28,16 +28,15 @@
 </head>
 <body>
 <div class="nav-section">
-
-    <div class="titletxt">
-        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! Urlive에 오신 것을 환영합니다!</h2>
-
+    <div class="titletxt" id="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! </h2>
+        <h2 style="color: #f3c238; -webkit-animation-delay: 3s;" class="line anim-typewriter">Urlive에 오신 것을 환영합니다!</h2>
         <div class="logoutbtn">
                 <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
         </div>
     </div>
-        <div class='btn-holder'>
-             <!-- Button trigger modal -->
+<div class='btn-holder'>
+                         <!-- Button trigger modal -->
         <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
             등록하기
         </button>
@@ -102,7 +101,7 @@
         </ul>
     </div>
 <div class="imgcv">
-<div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
 </div>
 </div>
 
