@@ -1,10 +1,8 @@
-*{
-        font-family: 'Jua', sans-serif;
-    }
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
 }
 @keyframes waviy {
   0%,40%,100% {
