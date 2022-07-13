@@ -1,6 +1,7 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
-    show_list(1);
+    media_check(userId)
+    show_list();
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -11,6 +12,18 @@ $(document).ready(function () {
         })
     })
 });
+
+function media_check(id) {
+    if (matchMedia("screen and (max-width:780px)").matches) {
+        $('#titletxt').empty()
+        let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
+                <h2 style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</h2>
+                <div class="logoutbtn">
+                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
+        $('#titletxt').append(temp_html)
+    }
+}
+
 
 // youtube URL에서 id 추출
 function youtube_parser(url) {

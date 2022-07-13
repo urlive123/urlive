@@ -11,6 +11,7 @@ from pymongo import MongoClient
 import certifi
 from werkzeug.utils import secure_filename
 
+
 ca = certifi.where()
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)

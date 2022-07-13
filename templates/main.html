@@ -13,6 +13,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../static/main.js"></script>
     <script> const userId = '{{id}}'</script>
+
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
@@ -30,9 +31,8 @@
 <body>
 <div class="nav-section">
 
-    <div class="titletxt">
+    <div class="titletxt"  id="titletxt">
         <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! Urlive에 오신 것을 환영합니다!</h2>
-
         <div class="logoutbtn">
                 <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
         </div>
