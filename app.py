@@ -14,7 +14,7 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.test
 
-
+UPLOAD_FOLDER = "../static"
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
 ## 홈페이지
@@ -285,6 +285,7 @@ def profile_comment_load():
     for document in one:
         document['_id'] = str(document['_id'])
     return jsonify({'one':one})
+
 
 
 if __name__ == '__main__':
