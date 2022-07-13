@@ -17,10 +17,12 @@ db = client.test
 
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
+## 홈페이지
 @app.route('/')
 def home():
     return render_template('index.html')
 
+## 메인페이지
 @app.route('/main')
 def mypage():
     token_receive = request.cookies.get('mytoken')
@@ -32,6 +34,8 @@ def mypage():
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("home"))
+
+## 마이페이지
 @app.route('/main/mypage')
 def main():
     token_receive = request.cookies.get('mytoken')
@@ -43,9 +47,10 @@ def main():
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("home"))
+
 ## 회원가입
-@app.route('/api/register', methods=['POST'])
-def api_register():
+@app.route('/api/sign-up', methods=['POST'])
+def api_sign_up():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
@@ -57,8 +62,9 @@ def api_register():
         check = 0
     return jsonify({'result': 'success', 'check': check})
 
-@app.route('/api/login', methods=['POST'])
-def api_login():
+## 로그인
+@app.route('/api/log-in', methods=['POST'])
+def api_log_in():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
@@ -75,9 +81,9 @@ def api_login():
     else:
         return jsonify(({'result' : 'fail', 'msg': '아이디, 비밀번호가 일치하지 않습니다.'}))
 
-
-@app.route('/api/post', methods=['POST'])
-def api_post():
+## 카드 등록
+@app.route('/api/contents', methods=['POST'])
+def api_post_card():
     userId_receive = request.form['userId_give']
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
@@ -92,9 +98,9 @@ def api_post():
     }
     db.urliveContents.insert_one(doc)
     return jsonify({'msg': '등록되었습니다!'})
-# 리스트 조회 api
-@app.route('/api/get', methods=['GET'])
-def api_get():
+# 카드 조회 api
+@app.route('/api/contents', methods=['GET'])
+def api_get_card():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -111,7 +117,7 @@ def api_get():
         return redirect(url_for("home"))
 # 좋아요 기능
 @app.route('/api/likes', methods=['POST'])
-def update_like():
+def api_update_likes():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -136,8 +142,8 @@ def update_like():
         return redirect(url_for("home"))
 
 # 카드 삭제 기능
-@app.route('/api/delete', methods=['POST'])
-def api_delete():
+@app.route('/api/content', methods=['POST'])
+def api_delete_content():
     id_receive = request.form['id_give']
     userId_receive = request.form['userId_give']
     content = db.urliveContents.find_one({'_id': ObjectId(id_receive)})
@@ -152,8 +158,8 @@ def api_delete():
     return jsonify({'msg': msg, 'check': check})
 
 ## 댓글 등록 api
-@app.route('/main/comment', methods=['POST'])
-def comment_post():
+@app.route('/api/comments', methods=['POST'])
+def api_post_comment():
     userId_receive = request.form['userId_give']
     comment_receive = request.form['comment_give']
     num= request.form['objectId_give']
@@ -169,16 +175,17 @@ def comment_post():
 
 
 # 숫자를 받아오면 바꿔주어야 함
-@app.route("/main/comment", methods=["GET"])
-def comment_get():
+# 댓글 조회
+@app.route("/api/comments", methods=["GET"])
+def api_get_comment():
     comment_list = list(db.urliveComment.find({}))
     for document in comment_list:
         document['_id'] = str(document['_id'])
     return jsonify({'urliveComments': comment_list})
 
 # 댓글 삭제 api
-@app.route('/comment/delete', methods=['POST'])
-def comment_delete():
+@app.route('/api/comment', methods=['POST'])
+def api_delete_comment():
     objectId_receive = request.form['objectId_give']
     user_id_receive = request.form['userId_give']
     comment_info = db.urliveComment.find_one({'_id': ObjectId(objectId_receive)})
@@ -193,7 +200,7 @@ def comment_delete():
     return jsonify({'msg': msg, 'check': check})
 
 # 댓글 순 정렬
-@app.route('/api/getByComment', methods=['GET'])
+@app.route('/api/contents-by-comment', methods=['GET'])
 def api_get_by_comment():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -210,8 +217,8 @@ def api_get_by_comment():
 
 
 # 좋아요 순 정렬
-@app.route('/api/sort_heart', methods=['GET'])
-def card_sort_heart():
+@app.route('/api/contents-by-heart', methods=['GET'])
+def api_get_by_heart():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     content_sort_heart = list(db.urliveContents.find())
@@ -227,7 +234,7 @@ def card_sort_heart():
     return jsonify({'contents': content_sort_heart})
 
 ## 마이페이지 좋아요 누른 영상
-@app.route('/api/mypageheart', methods=['GET'])
+@app.route('/api/my-contents-by-likes', methods=['GET'])
 def api_get_my_like():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -241,7 +248,7 @@ def api_get_my_like():
     print(filtered_list)
     return jsonify({'contents': filtered_list})
 ## 마이페이지 내가 올린 영상
-@app.route('/api/myupload', methods=['GET'])
+@app.route('/api/my-contents-by-upload', methods=['GET'])
 def api_get_my_upload():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -254,6 +261,49 @@ def api_get_my_upload():
     filtered_list = [c for c in content_list if c['userId'] == payload['id']]
     return jsonify({'contents': filtered_list})
 
+
+#############################메인페이지 python 함수#################################################
+##프로파일 기본 설정
+
+@app.route('/api/profile', methods=['GET'])
+def profile_users_load():
+    one = list(db.urliveUsers.find({}))
+    return jsonify({'one': one})
+
+##프로파일-댓글 수
+@app.route('/api/profile-comment', methods=['GET'])
+def profile_comment_load():
+    one = list(db.urliveComment.find({}))
+    return jsonify({'one':one})
+##프로파일-좋아요 수
+
+@app.route('/api/profile-like', methods=['GET'])
+def profile_like_load():
+    one = list(db.urliveLikes.find({}))
+    return jsonify({'one':one})
+##프로파일-업로드 수
+
+@app.route('/api/profile-upload', methods=['GET'])
+def profile_load():
+    one = list(db.urliveContents.find({}))
+    return jsonify({'one':one})
+
+
+
+@app.route('/api/profile', methods=['POST'])
+def profile_edit():
+    userId_receive = request.form['userId_give']
+    intro_receive = request.form['intro_give']
+    if db.urliveUsers.include('intro')==True:
+        db.urliveUsers.insert_one({'intro': intro_receive})
+    else: db.urliveUsers.update_one({"$set": {'intro': intro_receive}})
+    return jsonify({'msg': '수정되었습니다'})
+
+
 if __name__ == '__main__':
 
+<<<<<<< HEAD
     app.run('0.0.0.0', port=5100, debug=True)
+=======
+    app.run('0.0.0.0', port=5000, debug=True)
+>>>>>>> 8f3ce540f76317b767d05cbbce6569a4f1e9b38b
