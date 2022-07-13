@@ -5,13 +5,13 @@ $(document).ready(function () {
         }
     })
 });
-
+// 로그인
 function login() {
     id = $('#id').val();
     pw = $('#password').val();
     $.ajax({
         type: "POST",
-        url: "/api/login",
+        url: "/api/log-in",
         data: {id_give: id, pw_give: pw},
         success: function (response) {
             if (response['result'] == 'fail') {
@@ -26,7 +26,7 @@ function login() {
         }
     })
 }
-
+// 회원가입
 function register() {
     id = $('#register-id').val();
     pw = $('#register-password').val();
@@ -35,7 +35,7 @@ function register() {
     } else {
     $.ajax({
         type: "POST",
-        url: "/api/register",
+        url: "/api/sign-up",
         data: {id_give: id, pw_give: pw},
         success: function (response) {
             if(response['check'] == 1) {
