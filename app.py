@@ -8,13 +8,14 @@ app = Flask(__name__)
 from bson import ObjectId
 from pymongo import MongoClient
 import certifi
+from werkzeug.utils import secure_filename
 
 ca = certifi.where()
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.i3cxp.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.test
 
-
+UPLOAD_FOLDER = "../static"
 SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 
 ## 홈페이지
@@ -225,7 +226,6 @@ def api_get_by_heart():
     print(content_sort_heart)
     for document in content_sort_heart:
         document['_id'] = str(document['_id'])
-
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
         document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
@@ -263,41 +263,60 @@ def api_get_my_upload():
 
 
 #############################메인페이지 python 함수#################################################
-##프로파일 기본 설정
+
+##프로파일-조회 수
 
 @app.route('/api/profile', methods=['GET'])
-def profile_users_load():
-    one = list(db.urliveUsers.find({}))
-    return jsonify({'one': one})
+def profile_load():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    one = list(db.urliveContents.find({}))
+    for document in one:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+        document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
+        document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
+    return jsonify({'one':one})
 
-##프로파일-댓글 수
 @app.route('/api/profile-comment', methods=['GET'])
 def profile_comment_load():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     one = list(db.urliveComment.find({}))
+    for document in one:
+        document['_id'] = str(document['_id'])
     return jsonify({'one':one})
-##프로파일-좋아요 수
-
-@app.route('/api/profile-like', methods=['GET'])
-def profile_like_load():
-    one = list(db.urliveLikes.find({}))
-    return jsonify({'one':one})
-##프로파일-업로드 수
-
-@app.route('/api/profile-upload', methods=['GET'])
-def profile_load():
-    one = list(db.urliveContents.find({}))
-    return jsonify({'one':one})
-
-
-
-@app.route('/api/profile', methods=['POST'])
-def profile_edit():
-    userId_receive = request.form['userId_give']
-    intro_receive = request.form['intro_give']
-    if db.urliveUsers.include('intro')==True:
-        db.urliveUsers.insert_one({'intro': intro_receive})
-    else: db.urliveUsers.update_one({"$set": {'intro': intro_receive}})
-    return jsonify({'msg': '수정되었습니다'})
+##파일업로드
+@app.route('/update_profile', methods=['POST'])
+def save_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        username = payload["id"]
+        new_doc = {
+        }
+        if 'file_give' in request.files:
+            file = request.files["file_give"]
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            file_path = f"profile_pics/{username}.{extension}"
+            file.save("./static/"+file_path)
+            new_doc["profile_pic"] = filename
+            new_doc["profile_pic_real"] = file_path
+        db.urliveUsers.update_one({'id': payload['id']}, {'$set':new_doc})
+        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+@app.route('/get_profile', methods=['GET'])
+def get_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.urliveUsers.find_one({'id': payload['id']},{'_id':False})
+        print(userinfo)
+        return jsonify({"result": "success", 'userinfo': userinfo})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
