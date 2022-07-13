@@ -14,12 +14,12 @@ $(document).ready(function () {
 });
 
 function media_check(id) {
-    if (matchMedia("screen and (max-width:780px)").matches) {
+    if (matchMedia("screen and (max-width:550px)").matches) {
         $('#titletxt').empty()
         let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
-                <h2 style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</h2>
-                <div class="logoutbtn">
-                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
+                            <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
+                            <div class="logoutbtn">
+                            <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
         $('#titletxt').append(temp_html)
     }
 }
