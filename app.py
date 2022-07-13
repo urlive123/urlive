@@ -8,6 +8,7 @@ app = Flask(__name__)
 from bson import ObjectId
 from pymongo import MongoClient
 import certifi
+from werkzeug.utils import secure_filename
 
 ca = certifi.where()
 
@@ -285,7 +286,37 @@ def profile_comment_load():
     for document in one:
         document['_id'] = str(document['_id'])
     return jsonify({'one':one})
-
+##파일업로드
+@app.route('/update_profile', methods=['POST'])
+def save_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        username = payload["id"]
+        new_doc = {
+        }
+        if 'file_give' in request.files:
+            file = request.files["file_give"]
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            file_path = f"profile_pics/{username}.{extension}"
+            file.save("./static/"+file_path)
+            new_doc["profile_pic"] = filename
+            new_doc["profile_pic_real"] = file_path
+        db.urliveUsers.update_one({'id': payload['id']}, {'$set':new_doc})
+        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+@app.route('/get_profile', methods=['GET'])
+def get_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.urliveUsers.find_one({'id': payload['id']},{'_id':False})
+        print(userinfo)
+        return jsonify({"result": "success", 'userinfo': userinfo})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
