@@ -1,5 +1,6 @@
 $(document).ready(function () {
     showMyActivity()
+    get_img()
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -399,3 +400,37 @@ function showMyActivity() {
     })
 }
 
+function update_profile() {
+    let file = $('#input-pic')[0].files[0]
+    let form_data = new FormData()
+    form_data.append("file_give", file)
+    console.log(form_data)
+
+    $.ajax({
+        type: "POST",
+        url: "/update_profile",
+        data: form_data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response["result"] == "success") {
+                alert(response["msg"])
+                window.location.reload()
+
+            }
+        }
+    });
+}
+function get_img() {
+    $.ajax({
+        type: "GET",
+        url: "/get_profile",
+        data: {},
+        success: function (response) {
+            console.log(response['userinfo']['profile_pic_real'])
+            pic_path = response['userinfo']['profile_pic_real']
+            $('.photo-container').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
+        }
+    });
+}

@@ -40,50 +40,53 @@
     </div>
 </div>
 <div class="tab-menu d-none d-sm-block">
-        <ul class="tab-menu__list">
-            <li class="tab-menu__item tab-menu__active">
-                <span class="tab-menu__icon"><i class="ri-user-line"></i></span>
-                <span onclick="showMyActivity()" class="tab-menu__text">프로필</span>
-            </li>
+    <ul class="tab-menu__list">
+        <li class="tab-menu__item tab-menu__active">
+            <span class="tab-menu__icon"><i class="ri-user-line"></i></span>
+            <span onclick="showMyActivity()" class="tab-menu__text">프로필</span>
+        </li>
 
-            <li class="tab-menu__item">
-                <span class="tab-menu__icon"><i class="ri-heart-line"></i></span>
-                <span onclick="showMyLike()" class="tab-menu__text">좋아요한</span>
-            </li>
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-heart-line"></i></span>
+            <span onclick="showMyLike()" class="tab-menu__text">좋아요한</span>
+        </li>
 
-            <li class="tab-menu__item">
-                <span class="tab-menu__icon"><i class="ri-chat-follow-up-line"></i></span>
-                <span onclick="showMyUpload()" class="tab-menu__text">업로드한</span>
-            </li>
-            <li class="tab-menu__item">
-                <span class="tab-menu__icon"><i class="ri-pages-line"></i></span>
-                <span onclick="gotomain()" class="tab-menu__text">메인페이지</span>
-            </li>
-        </ul>
-    </div>
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-chat-follow-up-line"></i></span>
+            <span onclick="showMyUpload()" class="tab-menu__text">업로드한</span>
+        </li>
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-pages-line"></i></span>
+            <span onclick="gotomain()" class="tab-menu__text">메인페이지</span>
+        </li>
+    </ul>
+</div>
 <div id="live_like_section">
-         <div class="row row-cols-1 row-cols-md-4 g-4" id="live_section">
-        </div>
-    <div class="wrapper">
-      <div class="container">
-        <div class="photo-container">
-          <img style="max-width: 100%; max-height: 100%;" src="../static/profileex.png" alt="">
-        </div>
-        <h3 class="profile_title" id="profile_id"></h3>
-        <div class="content">
-          <div class="social-description" id="profile_like">
-            <p>좋아요 한 영상</p>
-          </div>
-          <div class="social-description" id="profile_comment">
-            <p>단 댓글 수</p>
-          </div>
-          <div class="social-description" id="profile_upload">
-            <p>업로드한 영상</p>
-          </div>
-        </div>
-      </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="live_section">
     </div>
-  </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="photo-container">
+
+            </div>
+            <h3 class="profile_title" id="profile_id"></h3>
+            <div class="content">
+                <div class="social-description" id="profile_like">
+                    <p>좋아요 한 영상</p>
+                </div>
+                <div class="social-description" id="profile_comment">
+                    <p>단 댓글 수</p>
+                </div>
+                <div class="social-description" id="profile_upload">
+                    <p>업로드한 영상</p>
+                </div>
+            </div>
+        </div>
+            <p>프로필 사진 등록/수정</p>
+            <input id="input-pic" type="file" name="file"/>
+            <input onclick="update_profile()" type="submit"/>
+    </div>
+</div>
 </div>
 </body>
 </html>
