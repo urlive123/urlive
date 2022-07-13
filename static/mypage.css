@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body {
     background-color: RGBA(232, 52, 78, 0.2);
     min-height: 100vh;
@@ -41,7 +41,7 @@ input::-webkit-calendar-picker-indicator {
     width:100%;
     height:100%;
 }
-=======
+
 @import "main.css";
 #live_like_section {
     width: 100%;
@@ -76,7 +76,5 @@ input::-webkit-calendar-picker-indicator {
   margin-bottom: 15px;
 }
 
-
->>>>>>> 28df95e861be07c0f3c4745625a81ff0ce66716e
 
 
