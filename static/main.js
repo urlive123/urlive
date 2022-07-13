@@ -409,5 +409,5 @@ function gotomypage() {
 }
 
 function gotomain() {
-    window.location.reload()
+    window.location.replace("/main")
 }

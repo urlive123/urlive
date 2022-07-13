@@ -23,6 +23,13 @@ SECRET_KEY = '5B369D323AAFB548EFA77E38B3922'
 @app.route('/')
 def home():
     return render_template('index.html')
+## 로그인페이지
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 
 ## 메인페이지
 @app.route('/main')
@@ -326,4 +333,4 @@ def get_img():
 
 if __name__ == '__main__':
 
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5100, debug=True)
