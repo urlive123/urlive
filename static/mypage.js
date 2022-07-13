@@ -25,7 +25,7 @@ function youtube_parser(url) {
                 url: "/api/my-contents-by-upload",
                 data: {},
                 success: function (response) {
-                    $('#profile_container').hide()
+                    $('.wrapper').hide()
                     $('#live_section').empty()
                     console.log('my like', response['contents'])
                     let rows = response['contents']
@@ -117,7 +117,7 @@ function youtube_parser(url) {
                 url: "/api/my-contents-by-likes",
                 data: {},
                 success: function (response) {
-                    $('#profile_container').hide()
+                    $('.wrapper').hide()
                     $('#live_section').empty()
                     console.log('my like', response['contents'])
                     let rows = response['contents']
@@ -335,7 +335,11 @@ function youtube_parser(url) {
                 }
 //활동이력 조회
 function showMyActivity() {
+    $('.wrapper').show()
+    if ($('#profile_id').children().length == 0){
     $('#profile_id').append(userId)
+    }
+    $('#live_section').empty()
     $.ajax({
         type: 'GET',
         url: '/api/profile',
@@ -348,8 +352,10 @@ function showMyActivity() {
                     count++
                 }
             }
-            $('#profile_upload').prepend(`<h3>${count}</h3>`)
-
+            console.log('len',$('#profile_upload').children().length)
+            if ($('#profile_upload').children().length == 1) {
+                $('#profile_upload').prepend(`<h3>${count}</h3>`)
+            }
         }
     })
     $.ajax({
@@ -365,8 +371,9 @@ function showMyActivity() {
                 }
             }
                 let temp_html =`<h3>${count}</h3>`
-
+            if ($('#profile_like').children().length == 1) {
             $('#profile_like').prepend(temp_html)
+            }
 
         }
     })
@@ -384,8 +391,11 @@ function showMyActivity() {
                 }
             }
             let temp_html =`<h3>${count}</h3>`
+            if ($('#profile_like').children().length == 1){
             $('#profile_comment').prepend(temp_html)
+            }
 
         }
     })
 }
+
