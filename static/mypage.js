@@ -1,3 +1,14 @@
+
+function sign_out() {
+    $.removeCookie('mytoken', {path: '/'});
+    alert('로그아웃!')
+    window.location.href = "/login"
+}
+
+$(document).ready(function () {
+    get_posts()
+})
+
 $(document).ready(function () {
     showMyActivity()
     get_img()
@@ -16,6 +27,7 @@ function youtube_parser(url) {
     let match = url.match(regExp);
     return (match && match[7].length == 11) ? match[7] : false;
 }
+
 
 
 // 내가 업로드한 영상 조회
@@ -67,7 +79,7 @@ function youtube_parser(url) {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div id="modal-body" class="modal-body">
+                                                    <div class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -91,9 +103,12 @@ function youtube_parser(url) {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
+                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -156,7 +171,7 @@ function youtube_parser(url) {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div id="modal-body" class="modal-body">
+                                                    <div class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -180,9 +195,12 @@ function youtube_parser(url) {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
+                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -267,43 +285,26 @@ function youtube_parser(url) {
         }
 
 //좋아요 기능
-function toggle_like(post_id, type) {
-    let $a_like = $(`#${post_id} a[aria-label='heart']`)
-    let $i_like = $a_like.find("i")
-    console.log($i_like)
-    if ($i_like.hasClass("bi-suit-heart")) {
-        $.ajax({
-            type: "POST",
-            url: "/api/likes",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "like",
-            },
-            success: function (response) {
-                $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
-                $a_like.find("span.like-num").text(response["count"])
+        function toggle_like(post_id, type) {
+            let $a_like = $(`#${post_id} a[aria-label='heart']`)
+            let $i_like = $a_like.find("i")
+            console.log($i_like)
+            if ($i_like.hasClass("bi-suit-heart")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/likes",
+                    data: {
+                        post_id_give: post_id,
+                        type_give: type,
+                        action_give: "like",
+                    },
+                    success: function (response) {
+                        $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
+                        $a_like.find("span.like-num").text(response["count"])
+                    }
+                })
             }
-        })
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "/api/likes",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "unlike"
-            },
-            success: function (response) {
-                console.log("unlike")
-                $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
-                $a_like.find("span.like-num").text(response["count"])
-            }
-        })
-
-    }
-
-}
+        }
 
 //by현서 로그아웃 기능
                 function gotomain() {
@@ -348,7 +349,7 @@ function toggle_like(post_id, type) {
 function showMyActivity() {
     $('.wrapper').show()
     if ($('#profile_id').children().length == 0){
-    $('#profile_id').append(`<h3>${userId}</h3>`)
+    $('#profile_id').append(userId)
     }
     $('#live_section').empty()
     $.ajax({
@@ -363,8 +364,9 @@ function showMyActivity() {
                     count++
                 }
             }
+            console.log('len',$('#profile_upload').children().length)
             if ($('#profile_upload').children().length == 1) {
-                $('#profile_upload').prepend(`<h3 onclick="showMyUpload()">${count}</h3>`)
+                $('#profile_upload').prepend(`<h3>${count}</h3>`)
             }
         }
     })
@@ -380,7 +382,7 @@ function showMyActivity() {
                     count++
                 }
             }
-                let temp_html =`<h3 onclick="showMyLike()">${count}</h3>`
+                let temp_html =`<h3>${count}</h3>`
             if ($('#profile_like').children().length == 1) {
             $('#profile_like').prepend(temp_html)
             }
@@ -408,7 +410,6 @@ function showMyActivity() {
         }
     })
 }
-// 프로필 이미지 등록
 
 function update_profile() {
     let file = $('#input-pic')[0].files[0]
@@ -437,14 +438,10 @@ function get_img() {
         type: "GET",
         url: "/get_profile",
         data: {},
-    })
-        .done(function (response) {
+        success: function (response) {
             console.log(response['userinfo']['profile_pic_real'])
             pic_path = response['userinfo']['profile_pic_real']
-            if (response['userinfo']['profile_pic_real'] != undefined)
-            {
-            $('.photo-container').empty()
             $('.photo-container').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
-            }
-        })
+        }
+    });
 }

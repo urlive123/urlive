@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 function media_check(id) {
-    if (matchMedia("screen and (max-width:750px)").matches) {
+    if (matchMedia("screen and (max-width:550px)").matches) {
         $('#titletxt').empty()
         let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
                             <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
@@ -22,7 +22,6 @@ function media_check(id) {
         $('#titletxt').append(temp_html)
     }
 }
-
 
 
 // youtube URL에서 id 추출
@@ -35,9 +34,10 @@ function youtube_parser(url) {
 // 리스트 조회
 function show_list() {
     $.ajax({
-        type: "GET", url: '/api/contents', data: {}, success: function (response) {
-            console.log(response)
-
+        type: "GET",
+        url: "/api/contents",
+        data: {},
+        success: function (response) {
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -85,7 +85,7 @@ function show_list() {
                                                         <div class="post_box">
                                                                 <h2>${title} - ${artist}</h2>
                                                                 <p>${content}</p>
-                                                    </div>
+                                                        </div>
                                                     <div class="comment_box">
                                                         <table class="table">
                                                         <thead>
@@ -146,9 +146,8 @@ function sortbycomment() {
                                               <p class="card-writer">작성자: ${userId}</p>
                                               <p class="card-comment-count">댓글 수: ${count_comment}</p>
                                               <div class="card-wrap">
-                                              <button onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                               <i class="fa fa-youtube"></i>
-                                          
+                                              <button style="color: rgb(253,246,246)" onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
+                                               동영상 재생
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -330,7 +329,7 @@ function comment_listing(id) {
                     let objectId = rows[i]['_id']
                     let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment} <i style="cursor:pointer;" onclick="delete_comment('${objectId}', '${num}')" class="bi bi-x"></i></td>
+                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                 }
