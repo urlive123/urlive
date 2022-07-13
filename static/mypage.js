@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function sign_out() {
     $.removeCookie('mytoken', {path: '/'});
     alert('로그아웃!')
@@ -8,7 +8,7 @@ function sign_out() {
 $(document).ready(function () {
     get_posts()
 })
-=======
+
 $(document).ready(function () {
     showMyActivity()
     get_img()
@@ -445,4 +445,4 @@ function get_img() {
         }
     });
 }
->>>>>>> 28df95e861be07c0f3c4745625a81ff0ce66716e
+
