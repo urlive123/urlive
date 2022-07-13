@@ -1,4 +1,3 @@
-//엔터 기능
 $(document).ready(function () {
     $("#password").keydown(function(e){
         if(e.which == 13){
@@ -6,11 +5,7 @@ $(document).ready(function () {
         }
     })
 });
-<<<<<<< HEAD
-//로그인
-=======
-// 로그인
->>>>>>> 8f3ce540f76317b767d05cbbce6569a4f1e9b38b
+
 function login() {
     id = $('#id').val();
     pw = $('#password').val();
@@ -31,7 +26,6 @@ function login() {
         }
     })
 }
-// 회원가입
 function register() {
     id = $('#register-id').val();
     pw = $('#register-password').val();

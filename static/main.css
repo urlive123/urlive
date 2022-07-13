@@ -5,7 +5,6 @@
     html {
         height: 100vh;
     }
-
     .nav-section {
         width: 100%;
         height: 280px;
@@ -224,8 +223,16 @@
         background-color: var(--color-primary-ligth)
     }
 
-    .tab-menu__active .tab-menu__text{
+    .tab-menu__active .tab-menu__text {
         display: block;
     }
+    .imgcv {
+        width: 100%;
 
+        margin-left: 2%;
 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }

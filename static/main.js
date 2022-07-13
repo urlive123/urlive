@@ -74,7 +74,7 @@ function show_list() {
                                                         <div class="post_box">
                                                                 <h2>${title} - ${artist}</h2>
                                                                 <p>${content}</p>
-                                                    </div>
+                                                        </div>
                                                     <div class="comment_box">
                                                         <table class="table">
                                                         <thead>

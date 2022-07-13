@@ -302,8 +302,4 @@ def profile_edit():
 
 if __name__ == '__main__':
 
-<<<<<<< HEAD
     app.run('0.0.0.0', port=5100, debug=True)
-=======
-    app.run('0.0.0.0', port=5000, debug=True)
->>>>>>> 8f3ce540f76317b767d05cbbce6569a4f1e9b38b
