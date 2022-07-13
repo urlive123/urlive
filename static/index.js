@@ -1,3 +1,4 @@
+//엔터 기능
 $(document).ready(function () {
     $("#password").keydown(function(e){
         if(e.which == 13){
