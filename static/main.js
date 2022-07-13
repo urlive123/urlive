@@ -33,12 +33,10 @@ function youtube_parser(url) {
 }
 
 // 리스트 조회
-function show_list() {
+function show_list(page) {
     $.ajax({
-        type: "GET",
-        url: "/api/contents",
-        data: {},
-        success: function (response) {
+        type: "GET", url: `/api/contents?page=${page}`, data: {}, success: function (response) {
+            console.log(response)
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -62,7 +60,7 @@ function show_list() {
                                               <p class="card-comment-count">댓글 수: ${count_comment}개</p>
                                               <div class="card-wrap">
                                               <button style="color: rgb(253,246,246)" onclick="comment_listing('${objectId}')" href="#" type="button" class="btn btn-you-tube icon-onl" data-bs-toggle="modal" data-bs-target="#detailModal${objectId}">
-                                             동영상 재생
+                                               동영상 재생
                                               </button>
                                               <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${objectId}', 'heart')">
                                               <i class="bi ${class_heart}"></i>&nbsp;<span class="like-num">${count_heart}</span>
@@ -78,7 +76,7 @@ function show_list() {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div id="modal-body" class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -102,12 +100,10 @@ function show_list() {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
                                                         </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -123,10 +119,7 @@ function show_list() {
 // 댓글 순 정렬
 function sortbycomment() {
     $.ajax({
-        type: 'get',
-        url: '/api/contents-by-comment',
-        data: {},
-        success: function (response) {
+        type: 'get', url: '/api/contents-by-comment', data: {}, success: function (response) {
             $('#cards-box').empty()
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
@@ -166,7 +159,7 @@ function sortbycomment() {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div id="modal-body" class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -190,12 +183,9 @@ function sortbycomment() {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
-                                                        </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -213,9 +203,7 @@ function sortbycomment() {
 function sort_heart() {
     $('#cards-box').empty()
     $.ajax({
-        type: "GET", url: '/api/contents-by-heart',
-        data: {},
-        success: function (response) {
+        type: "GET", url: '/api/contents-by-heart', data: {}, success: function (response) {
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -254,7 +242,7 @@ function sort_heart() {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div id="modal-body" class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -278,12 +266,9 @@ function sort_heart() {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
-                                                        </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -304,6 +289,9 @@ function post_list() {
     let artist = $('#artist').val()
     let url = `${$('#url').val()}`
     console.log(url)
+    if(title == "" || content == "" || artist == "" || url == ""){
+        alert('내용을 모두 입력해주세요')
+    } else {
     $.ajax({
         type: 'POST',
         url: '/api/contents',
@@ -313,16 +301,14 @@ function post_list() {
             window.location.reload()
         }
     })
+    }
 }
 
 //댓글 조회
 function comment_listing(id) {
     $(`#comment${id}`).empty();
     $.ajax({
-        type: 'GET',
-        url: '/api/comments',
-        data: {},
-        success: function (response) {
+        type: 'GET', url: '/api/comments', data: {}, success: function (response) {
             console.log(response)
             let rows = response['urliveComments']
             for (let i = 0; i < rows.length; i++) {
@@ -346,16 +332,20 @@ function comment_listing(id) {
 //댓글 쓰기
 function comment_posting(id) {
     let commentpost = $(`#commentpost${id}`).val()
-    $.ajax({
-        type: 'POST',
-        url: '/api/comments',
-        data: {userId_give: userId, comment_give: commentpost, objectId_give: id},
-        success: function (response) {
-            alert(response['msg'])
-            comment_listing(id)
-            $(`#commentpost${id}`).val("")
-        }
-    });
+    if (commentpost == "") {
+        alert("댓글을 입력해주세요")
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '/api/comments',
+            data: {userId_give: userId, comment_give: commentpost, objectId_give: id},
+            success: function (response) {
+                alert(response['msg'])
+                comment_listing(id)
+                $(`#commentpost${id}`).val("")
+            }
+        });
+    }
 }
 
 //좋아요 기능
@@ -365,28 +355,18 @@ function toggle_like(post_id, type) {
     console.log($i_like)
     if ($i_like.hasClass("bi-suit-heart")) {
         $.ajax({
-            type: "POST",
-            url: "/api/likes",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "like",
-            },
-            success: function (response) {
+            type: "POST", url: "/api/likes", data: {
+                post_id_give: post_id, type_give: type, action_give: "like",
+            }, success: function (response) {
                 $i_like.addClass("bi-suit-heart-fill").removeClass("bi-suit-heart")
                 $a_like.find("span.like-num").text(response["count"])
             }
         })
     } else {
         $.ajax({
-            type: "POST",
-            url: "/api/likes",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "unlike"
-            },
-            success: function (response) {
+            type: "POST", url: "/api/likes", data: {
+                post_id_give: post_id, type_give: type, action_give: "unlike"
+            }, success: function (response) {
                 console.log("unlike")
                 $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
                 $a_like.find("span.like-num").text(response["count"])
@@ -408,10 +388,7 @@ function logout() {
 function delete_card(id) {
     if (confirm('삭제하시겠습니까?')) {
         $.ajax({
-            type: 'POST',
-            url: '/api/content',
-            data: {id_give: id, userId_give: userId},
-            success: function (response) {
+            type: 'POST', url: '/api/content', data: {id_give: id, userId_give: userId}, success: function (response) {
                 alert(response['msg'])
                 if (response['check'] == 1) {
                     window.location.reload()
@@ -445,5 +422,5 @@ function gotomypage() {
 }
 
 function gotomain() {
-    window.location.replace("/main")
+    window.location.reload()
 }

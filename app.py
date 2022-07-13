@@ -1,5 +1,6 @@
 import hashlib
 import datetime
+import math
 
 import jwt
 from flask import Flask, render_template, request, jsonify, redirect, url_for
@@ -77,8 +78,8 @@ def api_log_in():
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
         }
         # 서버에서 실행시 디코딩 필요
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         return jsonify({'result': 'success', 'token': token})
     else:
         return jsonify(({'result' : 'fail', 'msg': '아이디, 비밀번호가 일치하지 않습니다.'}))
@@ -104,15 +105,21 @@ def api_post_card():
 @app.route('/api/contents', methods=['GET'])
 def api_get_card():
     token_receive = request.cookies.get('mytoken')
+    print(request.args.get('page',type=int))
+    page = request.args.get('page',type=int)
+    limit = 10
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        content_list = list(db.urliveContents.find({}))
+        content_list = list(db.urliveContents.find({}).skip((page - 1)*limit).limit(limit))
+        tot_count = db.urliveContents.count_documents({})
+        last_page_num = math.ceil(tot_count/limit)
+        print(tot_count)
         for document in content_list:
             document['_id'] = str(document['_id'])
             document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
             document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
             document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-        return jsonify({'contents': content_list})
+        return jsonify({'contents': content_list, 'limit':limit, 'page':page, 'last_page_num':last_page_num})
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
