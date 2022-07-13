@@ -77,8 +77,8 @@ def api_log_in():
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
         }
         # 서버에서 실행시 디코딩 필요
-        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         return jsonify({'result': 'success', 'token': token})
     else:
         return jsonify(({'result' : 'fail', 'msg': '아이디, 비밀번호가 일치하지 않습니다.'}))
@@ -313,9 +313,9 @@ def get_img():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.urliveUsers.find_one({'id': payload['id']},{'_id':False})
-        print(userinfo)
-        return jsonify({"result": "success", 'userinfo': userinfo})
+        userinfo = db.urliveUsers.find_one({'id': payload['id']})
+        userinfo['_id'] = str(userinfo['_id'])
+        return jsonify({"result": "success", 'userinfo': userinfo,})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
