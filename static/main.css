@@ -1,6 +1,6 @@
 
 
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 550px) {
         @keyframes typewriter {
             from {
                 width: 0;
@@ -274,7 +274,6 @@
         font-size: 20px;
     }
 
-
     .form_floating {
         display: flex;
     }
@@ -285,5 +284,3 @@
         align-items: center;
         flex-direction: column;
     }
-
-
