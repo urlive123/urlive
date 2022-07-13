@@ -7,6 +7,14 @@
     flex-direction: column;
 
 }
+
+@media screen and (max-width: 580px) {
+    .center > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
 #live_section {
      margin: auto;
      width: 95%;

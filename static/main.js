@@ -14,7 +14,7 @@ $(document).ready(function () {
 });
 
 function media_check(id) {
-    if (matchMedia("screen and (max-width:550px)").matches) {
+    if (matchMedia("screen and (max-width:580px)").matches) {
         $('#titletxt').empty()
         let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
                             <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
