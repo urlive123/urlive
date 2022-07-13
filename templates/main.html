@@ -13,6 +13,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../static/main.js"></script>
     <script> const userId = '{{id}}'</script>
+
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
@@ -28,15 +29,14 @@
 </head>
 <body>
 <div class="nav-section">
-
-    <div class="titletxt">
-        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! Urlive에 오신 것을 환영합니다!</h2>
-
+    <div class="titletxt" id="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! </h2>
+        <h2 style="color: #f3c238; -webkit-animation-delay: 3s;" class="line anim-typewriter">Urlive에 오신 것을 환영합니다!</h2>
         <div class="logoutbtn">
                 <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
         </div>
     </div>
-        <div class='btn-holder'>
+<div class='btn-holder'>
              <!-- Button trigger modal -->
         <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
             등록하기
@@ -100,9 +100,12 @@
                 <span onclick="gotomypage()" class="tab-menu__text">마이페이지</span>
             </li>
         </ul>
-    </div>
+</div>
 <div class="imgcv">
-<div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+    <div class="center">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+        </div>
+    </div>
 </div>
 </div>
 
