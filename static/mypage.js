@@ -68,7 +68,7 @@ function youtube_parser(url) {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div id="modal-body" class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -92,12 +92,9 @@ function youtube_parser(url) {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
-                                                        </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -160,7 +157,7 @@ function youtube_parser(url) {
                                                     <div class="modal-header">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div id="modal-body" class="modal-body">
                                                                 <iframe width="766" height="431" src="https://youtube.com/embed/${url_result}"
                                                                 title="YouTube video player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -184,12 +181,9 @@ function youtube_parser(url) {
                                                         <div class="form-floating">
                                                             <textarea class="form-control" placeholder="Leave a comment" id="commentpost${objectId}"></textarea>
                                                             <label for="floatingTextarea">댓글 달기</label>
-                                                            <button onclick="comment_posting('${objectId}')" style="float: right" type="button" class="btn btn-outline-dark mt-2">등록</button>
+                                                            <button style="float: right;"type="button" class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">닫기</button>
+                                                            <button onclick="comment_posting('${objectId}')" style="float: right; margin-right: 10px;" type="button" class="btn btn-outline-dark mt-2">등록</button>
                                                         </div>
-                                                        </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>`
@@ -371,7 +365,7 @@ function showMyActivity() {
                 }
             }
             if ($('#profile_upload').children().length == 1) {
-                $('#profile_upload').prepend(`<h3>${count}</h3>`)
+                $('#profile_upload').prepend(`<h3 onclick="showMyUpload()">${count}</h3>`)
             }
         }
     })
@@ -387,7 +381,7 @@ function showMyActivity() {
                     count++
                 }
             }
-                let temp_html =`<h3>${count}</h3>`
+                let temp_html =`<h3 onclick="showMyLike()">${count}</h3>`
             if ($('#profile_like').children().length == 1) {
             $('#profile_like').prepend(temp_html)
             }
