@@ -6,7 +6,7 @@ $(document).ready(function () {
         }
     })
 });
-
+//로그인
 function login() {
     id = $('#id').val();
     pw = $('#password').val();

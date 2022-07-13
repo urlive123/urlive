@@ -1,4 +1,4 @@
-// 메인페이지 시작시 리스트 불러오기
+// 메인페이지 시작시 리스트 불러오기.동시 메뉴 불러오기
 $(document).ready(function () {
     show_list();
     const menuItems = document.querySelectorAll('.tab-menu__item');
