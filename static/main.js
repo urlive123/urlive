@@ -434,3 +434,4 @@ function gotomypage() {
 function gotomain() {
     window.location.replace("/main")
 }
+

@@ -1,36 +1,36 @@
-@import "main.css";
-#live_like_section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    @import "main.css";
+    #live_like_section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
-}
-#live_section {
-     margin: auto;
-     width: 95%;
-     max-width: 1500px;
-}
-.photo-container {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto;
-  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
-}
+    }
+    #live_section {
+         margin: auto;
+         width: 95%;
+         max-width: 1500px;
+    }
+    .photo-container {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    }
 
-.social-description {
-  display: inline-block;
-  max-width: 150px;
-  width: 145px;
-  text-align: center;
-  margin: 15px 0 0px;
-}
-.social-description h2 {
-  margin-bottom: 15px;
-}
+    .social-description {
+      display: inline-block;
+      max-width: 150px;
+      width: 145px;
+      text-align: center;
+      margin: 15px 0 0px;
+    }
+    .social-description h2 {
+      margin-bottom: 15px;
+    }
 
 
 
