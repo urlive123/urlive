@@ -25,7 +25,7 @@ function youtube_parser(url) {
                 url: "/api/my-contents-by-upload",
                 data: {},
                 success: function (response) {
-                    $('#profile_section').empty()
+                    $('#profile_container').hide()
                     $('#live_section').empty()
                     console.log('my like', response['contents'])
                     let rows = response['contents']
@@ -112,13 +112,12 @@ function youtube_parser(url) {
 
 // 내가 좋아요 누른 영상 조회
         function showMyLike() {
-
             $.ajax({
                 type: "GET",
                 url: "/api/my-contents-by-likes",
                 data: {},
                 success: function (response) {
-                    $('#profile_section').empty()
+                    $('#profile_container').hide()
                     $('#live_section').empty()
                     console.log('my like', response['contents'])
                     let rows = response['contents']
@@ -336,9 +335,7 @@ function youtube_parser(url) {
                 }
 //활동이력 조회
 function showMyActivity() {
-    $('#live_section').empty()
-    $('#profile_section').empty()
-    $('#profile_section').append(`<h3>아이디: ${userId}</h3>`)
+    $('#profile_id').append(userId)
     $.ajax({
         type: 'GET',
         url: '/api/profile',
@@ -351,9 +348,7 @@ function showMyActivity() {
                     count++
                 }
             }
-            let temp_html =`
-                            <p class="small text-muted mb-1">올린 포스트: ${count}</p>`
-            $('#profile_section').append(temp_html)
+            $('#profile_upload').prepend(`<h3>${count}</h3>`)
 
         }
     })
@@ -369,10 +364,9 @@ function showMyActivity() {
                     count++
                 }
             }
-                let temp_html =`
-                            <p class="small text-muted mb-1">좋아요 한 영상: ${count}</p>`
+                let temp_html =`<h3>${count}</h3>`
 
-            $('#profile_section').append(temp_html)
+            $('#profile_like').prepend(temp_html)
 
         }
     })
@@ -389,11 +383,8 @@ function showMyActivity() {
                     count++
                 }
             }
-            let comment_num = count
-            let temp_html =`
-                            <p class="small text-muted mb-1">남긴 댓글 수: ${count}</p>
-                            `
-            $('#profile_section').append(temp_html)
+            let temp_html =`<h3>${count}</h3>`
+            $('#profile_comment').prepend(temp_html)
 
         }
     })

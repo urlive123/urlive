@@ -225,7 +225,6 @@ def api_get_by_heart():
     print(content_sort_heart)
     for document in content_sort_heart:
         document['_id'] = str(document['_id'])
-
         document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
         document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
         document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))

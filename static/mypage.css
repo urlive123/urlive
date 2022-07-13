@@ -12,20 +12,26 @@
      width: 95%;
      max-width: 1500px;
 }
-
-#profile_section {
-    padding-top: 20px;
-    margin: auto;
-    height: 100%;
+.photo-container {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
 }
 
-#profile_section p {
-    font-size: 50px;
+.social-description {
+  display: inline-block;
+  max-width: 150px;
+  width: 145px;
+  text-align: center;
+  margin: 15px 0 0px;
+}
+.social-description h2 {
+  margin-bottom: 15px;
 }
 
-h3 {
-    font-size: 70px;
-}
 
 
 
