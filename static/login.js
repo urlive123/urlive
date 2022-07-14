@@ -48,3 +48,7 @@ function register() {
     })
     }
 }
+
+function gotohome() {
+    window.location.replace("/")
+}

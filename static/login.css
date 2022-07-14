@@ -1,3 +1,7 @@
+    * {
+        font-family: 'Jua', sans-serif;
+    }
+
 body{
 	margin: 0;
 	padding: 0;
@@ -86,3 +90,11 @@ button:hover{
 #chk:checked ~ .login label{
 	transform: scale(.6);
 }
+
+.homebtn {
+		width: 150px;
+        position: absolute;
+        right: 2%;
+        top: 2%;
+		white-space: nowrap;
+    }

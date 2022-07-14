@@ -89,8 +89,8 @@ function register() {
                 shape.remove();
             }
             group = [];
-        }, 2000);
-    }
+            }, 2000);
+
 
 $(function() {
   $(document).on('click', '.btn', function(e) {
