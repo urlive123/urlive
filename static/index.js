@@ -46,3 +46,9 @@ function media_check() {
 function loginpage() {
     window.location.replace("/login")
 }
+
+
+function manualpage() {
+    window.location.replace("/manual")
+}
+
