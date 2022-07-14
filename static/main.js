@@ -2,7 +2,6 @@
 $(document).ready(function () {
     get_img();
     show_list();
-
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -24,6 +23,7 @@ function media_check(id) {
                             <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
         $('#titletxt').append(temp_html)
         $('#photopop').empty()
+        $('#menu').show()
     }
 }
 
@@ -434,7 +434,7 @@ function get_img() {
             if (response['userinfo']['profile_pic_real'] != undefined)
             {
             $('.photo-wrap').empty()
-            $('.photo-wrap').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
+            $('.photo-wrap').append(`<img class=" d-none d-md-block" style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
             }
         })
 }
