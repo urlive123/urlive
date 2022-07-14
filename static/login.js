@@ -9,6 +9,9 @@ $(document).ready(function () {
 function login() {
     id = $('#id').val();
     pw = $('#password').val();
+    if( id == "" || pw == "") {
+        alert("내용을 모두 입력해주세요.")
+    } else {
     $.ajax({
         type: "POST",
         url: "/api/log-in",
@@ -25,6 +28,8 @@ function login() {
 
         }
     })
+    }
+
 }
 // 회원가입
 function register() {
@@ -48,7 +53,7 @@ function register() {
             success: function (response) {
                 if (response['check'] == 1) {
                     alert('회원가입 성공!')
-                    window.location.replace("/main")
+                    window.location.replace("/login")
                 } else if (response['check'] == 0) {
                     alert('이미 가입한 회원입니다.')
                 }
