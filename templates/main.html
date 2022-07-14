@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../static/main.js"></script>
+    <script> const userId = '{{id}}'</script>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="short icon" href="#">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <title>UrLive</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="nav-section">
+    <div class="titletxt" id="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! </h2>
+        <h2 style="color: #f3c238; -webkit-animation-delay: 3s;" class="line anim-typewriter">Urlive에 오신 것을 환영합니다!</h2>
+        <div class="logoutbtn">
+                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
+        </div>
+    </div>
+<div class='btn-holder'>
+                         <!-- Button trigger modal -->
+        <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            등록하기
+        </button>
+    </div>
+
+</div>
+<!-- Modal Post -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="url" class="col-form-label">URL:</label>
+                    <input type="text" class="form-control" id="url">
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-form-label">노래제목:</label>
+                    <input type="text" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                    <label for="artist" class="col-form-label">아티스트:</label>
+                    <input type="text" class="form-control" id="artist">
+                </div>
+                <div class="form-group">
+                    <label for="content" class="col-form-label">이 라이브를 추천하는 이유:</label>
+                    <textarea class="form-control" id="content"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="dark-button button-wrapper">
+                    <button onclick="post_list()" type="button" class="btn btn-outline-dark">등록하기</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-menu d-none d-sm-block">
+        <ul class="tab-menu__list">
+            <li class="tab-menu__item tab-menu__active">
+                <span class="tab-menu__icon"><i class="ri-home-4-line"></i></span>
+                <span onclick="logout()" class="tab-menu__text">홈</span>
+            </li>
+
+            <li class="tab-menu__item">
+                <span class="tab-menu__icon"><i class="ri-heart-line"></i></span>
+                <span onclick="sort_heart()" class="tab-menu__text">좋아요순</span>
+            </li>
+
+            <li class="tab-menu__item">
+                <span class="tab-menu__icon"><i class="ri-chat-follow-up-line"></i></span>
+                <span onclick="sortbycomment()" class="tab-menu__text">댓글순</span>
+            </li>
+            <li class="tab-menu__item">
+                <span class="tab-menu__icon"><i class="ri-user-line"></i></span>
+                <span onclick="gotomypage()" class="tab-menu__text">마이페이지</span>
+            </li>
+        </ul>
+    </div>
+<div class="imgcv">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+</div>
+</div>
+
+</body>
+</html>

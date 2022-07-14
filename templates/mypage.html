@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>URLIVE MY PAGE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script> const userId = '{{id}}'</script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="short icon" href="#">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="../static/mypage.css">
+    <script src="../static/mypage.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="nav-section">
+    <div class="titletxt">
+        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! 어서오세요!</h2>
+
+        <div class="logoutbtn">
+            <button onclick="gotomain()" type="button" class="btn btn-outline-danger">뒤로가기</button>
+        </div>
+    </div>
+</div>
+<div class="tab-menu d-none d-sm-block">
+    <ul class="tab-menu__list">
+        <li class="tab-menu__item tab-menu__active">
+            <span class="tab-menu__icon"><i class="ri-user-line"></i></span>
+            <span onclick="showMyActivity()" class="tab-menu__text">프로필</span>
+        </li>
+
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-heart-line"></i></span>
+            <span onclick="showMyLike()" class="tab-menu__text">좋아요한</span>
+        </li>
+
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-chat-follow-up-line"></i></span>
+            <span onclick="showMyUpload()" class="tab-menu__text">업로드한</span>
+        </li>
+        <li class="tab-menu__item">
+            <span class="tab-menu__icon"><i class="ri-pages-line"></i></span>
+            <span onclick="gotomain()" class="tab-menu__text">메인페이지</span>
+        </li>
+    </ul>
+</div>
+<div id="live_like_section">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="live_section">
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="photo-container">
+                <img style="max-width: 100%; max-height: 100%;" src="../static/profile_pics/profileex.png" alt="">
+            </div>
+                <div class="profile_title" id="profile_id">
+                </div>
+            <div class="content">
+                <div class="social-description" id="profile_like">
+                    <p>좋아요 한 영상</p>
+                </div>
+                <div class="social-description" id="profile_upload">
+                    <p>업로드한 영상</p>
+                </div>
+                <div class="social-description" id="profile_comment">
+                    <p>단 댓글 수</p>
+                </div>
+            </div>
+        </div>
+
+            <p>프로필 사진 등록/수정</p>
+            <p>정방형으로 올려주세요!(1:1 비율)</p>
+        <div class="post-wrap">
+            <label class="btn btn-outline-warning" for="input-pic" id="post-pic">업로드</label>
+            <input id="input-pic" type="file" name="file" style="display:none;"/>
+            <input class="btn btn-warning" onclick="update_profile()" type="submit"/>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
