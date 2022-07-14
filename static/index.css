@@ -1,3 +1,111 @@
+  @media screen and (max-width: 750px) {
+        .mobile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        body {
+            width: 100%;
+            height: 80%;
+            background-image: url(http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/223/125/81223125_1560161529492_1_600x600.JPG);
+            background-position: center 34%;
+            background-size: cover;
+            color: black
+        }
+
+        .background {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .title {
+            margin-top: 30px;
+            color: #684f7e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes waviy {
+            0%, 40%, 100% {
+                transform: translateY(0)
+            }
+            20% {
+                transform: translateY(-20px)
+            }
+        }
+
+        .streamingtxt {
+            max-width: 480px;
+            width:95%;
+            text-align: center;
+            color: #987cad;
+            background-color: aliceblue;
+            background-color: rgba( 255, 255, 255, 0.8 );
+            padding: 20px;
+            margin: 10px auto auto 0;
+        }
+
+        .baststreaming {
+            width: 90%;
+            height: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+        }
+        .ratio {
+            max-width: 600px;
+            max-height: 400px;
+            width:90%;
+            margin: 0 auto;
+        }
+        .titlepost {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+
+
+        .btn-contain > button {
+            font-size: 150%;
+            margin-bottom: 20px;
+
+        }
+
+        .waviy {
+            position: relative;
+            font-size: 30px;
+        }
+
+        .waviy span {
+            font-family: 'Alfa Slab One', cursive;
+            position: relative;
+            display: inline-block;
+            color: rgba(106, 72, 138, 0.37);
+            text-transform: uppercase;
+            animation: waviy 1.8s infinite;
+            animation-delay: calc(.1s * var(--i));
+
+        }
+    }
+
+
+    @media screen and (min-width: 581px){
+         .streamingtxt {
+        width: 50%;
+        text-align: center;
+        color: #987cad;
+        margin-right: 4%;
+    }
+    }
+
 * {
   padding: 0;
   margin: 0;
@@ -41,13 +149,6 @@
         margin: 0 auto;
     }
 
-    .streamingtxt {
-        width: 50%;
-        text-align: center;
-        color: #987cad;
-        margin-right: 4%;
-
-    }
     .titlepost {
         width: 100%;
         display: flex;

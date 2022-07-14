@@ -1,5 +1,6 @@
 $(document).ready(function () {
     console.log("Hello Sparta")
+     media_check()
 });
 
 // 회원가입
@@ -33,10 +34,21 @@ function register() {
     }
 }
 
+function media_check() {
+    if (matchMedia("screen and (max-width:750px)").matches) {
+        $('#wide-screen').empty()
+    } else if (matchMedia("screen and (min-width:751px)").matches) {
+        $('#mobile_index').empty()
+    }
+}
+
+
 function loginpage() {
     window.location.replace("/login")
 }
 
+
 function manualpage() {
     window.location.replace("/manual")
 }
+

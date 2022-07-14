@@ -1,5 +1,6 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
+
     show_list(1);
     get_img()
     // 무한 스크롤
@@ -10,6 +11,8 @@ $(document).ready(function () {
       show_list(page)
     }
 });
+
+
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -19,7 +22,21 @@ $(document).ready(function () {
             item.classList.add('tab-menu__active');
         })
     })
+    media_check(userId);
 });
+
+function media_check(id) {
+    if (matchMedia("screen and (max-width:575.9px)").matches) {
+        $('#titletxt').empty()
+        let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
+                            <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
+                            <div class="logoutbtn">
+                            <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
+        $('#titletxt').append(temp_html)
+        $('#photopop').empty()
+        $('#menu').show()
+    }
+}
 
 // youtube URL에서 id 추출
 function youtube_parser(url) {
@@ -425,9 +442,12 @@ function get_img() {
     })
         .done(function (response) {
             pic_path = response['userinfo']['profile_pic_real']
-            if (response['userinfo']['profile_pic_real'] != undefined) {
-                $('.photo-wrap').empty()
-                $('.photo-wrap').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
+
+            if (response['userinfo']['profile_pic_real'] != undefined)
+            {
+            $('.photo-wrap').empty()
+            $('.photo-wrap').append(`<img class=" d-none d-md-block" style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
+
             }
         })
 }

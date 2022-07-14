@@ -18,7 +18,8 @@
 
     <link rel="short icon" href="#">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
@@ -27,62 +28,64 @@
 
 </head>
 <body>
-<div class="nav-section">
+    <div class="nav-section">
+        <div class="titletxt">
+            <div class="photo-wrap" id="photopop">
 
-    <div class="titletxt">
-        <div class="photo-wrap">
-
-        </div>
-        <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! Urlive에 오신 것을 환영합니다!</h2>
-
-        <div class="logoutbtn">
-                <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
-        </div>
-    </div>
-        <div class='btn-holder'>
-             <!-- Button trigger modal -->
-        <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            등록하기
-        </button>
-    </div>
-
-</div>
-<!-- Modal Post -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="url" class="col-form-label">URL:</label>
-                    <input type="text" class="form-control" id="url">
-                </div>
-                <div class="form-group">
-                    <label for="title" class="col-form-label">노래제목:</label>
-                    <input type="text" class="form-control" id="title">
-                </div>
-                <div class="form-group">
-                    <label for="artist" class="col-form-label">아티스트:</label>
-                    <input type="text" class="form-control" id="artist">
-                </div>
-                <div class="form-group">
-                    <label for="content" class="col-form-label">이 라이브를 추천하는 이유:</label>
-                    <textarea class="form-control" id="content"></textarea>
+            <div id="titletxt">
+                <h2 style="color: #f3c238" class="line anim-typewriter">{{ id }}님! Urlive에 오신 것을 환영합니다!</h2>
+
+                <div class="logoutbtn">
+                    <button onclick="logout()" type="button" class="btn btn-outline-danger">로그아웃</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="dark-button button-wrapper">
-                    <button onclick="post_list()" type="button" class="btn btn-outline-dark">등록하기</button>
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
-                </div>
+            <div class='btn-holder'>
+                <!-- Button trigger modal -->
+                <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                    등록하기
+                </button>
             </div>
         </div>
     </div>
-</div>
-<div class="tab-menu d-none d-sm-block">
+
+    <!-- Modal Post -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="url" class="col-form-label">URL:</label>
+                        <input type="text" class="form-control" id="url">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="col-form-label">노래제목:</label>
+                        <input type="text" class="form-control" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="artist" class="col-form-label">아티스트:</label>
+                        <input type="text" class="form-control" id="artist">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="col-form-label">이 라이브를 추천하는 이유:</label>
+                        <textarea class="form-control" id="content"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="dark-button button-wrapper">
+                        <button onclick="post_list()" type="button" class="btn btn-outline-dark">등록하기</button>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-menu d-none d-lg-block">
         <ul class="tab-menu__list">
             <li class="tab-menu__item tab-menu__active">
                 <span class="tab-menu__icon"><i class="ri-home-4-line"></i></span>
@@ -104,17 +107,22 @@
             </li>
         </ul>
     </div>
+    <div class="menu d-block d-lg-none" id="menu">
+        <div class="m_menu">
+            <button onclick="gotomain()">홈</button>
+            <button onclick="sort_heart()">좋아요 순</button>
+            <button  onclick="sortbycomment()">댓글 순</button>
+            <button onclick="gotomypage()">마이 페이지</button>
+        </div>
+    </div>
 <div class="imgcv">
-
-    <nav id="pagination" aria-label="Page navigation example">
-    <ul class="pagination">
-
-    </ul>
-
-    </nav>
-<div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+        <div class="center">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+            </div>
+        </div>
 </div>
 </div>
+
 
 </body>
 </html>

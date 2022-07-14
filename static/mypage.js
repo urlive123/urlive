@@ -1,5 +1,6 @@
 $(document).ready(function () {
     showMyActivity()
+    media_check(userId);
     get_img()
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
@@ -11,6 +12,20 @@ $(document).ready(function () {
         })
     })
 })
+
+function media_check(id) {
+    if (matchMedia("screen and (max-width:575.9px)").matches) {
+        $('#titletxt').empty()
+        let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">${id}님</p>
+                            <p style="color: #f3c238; -webkit-animation-delay: 5s;" class="line-1 anim-typewriter"> 어서오세요!</p>
+                                 <div class="logoutbtn">
+             <button onClick="logout()" type="button" class="btn btn-outline-danger">로그아웃</button>
+         </div>`
+        $('#titletxt').append(temp_html)
+        $('#menu').show()
+    }
+}
+
 function youtube_parser(url) {
     let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     let match = url.match(regExp);
