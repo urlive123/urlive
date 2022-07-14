@@ -1,3 +1,4 @@
+
 $.fn.boom = function(e) {
   var colors = [
     '#ffb3f6',
@@ -13,35 +14,23 @@ $.fn.boom = function(e) {
     '<polygon class="other-star" points="18,0,22.242640687119284,13.757359312880714,36,18,22.242640687119284,22.242640687119284,18.000000000000004,36,13.757359312880716,22.242640687119284,0,18.000000000000004,13.757359312880714,13.757359312880716"></polygon>',
     '<polygon class="diamond" points="18,0,27.192388155425117,8.80761184457488,36,18,27.19238815542512,27.192388155425117,18.000000000000004,36,8.807611844574883,27.19238815542512,0,18.000000000000004,8.80761184457488,8.807611844574884"></polygon>'
   ];
-}
-// 회원가입
-function register() {
-    id = $('#register-id').val();
-    pw = $('#register-password').val();
-    pw_check = $('#register-password-check').val();
-    let idReg = /^[a-zA-Z]+[a-z0-9A-Z]{3,19}$/g;
-    if (!idReg.test(id)) {
-        alert("아이디는 영소문자로 시작하는 4~20자 영문자 또는 숫자이어야 합니다.");
-        return;
-    }
-    if (id == "" || pw == "") {
-        alert('아이디와 비밀번호를 정확히 입력해주세요!')
-    } else if (pw != pw_check) {
-        alert('동일한 비밀번호를 입력해주세요.')
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "/api/sign-up",
-            data: {id_give: id, pw_give: pw},
-            success: function (response) {
-                if (response['check'] == 1) {
-                    alert('회원가입 성공!')
-                    window.location.replace("/main")
-                } else if (response['check'] == 0) {
-                    alert('이미 가입한 회원입니다.')
-                }
-            }
-        })
+
+$(document).ready(function () {
+    media_check()
+    $("#password").keydown(function(e){
+        if(e.which == 13){
+            $('#login').click();
+        }
+    })
+});
+
+
+function media_check() {
+    if (matchMedia("screen and (max-width:750px)").matches) {
+        $('#mobile_index').show()
+        $('#wide-screen').empty()
+    } else if (matchMedia("screen and (min-width:751px)").matches) {
+        $('#mobile_index').empty()
     }
 }
 

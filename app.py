@@ -1,6 +1,5 @@
 import hashlib
 import datetime
-import math
 
 import jwt
 from flask import Flask, render_template, request, jsonify, redirect, url_for
@@ -10,6 +9,7 @@ from bson import ObjectId
 from pymongo import MongoClient
 import certifi
 from werkzeug.utils import secure_filename
+
 
 ca = certifi.where()
 
@@ -324,9 +324,9 @@ def get_img():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.urliveUsers.find_one({'id': payload['id']})
-        userinfo['_id'] = str(userinfo['_id'])
-        return jsonify({"result": "success", 'userinfo': userinfo,})
+        userinfo = db.urliveUsers.find_one({'id': payload['id']},{'_id':False})
+        print(userinfo)
+        return jsonify({"result": "success", 'userinfo': userinfo})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
