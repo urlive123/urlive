@@ -1,75 +1,83 @@
-    * {
-        font-family: 'Jua', sans-serif;
+
+@media screen and (max-width: 580px) {
+    .center > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    html, body {
+    .btn-holder {
+        margin-top: 30px;
+    }
+
+
+    .ul {
+        list-style-type: none;
+        padding-left: 0;
+        float: right;
+    }
+
+    @keyframes typewriter {
+        from {
+            width: 0;
+        }
+        to {
+            width: 24em;
+        }
+    }
+    @keyframes blinkTextCursor {
+        from {
+            border-right-color: rgba(255, 255, 255, .75);
+        }
+        to {
+            border-right-color: transparent;
+        }
+    }
+
+    .line-1 {
+        position: relative;
+        top: 50%;
+        width: 24em;
+        margin: 0 auto;
+        border-right: 2px solid rgba(255, 255, 255, .75);
+        font-size: 220%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        transform: translateY(-50%);
+    }
+
+    /* Animation */
+    .anim-typewriter {
+        animation: typewriter 4s steps(44) 1s 1 normal both,
+        blinkTextCursor 500ms steps(44) infinite normal;
+    }
+}
+
+
+* {
+    font-family: 'Jua', sans-serif;
+}
+
+
+html, body {
         width: 100%;
         height: 100%;
         height: 100vh;
     }
 
-    .nav-section {
-        width: 100%;
-        height: 280px;
-
-        background-image: url(https://www.chords.co.kr/wp-content/uploads/2021/04/%EC%95%A0%EC%89%AC-%EC%95%84%EC%9D%BC%EB%9E%9C%EB%93%9C-%EB%A9%9C%EB%A1%9C%EB%94%94_title.jpg);
-        background-position: center 35%;
-        background-size: cover;
-
+    .center{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
+    .nav-section {
+        width: 100%;
+        height: 280px;
 
-    @media screen and (max-width: 750px) {
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-            to {
-                width: 24em;
-            }
-        }
-        @keyframes blinkTextCursor {
-            from {
-                border-right-color: rgba(255, 255, 255, .75);
-            }
-            to {
-                border-right-color: transparent;
-            }
-        }
-        html {
-            min-height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            height: calc(100vh - 8em);
-            padding: 4em;
-            color: rgba(255, 255, 255, .75);
-            font-family: 'Anonymous Pro', monospace;
-            background-color: rgb(25, 25, 25);
-        }
-
-        .line-1 {
-            position: relative;
-            top: 50%;
-            width: 24em;
-            margin: 0 auto;
-            border-right: 2px solid rgba(255, 255, 255, .75);
-            font-size: 180%;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            transform: translateY(-50%);
-        }
-
-        /* Animation */
-        .anim-typewriter {
-            animation: typewriter 4s steps(44) 1s 1 normal both,
-            blinkTextCursor 500ms steps(44) infinite normal;
-        }
+    .btn-holder> button{
+        font-size: 95%;
     }
 
     #cards-box {
@@ -107,8 +115,6 @@
         align-items: center;
         justify-content: center;
     }
-
-
 
     .modal-footer {
         flex-direction: row;
@@ -295,3 +301,5 @@
         align-items: center;
         flex-direction: column;
     }
+
+

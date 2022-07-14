@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="URLIVE" />
-	<meta property="og:description" content="당신의 심장을 뛰게 한 인생 라이브는 무엇인가요?" />
-	<meta property="og:image" content="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+    <meta property="og:title" content="URLIVE"/>
+    <meta property="og:description" content="당신의 심장을 뛰게 한 인생 라이브는 무엇인가요?"/>
+    <meta property="og:image"
+          content="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -28,32 +29,32 @@
     </script>
 </head>
 <body>
-    <div id="mobile_index">
+    <div id="mobile_index" class="mobile">
         <div class="background">
             <div class="title">
-                    <div class="waviy">
-                        <span style="--i:5">y</span>
-                        <span style="--i:6">o</span>
-                        <span style="--i:7">u</span>
-                        <span style="--i:8">r&nbsp;</span>
-                        <span style="--i:10">L</span>
-                        <span style="--i:11">i</span>
-                        <span style="--i:12">v</span>
-                        <span style="--i:13">e</span>
-                    </div>
-                    <h4>-소중한 나의 라이브-</h4>
+                <div class="waviy">
+                    <span style="--i:5">y</span>
+                    <span style="--i:6">o</span>
+                    <span style="--i:7">u</span>
+                    <span style="--i:8">r&nbsp;</span>
+                    <span style="--i:10">L</span>
+                    <span style="--i:11">i</span>
+                    <span style="--i:12">v</span>
+                    <span style="--i:13">e</span>
                 </div>
+                <h4>-소중한 나의 라이브-</h4>
+            </div>
             <div class="main">
-                    <h1 class="logo">login</h1>
-                    <div class="container">
-                        <input type="text" placeholder="ID" id="id" class="account">
-                        <input type="password" placeholder="Password" id="password" class="account">
-                        <button onclick="login()" id="login" class="account">login</button>
-                        <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up
-                        </button>
-                        <p id="alert" class="account"></p>
-                    </div>
+                <h1 class="logo">login</h1>
+                <div class="container">
+                    <input type="text" placeholder="ID" id="id" class="account">
+                    <input type="password" placeholder="Password" id="password" class="account">
+                    <button onclick="login()" id="login" class="account">login</button>
+                    <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up
+                    </button>
+                    <p id="alert" class="account"></p>
                 </div>
+            </div>
         </div>
         <div class="baststreaming">
             <div class="ratio ratio-4x3">
@@ -98,9 +99,7 @@
             </div>
         </div>
     </div>
-
-
-   <div id="wide-screen">
+    <div id="wide-screen">
         <div class="backgraund">
             <div class="titlepost">
                 <div class="title">
@@ -115,22 +114,6 @@
                         <span style="--i:13">e</span>
                     </div>
                     <h4>-소중한 나의 라이브-</h4>
-
-    </div>
-</div>
-<!-- Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="register-id" class="col-form-label">ID</label>
-                    <input type="text" class="form-control" id="register-id" pattern="[A-Za-z]+">
-
                 </div>
                 <div class="main">
                     <h1 class="logo">login</h1>
@@ -143,11 +126,6 @@
                         <p id="alert" class="account"></p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="register-password-check" class="col-form-label">Password 확인</label>
-                    <input type="password" class="form-control" id="register-password-check">
-                </div>
-
             </div>
         </div>
         <div class="baststreaming">
@@ -192,6 +170,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+    </div>
 </body>
 </html>

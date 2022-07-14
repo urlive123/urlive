@@ -1,6 +1,5 @@
 import hashlib
 import datetime
-import math
 
 import jwt
 from flask import Flask, render_template, request, jsonify, redirect, url_for
@@ -105,21 +104,15 @@ def api_post_card():
 @app.route('/api/contents', methods=['GET'])
 def api_get_card():
     token_receive = request.cookies.get('mytoken')
-    print(request.args.get('page',type=int))
-    page = request.args.get('page',type=int)
-    limit = 10
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        content_list = list(db.urliveContents.find({}).skip((page - 1)*limit).limit(limit))
-        tot_count = db.urliveContents.count_documents({})
-        last_page_num = math.ceil(tot_count/limit)
-        print(tot_count)
+        content_list = list(db.urliveContents.find({}))
         for document in content_list:
             document['_id'] = str(document['_id'])
             document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
             document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
             document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-        return jsonify({'contents': content_list, 'limit':limit, 'page':page, 'last_page_num':last_page_num})
+        return jsonify({'contents': content_list})
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:
@@ -190,7 +183,11 @@ def api_get_comment():
     comment_list = list(db.urliveComment.find({}))
     for document in comment_list:
         document['_id'] = str(document['_id'])
-    return jsonify({'urliveComments': comment_list})
+    content_list = list(db.urliveContents.find({}))
+    for document in content_list:
+        document['_id'] = str(document['_id'])
+        document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
+    return jsonify({'urliveComments': comment_list, 'urliveContents': content_list})
 
 # 댓글 삭제 api
 @app.route('/api/comment', methods=['POST'])
@@ -320,9 +317,9 @@ def get_img():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.urliveUsers.find_one({'id': payload['id']})
-        userinfo['_id'] = str(userinfo['_id'])
-        return jsonify({"result": "success", 'userinfo': userinfo,})
+        userinfo = db.urliveUsers.find_one({'id': payload['id']},{'_id':False})
+        print(userinfo)
+        return jsonify({"result": "success", 'userinfo': userinfo})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
