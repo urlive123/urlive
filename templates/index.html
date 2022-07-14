@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="URLIVE"/>
-    <meta property="og:description" content="당신의 심장을 뛰게 한 인생 라이브는 무엇인가요?"/>
+    <meta property="og:title" content="URLIVE" />
+	<meta property="og:description" content="당신의 심장을 뛰게 한 인생 라이브는 무엇인가요?"/>
     <meta property="og:image"
           content="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
 
@@ -44,63 +44,30 @@
                 </div>
                 <h4>-소중한 나의 라이브-</h4>
             </div>
-            <div class="main">
-                <h1 class="logo">login</h1>
-                <div class="container">
-                    <input type="text" placeholder="ID" id="id" class="account">
-                    <input type="password" placeholder="Password" id="password" class="account">
-                    <button onclick="login()" id="login" class="account">login</button>
-                    <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up
-                    </button>
-                    <p id="alert" class="account"></p>
-                </div>
-            </div>
         </div>
         <div class="baststreaming">
-            <div class="ratio ratio-4x3">
-                <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" title="YouTube video" allowfullscreen></iframe>
-            </div>
-            <div class="streamingtxt">
-                <h3>
-                    < 내 손을 잡아 >
-                </h3>
-                <h4>-아이유-</h4>
-                <h6>음악도 음악이지만 그동안 그 수많은</h6>
-                <h6>억까들과 악플에도 꿋꿋하게 살아남아</h6>
-                <h6>음악을 계속해온 그 정신력이 새삼 대단한거 같다...</h6>
-                <h6>짧은 이 3분짜리 영상에서.</h6>
-                <h6>그동안 해온 노력들이 느껴지네요..</h6>
-
-            </div>
+            <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" title="YouTube video" allowfullscreen></iframe>
         </div>
-        <!-- Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="register-id" class="col-form-label">ID</label>
-                            <input type="text" class="form-control" id="register-id">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-password" class="col-form-label">Password</label>
-                            <input type="password" class="form-control" id="register-password">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        <button onclick="register()" type="button" class="btn btn-primary">가입하기</button>
-                    </div>
-                </div>
             </div>
+        <div class="streamingtxt">
+                <div class="btn-contain">
+                    <button style="width: 200px" onclick="loginpage()">시작하기</button>
+                    </div>
+                    <h3>
+                        < 내 손을 잡아 >
+                    </h3>
+                    <h4>-아이유-</h4>
+                    <h6>음악도 음악이지만 그동안 그 수많은</h6>
+                    <h6>억까들과 악플에도 꿋꿋하게 살아남아</h6>
+                    <h6>음악을 계속해온 그 정신력이 새삼 대단한거 같다...</h6>
+                    <h6>짧은 이 3분짜리 영상에서.</h6>
+                    <h6>그동안 해온 노력들이 느껴지네요..</h6>
+
         </div>
     </div>
     <div id="wide-screen">
-        <div class="backgraund">
+        <div class="background">
             <div class="titlepost">
                 <div class="title">
                     <div class="waviy">
@@ -115,17 +82,6 @@
                     </div>
                     <h4>-소중한 나의 라이브-</h4>
                 </div>
-                <div class="main">
-                    <h1 class="logo">login</h1>
-                    <div class="container">
-                        <input type="text" placeholder="ID" id="id" class="account">
-                        <input type="password" placeholder="Password" id="password" class="account">
-                        <button onclick="login()" id="login" class="account">login</button>
-                        <button id="signup" class="account" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up
-                        </button>
-                        <p id="alert" class="account"></p>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="baststreaming">
@@ -133,44 +89,54 @@
                 <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" title="YouTube video" allowfullscreen></iframe>
             </div>
             <div class="streamingtxt">
-                <h3>
-                    < 내 손을 잡아 >
-                </h3>
-                <h4>-아이유-</h4>
-                <h6>음악도 음악이지만 그동안 그 수많은</h6>
-                <h6>억까들과 악플에도 꿋꿋하게 살아남아</h6>
-                <h6>음악을 계속해온 그 정신력이 새삼 대단한거 같다...</h6>
-                <h6>짧은 이 3분짜리 영상에서.</h6>
-                <h6>그동안 해온 노력들이 느껴지네요..</h6>
 
+                <div class="btn-contain">
+
+                    <button onclick="loginpage()">시작하기</button>
+
+                    <h3>
+                        < 내 손을 잡아 >
+                    </h3>
+                    <h4>-아이유-</h4>
+                    <h6>음악도 음악이지만 그동안 그 수많은</h6>
+                    <h6>억까들과 악플에도 꿋꿋하게 살아남아</h6>
+                    <h6>음악을 계속해온 그 정신력이 새삼 대단한거 같다...</h6>
+                    <h6>짧은 이 3분짜리 영상에서.</h6>
+                    <h6>그동안 해온 노력들이 느껴지네요..</h6>
+
+                </div>
             </div>
-        </div>
-        <!-- Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="register-id" class="col-form-label">ID</label>
-                            <input type="text" class="form-control" id="register-id">
+            <!-- Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">정보를 입력해주세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="form-group">
-                            <label for="register-password" class="col-form-label">Password</label>
-                            <input type="password" class="form-control" id="register-password">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="register-id" class="col-form-label">ID</label>
+                                <input type="text" class="form-control" id="register-id" pattern="[A-Za-z]+">
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password" class="col-form-label">Password</label>
+                                <input type="password" class="form-control" id="register-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password-check" class="col-form-label">Password 확인</label>
+                                <input type="password" class="form-control" id="register-password-check">
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        <button onclick="register()" type="button" class="btn btn-primary">가입하기</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            <button onclick="register()" type="button" class="btn btn-primary">가입하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 </html>
