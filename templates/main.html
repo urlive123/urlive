@@ -30,10 +30,8 @@
 <body>
     <div class="nav-section">
         <div class="titletxt">
-            <div id="photopop">
-            <div class="photo-wrap">
+            <div class="photo-wrap" id="photopop">
 
-            </div>
             </div>
             <div id="titletxt">
                 <h2 style="color: #f3c238" class="line anim-typewriter">{{ id }}님! Urlive에 오신 것을 환영합니다!</h2>
@@ -87,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-menu d-none d-sm-block">
+    <div class="tab-menu d-none d-lg-block">
         <ul class="tab-menu__list">
             <li class="tab-menu__item tab-menu__active">
                 <span class="tab-menu__icon"><i class="ri-home-4-line"></i></span>
@@ -108,6 +106,14 @@
                 <span onclick="gotomypage()" class="tab-menu__text">마이페이지</span>
             </li>
         </ul>
+    </div>
+    <div class="menu d-block d-lg-none" id="menu">
+        <div class="m_menu">
+            <button onclick="gotomain()">홈</button>
+            <button onclick="sort_heart()">좋아요 순</button>
+            <button  onclick="sortbycomment()">댓글 순</button>
+            <button onclick="gotomypage()">마이 페이지</button>
+        </div>
     </div>
     <div class="imgcv">
         <div class="center">
