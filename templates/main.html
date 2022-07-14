@@ -13,7 +13,6 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../static/main.js"></script>
     <script> const userId = '{{id}}'</script>
-
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
@@ -37,6 +36,7 @@
                 <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
         </div>
     </div>
+
     <div class='btn-holder'>
              <!-- Button trigger modal -->
         <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -83,7 +83,7 @@
         <ul class="tab-menu__list">
             <li class="tab-menu__item tab-menu__active">
                 <span class="tab-menu__icon"><i class="ri-home-4-line"></i></span>
-                <span onclick="gotomain()" class="tab-menu__text">홈</span>
+                <span onclick="logout()" class="tab-menu__text">홈</span>
             </li>
 
             <li class="tab-menu__item">
@@ -103,10 +103,12 @@
     </div>
 
 <div class="imgcv">
+
     <div class="center">
         <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
         </div>
     </div>
+
 </div>
 </div>
 

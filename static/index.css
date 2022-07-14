@@ -127,6 +127,9 @@
             color: black;
 
         }
+        .mobile{
+            display: none;
+        }
 
         .main {
             width: 250px;

@@ -10,9 +10,9 @@ $(document).ready(function () {
 
 function media_check() {
     if (matchMedia("screen and (max-width:750px)").matches) {
+        $('#mobile_index').show()
         $('#wide-screen').empty()
-        let temp_html = ``
-    }else if (matchMedia("screen and (min-width:751px)").matches){
+    } else if (matchMedia("screen and (min-width:751px)").matches) {
         $('#mobile_index').empty()
     }
 }
