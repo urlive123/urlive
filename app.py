@@ -29,6 +29,10 @@ def home():
 def login():
     return render_template('login.html')
 
+@app.route('/manual')
+def manual():
+    return render_template('manual.html')
+
 
 
 ## 메인페이지
@@ -85,8 +89,8 @@ def api_log_in():
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
             }
             # 서버에서 실행시 디코딩 필요
-            # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+            # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
             check = 1
             return jsonify({'result': 'success', 'token': token, 'check': check})
         else:
@@ -117,15 +121,18 @@ def api_post_card():
 @app.route('/api/contents', methods=['GET'])
 def api_get_card():
     token_receive = request.cookies.get('mytoken')
+    current_page = request.args.get('page')
+    limit = 10
+    tot_count = db.urliveContents.count_documents({})
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        content_list = list(db.urliveContents.find({}))
+        content_list = list(db.urliveContents.find({}).skip((int(current_page) - 1) * limit).limit(limit))
         for document in content_list:
             document['_id'] = str(document['_id'])
             document['comment_count'] = db.urliveComment.count_documents({"num": str(document['_id'])})
             document["count_heart"] = db.urliveLikes.count_documents({"post_id": document["_id"], "type": "heart"})
             document["heart_by_me"] = bool(db.urliveLikes.find_one({"post_id": document["_id"], "type": "heart", "id": payload['id']}))
-        return jsonify({'contents': content_list})
+        return jsonify({'contents': content_list, 'current_page': current_page, 'limit': limit, 'tot_count': tot_count})
     except jwt.ExpiredSignatureError:
         return redirect(url_for("home"))
     except jwt.exceptions.DecodeError:

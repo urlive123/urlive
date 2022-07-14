@@ -262,4 +262,12 @@
         align-items: center;
         flex-display: row;
     }
-
+    #pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #pagination li {
+        margin-right: 10px;
+    }

@@ -36,3 +36,7 @@ function register() {
 function loginpage() {
     window.location.replace("/login")
 }
+
+function manualpage() {
+    window.location.replace("/manual")
+}
