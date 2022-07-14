@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
     <link rel="short icon" href="#">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
@@ -35,13 +36,13 @@
                 <button  onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>
         </div>
     </div>
-<div class='btn-holder'>
-                         <!-- Button trigger modal -->
+
+    <div class='btn-holder'>
+             <!-- Button trigger modal -->
         <button id="post-btn" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
             등록하기
         </button>
     </div>
-
 </div>
 <!-- Modal Post -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -78,7 +79,7 @@
         </div>
     </div>
 </div>
-<div class="tab-menu d-none d-sm-block">
+    <div class="tab-menu d-none d-sm-block">
         <ul class="tab-menu__list">
             <li class="tab-menu__item tab-menu__active">
                 <span class="tab-menu__icon"><i class="ri-home-4-line"></i></span>
@@ -100,8 +101,14 @@
             </li>
         </ul>
     </div>
+
 <div class="imgcv">
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+
+    <div class="center">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+        </div>
+    </div>
+
 </div>
 </div>
 

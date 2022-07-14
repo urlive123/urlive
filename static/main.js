@@ -13,7 +13,8 @@ $(document).ready(function () {
 });
 
 function media_check(id) {
-    if (matchMedia("screen and (max-width:550px)").matches) {
+    if (matchMedia("screen and (max-width:575.9px)").matches) {
+
         $('#titletxt').empty()
         let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">URLIVE</p>
                             <p style="color: #f3c238; -webkit-animation-delay: 3s;" class="line-1 anim-typewriter"> ${id}님 환영합니다!</p>
@@ -21,6 +22,7 @@ function media_check(id) {
                             <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
         $('#titletxt').append(temp_html)
     }
+
 }
 
 
@@ -329,7 +331,7 @@ function comment_listing(id) {
                     let objectId = rows[i]['_id']
                     let temp_html = ` <tr>
                                         <td>${userId}</td>
-                                        <td>${comment} <button onclick="delete_comment('${objectId}', '${num}')" type="button" class="btn-close" aria-label="Close"></button></td>
+                                        <td>${comment} <i style="cursor:pointer;" onclick="delete_comment('${objectId}', '${num}')" class="bi bi-x"></i></td>
                                     </tr>`
                     $(`#comment${id}`).append(temp_html)
                 }
