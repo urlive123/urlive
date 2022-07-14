@@ -1,6 +1,7 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
     show_list();
+    get_img()
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -23,7 +24,6 @@ function youtube_parser(url) {
 function show_list() {
     $.ajax({
         type: "GET", url: '/api/contents', data: {}, success: function (response) {
-            console.log(response)
             let rows = response['contents']
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
@@ -275,7 +275,7 @@ function post_list() {
     let content = $('#content').val()
     let artist = $('#artist').val()
     let url = `${$('#url').val()}`
-    console.log(url)
+
     if(title == "" || content == "" || artist == "" || url == ""){
         alert('내용을 모두 입력해주세요')
     } else {
@@ -296,7 +296,7 @@ function comment_listing(id) {
     $(`#comment${id}`).empty();
     $.ajax({
         type: 'GET', url: '/api/comments', data: {}, success: function (response) {
-            console.log(response)
+
             let rows = response['urliveComments']
             for (let i = 0; i < rows.length; i++) {
                 let num = rows[i]['num']
@@ -339,7 +339,6 @@ function comment_posting(id) {
 function toggle_like(post_id, type) {
     let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
-    console.log($i_like)
     if ($i_like.hasClass("bi-suit-heart")) {
         $.ajax({
             type: "POST", url: "/api/likes", data: {
@@ -354,7 +353,6 @@ function toggle_like(post_id, type) {
             type: "POST", url: "/api/likes", data: {
                 post_id_give: post_id, type_give: type, action_give: "unlike"
             }, success: function (response) {
-                console.log("unlike")
                 $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -368,7 +366,6 @@ function toggle_like(post_id, type) {
 function logout() {
     $.removeCookie('mytoken')
     window.location.reload()
-    console.log("clicked!")
 }
 
 //by현서 카드 삭제 기능
@@ -410,4 +407,20 @@ function gotomypage() {
 
 function gotomain() {
     window.location.replace("/main")
+}
+
+function get_img() {
+    $.ajax({
+        type: "GET",
+        url: "/get_profile",
+        data: {},
+    })
+        .done(function (response) {
+            pic_path = response['userinfo']['profile_pic_real']
+            if (response['userinfo']['profile_pic_real'] != undefined)
+            {
+            $('.photo-wrap').empty()
+            $('.photo-wrap').append(`<img style="max-width: 100%; max-height: 100%;" src="../static/${pic_path}" alt="">`)
+            }
+        })
 }

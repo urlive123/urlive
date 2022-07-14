@@ -21,9 +21,14 @@ function login() {
                 alert(response['msg'])
             }
             if (response['result'] == 'success') {
+                if (response['check'] == 1) {
                 let access_token = response['token']
                 $.cookie('mytoken', access_token, {path: '/'})
                 window.location.replace("/main")
+                }
+                else {
+                    alert(response['msg'])
+                }
             }
 
         }
@@ -37,11 +42,16 @@ function register() {
     pw = $('#register-password').val();
     pw_check = $('#register-password-check').val();
     let idReg = /^[a-zA-Z]+[a-z0-9A-Z]{3,19}$/g;
+    let pwReg = /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?=[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{10,}$/;
     if (!idReg.test(id)) {
         alert("아이디는 영소문자로 시작하는 4~20자 영문자 또는 숫자이어야 합니다.");
         return;
     }
-    if (id == "" || pw == "") {
+    else if (!pwReg.test(pw)) {
+        alert("영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이내로 입력해주세요.")
+        return;
+    }
+    else if (id == "" || pw == "" || pw_check == "") {
         alert('아이디와 비밀번호를 정확히 입력해주세요!')
     } else if (pw != pw_check) {
         alert('동일한 비밀번호를 입력해주세요.')

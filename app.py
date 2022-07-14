@@ -65,7 +65,7 @@ def api_sign_up():
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
     user = db.urliveUsers.find_one({'id': id_receive})
     if user is None:
-        db.urliveUsers.insert_one({'id': id_receive, 'pw': pw_hash,})
+        db.urliveUsers.insert_one({'id': id_receive, 'pw': pw_hash, 'profile_pic_real': "profile_pics/profileex.png"})
         check = 1
     else:
         check = 0
@@ -77,18 +77,24 @@ def api_log_in():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-    result = db.urliveUsers.find_one({'id':id_receive, 'pw': pw_hash})
+    result = db.urliveUsers.find_one({'id':id_receive})
     if result is not None:
-        payload = {
-            'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
-        }
-        # 서버에서 실행시 디코딩 필요
-        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-        return jsonify({'result': 'success', 'token': token})
+        if pw_hash == result['pw']:
+            payload = {
+                'id': id_receive,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
+            }
+            # 서버에서 실행시 디코딩 필요
+            # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+            check = 1
+            return jsonify({'result': 'success', 'token': token, 'check': check})
+        else:
+            print("merong")
+            check = 0
+            return jsonify({'result': 'success', 'msg' : '비밀번호를 확인해주세요', 'check': check})
     else:
-        return jsonify(({'result' : 'fail', 'msg': '아이디, 비밀번호가 일치하지 않습니다.'}))
+        return jsonify(({'result' : 'fail', 'msg': '존재하지 않는 회원입니다.'}))
 
 ## 카드 등록
 @app.route('/api/contents', methods=['POST'])

@@ -28,7 +28,6 @@ function youtube_parser(url) {
                 success: function (response) {
                     $('.wrapper').hide()
                     $('#live_section').empty()
-                    console.log('my like', response['contents'])
                     let rows = response['contents']
                     for (let i = 0; i < rows.length; i++) {
                         let title = rows[i]['title']
@@ -117,7 +116,6 @@ function youtube_parser(url) {
                 success: function (response) {
                     $('.wrapper').hide()
                     $('#live_section').empty()
-                    console.log('my like', response['contents'])
                     let rows = response['contents']
                     for (let i = 0; i < rows.length; i++) {
                         let title = rows[i]['title']
@@ -205,7 +203,6 @@ function youtube_parser(url) {
                 url: '/main/comment',
                 data: {},
                 success: function (response) {
-                    console.log(response)
                     let rows = response['urliveComments']
                     for (let i = 0; i < rows.length; i++) {
                         let num = rows[i]['num']
@@ -232,7 +229,6 @@ function youtube_parser(url) {
                 url: '/api/comments',
                 data: {},
                 success: function (response) {
-                    console.log(response)
                     let rows = response['urliveComments']
                     for (let i = 0; i < rows.length; i++) {
                         let num = rows[i]['num']
@@ -271,7 +267,6 @@ function youtube_parser(url) {
 function toggle_like(post_id, type) {
     let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
-    console.log($i_like)
     if ($i_like.hasClass("bi-suit-heart")) {
         $.ajax({
             type: "POST",
@@ -296,7 +291,6 @@ function toggle_like(post_id, type) {
                 action_give: "unlike"
             },
             success: function (response) {
-                console.log("unlike")
                 $i_like.addClass("bi-suit-heart").removeClass("bi-suit-heart-fill")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -393,7 +387,6 @@ function showMyActivity() {
         url: '/api/profile-comment',
         data: {},
         success: function (response) {
-            console.log(response)
             let count =0
             let rows = response['one']
             for ( let i=0; i<rows.length; i++) {
@@ -415,7 +408,6 @@ function update_profile() {
     let file = $('#input-pic')[0].files[0]
     let form_data = new FormData()
     form_data.append("file_give", file)
-    console.log(form_data)
 
     $.ajax({
         type: "POST",
@@ -440,7 +432,6 @@ function get_img() {
         data: {},
     })
         .done(function (response) {
-            console.log(response['userinfo']['profile_pic_real'])
             pic_path = response['userinfo']['profile_pic_real']
             if (response['userinfo']['profile_pic_real'] != undefined)
             {
