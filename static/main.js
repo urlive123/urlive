@@ -1,7 +1,17 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
-    get_img();
-    show_list();
+
+    show_list(1);
+    get_img()
+    // 무한 스크롤
+    let page = 1
+    $(window).scroll(function() {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      ++page
+      show_list(page)
+    }
+});
+
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -23,7 +33,6 @@ function media_check(id) {
                             <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
         $('#titletxt').append(temp_html)
         $('#photopop').empty()
-        $('#menu').show()
     }
 }
 
@@ -35,10 +44,11 @@ function youtube_parser(url) {
 }
 
 // 리스트 조회
-function show_list() {
+function show_list(page) {
     $.ajax({
-        type: "GET", url: '/api/contents', data: {}, success: function (response) {
+        type: "GET", url: `/api/contents?page=${page}`, data: {}, success: function (response) {
             let rows = response['contents']
+
             for (let i = 0; i < rows.length; i++) {
                 let title = rows[i]['title']
                 let content = rows[i]['content']
@@ -50,7 +60,6 @@ function show_list() {
                 let count_comment = rows[i]['comment_count']
                 let class_heart = rows[i]['heart_by_me'] ? "bi-suit-heart-fill" : "bi-suit-heart"
                 let url_result = youtube_parser(url)
-
                 let temp_html = `<div id="${objectId}" class="card" style="width: 18rem;">
                                           <img src="http://i.ytimg.com/vi/${url_result}/0.jpg" class="card-img-top" alt="...">
                                              <div class="card-body">
@@ -290,18 +299,18 @@ function post_list() {
     let artist = $('#artist').val()
     let url = `${$('#url').val()}`
 
-    if(title == "" || content == "" || artist == "" || url == ""){
+    if (title == "" || content == "" || artist == "" || url == "") {
         alert('내용을 모두 입력해주세요')
     } else {
-    $.ajax({
-        type: 'POST',
-        url: '/api/contents',
-        data: {title_give: title, content_give: content, userId_give: userId, artist_give: artist, url_give: url},
-        success: function (response) {
-            alert(response['msg'])
-            window.location.reload()
-        }
-    })
+        $.ajax({
+            type: 'POST',
+            url: '/api/contents',
+            data: {title_give: title, content_give: content, userId_give: userId, artist_give: artist, url_give: url},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload()
+            }
+        })
     }
 }
 

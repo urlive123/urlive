@@ -34,9 +34,9 @@
     <div class="titletxt" id="titletxt">
         <h2 style="color: #f3c238" class="line anim-typewriter">{{id}}님! 어서오세요!</h2>
 
-         <div class="logoutbtn">
-             <button onclick="logout()" type="button" class="btn btn-outline-danger">로그아웃</button>
-         </div>
+        <div class="logoutbtn">
+            <button onclick="gotomain()" type="button" class="btn btn-outline-danger">뒤로가기</button>
+        </div>
     </div>
 </div>
 <div class="tab-menu d-none d-sm-block">
@@ -96,9 +96,9 @@
             <p>프로필 사진 등록/수정</p>
             <p>정방형으로 올려주세요!(1:1 비율)</p>
         <div class="post-wrap">
-            <label class="btn btn-outline-warning" style="margin-bottom: 30px" for="input-pic" id="post-pic">업로드</label>
+            <label class="btn btn-outline-warning" for="input-pic" id="post-pic">업로드</label>
             <input id="input-pic" type="file" name="file" style="display:none;"/>
-            <input class="btn btn-warning" style="margin-bottom: 30px" onclick="update_profile()" type="submit"/>
+            <input class="btn btn-warning" onclick="update_profile()" type="submit"/>
         </div>
     </div>
 </div>

@@ -18,11 +18,9 @@ function media_check(id) {
         $('#titletxt').empty()
         let temp_html = ` <p style="color: #f3c238" class="line-1 anim-typewriter">${id}님</p>
                             <p style="color: #f3c238; -webkit-animation-delay: 5s;" class="line-1 anim-typewriter"> 어서오세요!</p>
-                                 <div class="logoutbtn">
-             <button onClick="logout()" type="button" class="btn btn-outline-danger">로그아웃</button>
-         </div>`
+                                 <div className="logoutbtn">
+            <button onClick="gotomain()" type="button" className="btn btn-outline-danger">뒤로가기</button>`
         $('#titletxt').append(temp_html)
-        $('#menu').show()
     }
 }
 

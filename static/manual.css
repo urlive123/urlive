@@ -1,0 +1,108 @@
+html, body {
+    background: url("../static/stepimg/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: palevioletred;
+    font-size: 30px;
+    font-family: 'Jua', sans-serif;
+}
+
+.section1 {
+    padding-left: 150px;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.section2 {
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.step1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px auto;
+
+}
+
+.step2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-left: 200px;
+}
+
+.step3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.step4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.step1-img {
+    width: 70%;
+    border-radius: 30px;
+}
+
+.step2-img {
+    width: 70%;
+    border-radius: 30px;
+}
+
+.step3-img {
+    width: 70%;
+    border-radius: 30px;
+}
+
+.step4-img {
+    width: 100%;
+    border-radius: 30px;
+}
+
+.nav-bar {
+    float: right;
+}
+
+#nav-btn {
+    right: 30px;
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 1px #66aaff solid;;
+    border-radius: 5px;
+    margin: 15px auto;
+    background-color: #66aaff;
+    text-align: center;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.9s;
+    font-family: 'Jua', sans-serif;
+    font-size: large;
+    color: white;
+}
+
+#nav-btn:hover {
+    color: #fff;
+    box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+    -200px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+}
