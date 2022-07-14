@@ -1,8 +1,8 @@
 // 메인페이지 시작시 리스트 불러오기
 $(document).ready(function () {
-    media_check(userId);
+    get_img();
     show_list();
-    get_img()
+
     const menuItems = document.querySelectorAll('.tab-menu__item');
     let previousSelectedItem = menuItems[0];
     menuItems.forEach(item => {
@@ -12,6 +12,7 @@ $(document).ready(function () {
             item.classList.add('tab-menu__active');
         })
     })
+    media_check(userId);
 });
 
 function media_check(id) {
@@ -22,6 +23,7 @@ function media_check(id) {
                             <div class="logoutbtn">
                             <button onclick="logout()"  type="button" class="btn btn-outline-danger">로그아웃</button>`
         $('#titletxt').append(temp_html)
+        $('#photopop').empty()
     }
 }
 
